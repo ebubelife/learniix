@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import AppBar from './components/Appbar';
 
 
-import * as React from 'react';
+import { useState, useEffect, forwardRef, Fragment } from "react";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -17,7 +17,7 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 
 
-const Transition = React.forwardRef(function Transition(
+const Transition = forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
   },
@@ -29,7 +29,7 @@ const Transition = React.forwardRef(function Transition(
 export default function Home() {
 
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -44,7 +44,7 @@ export default function Home() {
 
     <>
    {/*Pop to display options for getting started*/}
-<React.Fragment>
+<Fragment>
      
      <Dialog
        open={open}
@@ -66,7 +66,7 @@ export default function Home() {
        </DialogContent>
       
      </Dialog>
-   </React.Fragment>
+   </Fragment>
 
 
     <main className="items-center h-screen w-screen">

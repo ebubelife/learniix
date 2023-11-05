@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Header from './components/Header'
 import FAQs from './components/Faqs'
 import Footer from './components/Footer';
+import AppBar from './components/Appbar';
 
 
 
@@ -25,6 +26,14 @@ export default function Home() {
       <Header />
 
 
+
+      </div>
+
+      <div className='md:hidden '>
+
+        {/*main top header small screens*/}
+
+      <AppBar />
 
       </div>
       

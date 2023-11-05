@@ -69,7 +69,7 @@ const handleClose = () => {
 
 
         
-<p className="main-logo text-black font-bold text-2xl"><Link href={"/"}>LEARNIIX</Link></p>
+<p className="main-logo text-black font-bold text-2xl"><Link href={"/"}><img src="/images/home/learniix_logo.jpeg" className="w-32 h-8" alt="learnix-log" /></Link></p>
 <ul className="main-menu text-black flex space-x-6 justify-center ml-40 pt-2">
 <li className="menu-item  text-sm cursor-pointer hover:text-zinc-600 "><Link href={"../../about"}>About Us</Link></li>
 <li className="menu-item text-sm cursor-pointer hover:text-zinc-600 "><Link href={"../../focus"}>Our Focus</Link></li>

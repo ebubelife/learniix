@@ -166,7 +166,7 @@ export default function Home() {
 
 
 <div className='w-screen flex justify-center mt-16'>
-  <p className='font-medium text-3xl text-green-600'>How I Works</p>
+  <p className='font-medium text-3xl text-green-600'>How It Works</p>
 
 </div>
 
@@ -175,62 +175,40 @@ export default function Home() {
 
   <div className='w-full grid md:grid-cols-2 grid-cols-1 gap-4'>
 
-    <div className='w-full  border border-zinc-100 rounded-xl shadow-md p-2'>
+  <div className='w-full px-4 py-2 border border-zinc-100 rounded-xl shadow-md mt:mt-0 mt-16'>
 
-     <div style={{marginTop:`-30px`}} className='w-full flex justify-center'>
-     <div className='h-16 w-16 bg-white border border-zinc-100 rounded-full shadow-xl items-center flex  justify-center'>
+<div style={{marginTop:`-30px`}} className='w-full flex justify-center'>
+<div className='h-16 w-16 bg-white border border-zinc-100 rounded-full shadow-xl items-center flex  justify-center'>
 
-  <p className="text-green-500">1</p>
-
-
-
-</div>
-
-     </div>
-
-     <div className="w-full h-60 px-4 mt-4">
-    <img src="/images/home/Xnapper-2023-11-05-02.07.00.png" className='h-full w-full rounded-md' alt=""/>
-
-
-  </div>
-
-  <p className='font-light text-center  text-xs text-zinc-600 mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.</p>
-
-
-    </div>
-
-
-
-
-
-    <div className='w-full px-4 py-2 border border-zinc-100 rounded-xl shadow-md mt:mt-0 mt-16'>
-
-     <div style={{marginTop:`-30px`}} className='w-full flex justify-center'>
-     <div className='h-16 w-16 bg-white border border-zinc-100 rounded-full shadow-xl items-center flex  justify-center'>
-
-     <p className="text-green-500">2</p>
+<p className="text-green-500">1</p>
 
 </div>
 
 
 
 
-     </div>
+</div>
 
 
-     <div className="w-full h-60 px-4 mt-4">
-    <img src="/images/home/Xnapper-2023-11-05-02.07.00.png" className='h-full w-full rounded-md' alt=""/>
+<div className="w-full h-60 px-4 mt-4">
+<img src="/images/home/Xnapper-2023-11-05-02.07.00.png" className='h-full w-full rounded-md' alt=""/>
 
 
-  </div>
+</div>
 
-  <p className='font-light text-center  text-xs text-zinc-600 mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.</p>
-
-
-    </div>
+<p className='font-light text-center  text-xs text-zinc-600 mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.</p>
 
 
+</div>
 
+
+
+
+
+
+
+
+   
   </div>
 
 

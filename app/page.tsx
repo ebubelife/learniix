@@ -201,6 +201,8 @@ export default function Home() {
 
 
 
+
+
     <div className='w-full px-4 py-2 border border-zinc-100 rounded-xl shadow-md mt:mt-0 mt-16'>
 
      <div style={{marginTop:`-30px`}} className='w-full flex justify-center'>
@@ -209,6 +211,8 @@ export default function Home() {
      <p className="text-green-500">2</p>
 
 </div>
+
+
 
 
      </div>

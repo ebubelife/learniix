@@ -90,7 +90,7 @@ export default function AppBar() {
             onClose={toggleDrawer(anchor, false)}
            
           >
-            <div className='w-full h-full bg-purple3 nav-drawer'>
+            <div className='w-full h-full bg-black nav-drawer'>
             <div className='drawer-overlay w-full h-full '>
             {list(anchor)}
             </div>

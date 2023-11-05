@@ -6,17 +6,67 @@ import Footer from './components/Footer';
 import AppBar from './components/Appbar';
 
 
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import { TransitionProps } from '@mui/material/transitions';
 
+
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>,
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function Home() {
 
 
+  const [open, setOpen] = React.useState(false);
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
 
   return (
 
     <>
-    {/**popup to confirm faxing and emailing */}
+   {/*Pop to display options for getting started*/}
+<React.Fragment>
+     
+     <Dialog
+       open={open}
+       TransitionComponent={Transition}
+       keepMounted
+       onClose={handleClose}
+       aria-describedby="alert-dialog-slide-description"
+     >
+       <DialogTitle className="font-medium text-sm">{"Create An Account On Learniix"}</DialogTitle>
+       <DialogContent>
+        <div className="bg-black p-2 rounded-md text-white text-center shadow-xl hover:shadow-2xl cursor-pointer font-light">
+          Become An Affiliate
+        </div>
+
+        <div className="bg-green-500 p-2 rounded-md text-white text-center mt-4 shadow-xl hover:shadow-2xl cursor-pointer font-light">
+          Become A Vendor
+        </div>
+         
+       </DialogContent>
+      
+     </Dialog>
+   </React.Fragment>
 
 
     <main className="items-center h-screen w-screen">
@@ -73,7 +123,7 @@ export default function Home() {
       <button className='bg-green-600 text-white shadow-xl hover:bg-white hover:text-green-600 cursor-pointer md:text-xl text-md py-2 px-10 mt-4 rounded-full md:block hidden'>Yes I Want In!</button>
        
       <div className="md:mt-4 mt-8 flex  justify-center md:hidden ">
-      <button className='bg-green-600 text-white shadow-xl hover:bg-white hover:text-green-600 cursor-pointer md:text-xl text-md py-2 px-10 mt-4 rounded-full'>Yes I Want In!</button>
+      <button onClick={handleClickOpen} className='bg-green-600 text-white shadow-xl hover:bg-white hover:text-green-600 cursor-pointer md:text-xl text-md py-2 px-10 mt-4 rounded-full'>Yes I Want In!</button>
      </div>
        
        </div>

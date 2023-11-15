@@ -58,7 +58,7 @@ export default function AppBar() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Home','About', 'Contact',  'Log In', 'Become An Affiliate'].map((text, index) => (
+        {['Home','About', 'Contact',  'Log In', 'Become A Vendor'].map((text, index) => (
           
            <div className='block mt-5 ml-3 text-white'  key={text}>
           <Link href={navLinks[index]}>  {text} </Link>

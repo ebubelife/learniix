@@ -26,15 +26,18 @@ const Transition = React.forwardRef(function Transition(
 export default function Header() {
 
 
-const [open, setOpen] = React.useState(false);
+const [openGetStarted, setOpenGetStarted] = React.useState(false);
+const [openLogin, setOpenLogin] = React.useState(false);
 
-const handleClickOpen = () => {
-  setOpen(true);
+const toggleGetStartedPopUp = () => {
+    setOpenGetStarted(!openGetStarted);
 };
 
-const handleClose = () => {
-  setOpen(false);
+const toggleLoginPopUp = () => {
+    setOpenLogin(!openLogin);
 };
+
+
 
 
     return (
@@ -45,26 +48,63 @@ const handleClose = () => {
 <React.Fragment>
      
      <Dialog
-       open={open}
+       open={openGetStarted}
        TransitionComponent={Transition}
        keepMounted
-       onClose={handleClose}
+       onClose={toggleGetStartedPopUp}
        aria-describedby="alert-dialog-slide-description"
      >
        <DialogTitle className="font-medium text-sm">{"Create An Account On Learniix"}</DialogTitle>
        <DialogContent>
-        <div className="bg-black p-2 rounded-md text-white text-center shadow-xl hover:shadow-2xl cursor-pointer font-light">
-          Become An Affiliate
+      
+      {
+        /*
+ <div className="bg-black p-2 rounded-md text-white text-center shadow-xl hover:shadow-2xl cursor-pointer font-light">
+         <Link href={"../affiliates/new"}> Become An Affiliate</Link>
         </div>
+        */
+      }
+       
 
         <div className="bg-green-500 p-2 rounded-md text-white text-center mt-4 shadow-xl hover:shadow-2xl cursor-pointer font-light">
-          Become A Vendor
+        <Link href={"../vendors/new"}>  Become A Vendor</Link>
         </div>
          
        </DialogContent>
       
      </Dialog>
    </React.Fragment>
+
+
+
+{/*Pop to display options for login*/}
+<React.Fragment>
+     
+     <Dialog
+       open={openLogin}
+       TransitionComponent={Transition}
+       keepMounted
+       onClose={toggleLoginPopUp}
+       aria-describedby="alert-dialog-slide-description"
+     >
+       <DialogTitle className="font-medium text-sm">{"Create An Account On Learniix"}</DialogTitle>
+       <DialogContent>
+        <div className="bg-black p-2 rounded-md text-white text-center shadow-xl hover:shadow-2xl cursor-pointer font-light">
+        <Link href={"../affiliates/signin"}>  Affiliate Login</Link>
+        
+        
+        </div>
+
+        <div className="bg-green-500 p-2 rounded-md text-white text-center mt-4 shadow-xl hover:shadow-2xl cursor-pointer font-light">
+        <Link href={"../vendors/signin"}>   Vendor Login</Link>
+        </div>
+         
+       </DialogContent>
+      
+     </Dialog>
+   </React.Fragment>
+
+
       <div className=' w-screen bg-white shadow-md px-20 py-2 flex items-center justify-center '>
 
 
@@ -74,9 +114,11 @@ const handleClose = () => {
 <li className="menu-item  text-sm cursor-pointer hover:text-zinc-600 "><Link href={"../../about"}>About Us</Link></li>
 <li className="menu-item text-sm cursor-pointer hover:text-zinc-600 "><Link href={"../../focus"}>Our Focus</Link></li>
 <li className="menu-item text-sm cursor-pointer hover:text-zinc-600 ">Contact</li>
-<li className="menu-item text-sm cursor-pointer hover:text-zinc-600 bg-black text-white px-4 py-2 ml-2 shadow-xl rounded-md hover:ml-2 ">Login</li>
+<li className="menu-item text-sm cursor-pointer hover:text-zinc-600 bg-black text-white px-4 py-2 ml-2 shadow-xl rounded-md hover:ml-2 " onClick={toggleLoginPopUp}>Login</li>
 
-<li className="menu-item text-sm cursor-pointer hover:text-zinc-600 bg-green-400 p-2 ml-2 shadow-xl rounded-md hover:ml-2 " onClick={handleClickOpen}>Get Started</li>
+<li className="menu-item text-sm cursor-pointer hover:text-zinc-600 bg-green-400 p-2 ml-2 shadow-xl rounded-md hover:ml-2 " onClick={toggleGetStartedPopUp}>Get Started</li>
+
+
 
 
 </ul>

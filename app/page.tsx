@@ -72,7 +72,7 @@ export default function Home() {
       });
     };
 
-    const interval = setInterval(type, 1000); // Adjust speed here (milliseconds)
+    const interval = setInterval(type, 100); // Adjust speed here (milliseconds)
 
     return () => clearInterval(interval);
   }, [currentPhraseIndex, phrasesArray]);

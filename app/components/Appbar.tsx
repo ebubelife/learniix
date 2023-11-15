@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-var navLinks = ['https://zenithstake.com/','https://zenithstake.com/about','https://zenithstake.com/contact','https://zenithstake.com/signin','https://zenithstake.com/aff?aff_id=Fk9vMl&pid=1']
+var navLinks = ['https://learniix.vercel.app/','https://learniix.vercel.app/about','https://learniix.vercel.app/contact','https://learniix.vercel.app/signin','https://learniix.vercel.app/aff?aff_id=Fk9vMl&pid=1']
 
 export default function AppBar() {
 

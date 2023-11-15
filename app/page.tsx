@@ -40,6 +40,43 @@ export default function Home() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const phrasesArray = ['Profitable Knowledge', 'Profitable Skills', 'Salesmanship', 'Digital Skills'];
+
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [displayedPhrase, setDisplayedPhrase] = useState('');
+
+  {/* code below randomises phrases in the header hero */}
+
+  useEffect(() => {
+    let charIndex = 0;
+    let isDeleting = false;
+
+    const type = () => {
+      const currentPhrase = phrasesArray[currentPhraseIndex];
+      setDisplayedPhrase((prevPhrase) => {
+        const displayedLength = prevPhrase.length;
+
+        if (!isDeleting && displayedLength < currentPhrase.length) {
+          return currentPhrase.substring(0, displayedLength + 1);
+        } else if (isDeleting && displayedLength > 0) {
+          return currentPhrase.substring(0, displayedLength - 1);
+        } else {
+          isDeleting = !isDeleting;
+          if (isDeleting) {
+            charIndex = 0;
+            setCurrentPhraseIndex((prevIndex) => (prevIndex + 1) % phrasesArray.length);
+          }
+        }
+        return prevPhrase;
+      });
+    };
+
+    const interval = setInterval(type, 1000); // Adjust speed here (milliseconds)
+
+    return () => clearInterval(interval);
+  }, [currentPhraseIndex, phrasesArray]);
+
   
 
   return (
@@ -107,13 +144,13 @@ export default function Home() {
        
        {/*mobile version shows only on mobile */}
      <div className="md:mt-4 mt-8 flex  justify-center md:hidden ">
-     <div className=' rounded-md shadow-md w-60 bg-white text-center font-semibold text-green-600 text-md  py-2 '>Profitable Knowledge</div>
+     <div className=' rounded-md shadow-md w-60 bg-white text-center font-semibold text-green-600 text-md  py-2 '>  {displayedPhrase}</div>
 
      </div>
 
  {/*large screen version shows only on large */}
      <div className="md:mt-4 mt-8 hidden md:block  ">
-     <div className='h-10 rounded-md shadow-md w-60 bg-white text-center font-semibold text-green-600 text-xl  py-1 '>Profitable Knowledge</div>
+     <div className='h-10 rounded-md shadow-md w-60 bg-white text-center font-semibold text-green-600 text-xl  py-1 '>  {displayedPhrase}</div>
 
      </div>
 

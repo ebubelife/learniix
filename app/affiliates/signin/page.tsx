@@ -17,18 +17,22 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { TransitionProps } from '@mui/material/transitions';
 
-
+import { useRouter } from 'next/navigation';
 
 
 export default function Signin() {
 
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+   function loginUser(){
 
+    router.push("../affiliates/dashboard")
+   }
 
   return (
 
@@ -202,7 +206,7 @@ export default function Signin() {
         }}
       />
 
-<button
+<button onClick={loginUser}
         type="submit"
         className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
       >

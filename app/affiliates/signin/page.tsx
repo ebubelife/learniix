@@ -139,7 +139,7 @@ export default function Signin() {
 
        <TextField
         fullWidth
-        label="Email Or Phone Number"
+        label="Email"
         variant="outlined"
         margin="normal"
       //  {...register('email', { required: true })}

@@ -73,6 +73,14 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     router.push("../affiliates/reports")
    };
 
+   const goToProfile = () => {
+    router.push("../affiliates/profile")
+   };
+
+   const goToWithdrawals = () => {
+    router.push("../affiliates/withdrawals")
+   };
+
 
 
 
@@ -132,7 +140,7 @@ marginTop: '5%',
   <hr></hr>
 
   <ListItem button>
-    <ListItemText primary="Withdrawals" />
+    <ListItemText onClick={goToWithdrawals} primary="Withdrawals" />
   </ListItem>
   <hr></hr>
 
@@ -142,7 +150,7 @@ marginTop: '5%',
   <hr></hr>
 
   <ListItem button>
-    <ListItemText primary="Account" />
+    <ListItemText onClick={goToProfile} primary="Account" />
   </ListItem>
 
 

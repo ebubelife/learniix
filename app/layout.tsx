@@ -1,12 +1,13 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import { Space_Grotesk } from 'next/font/google'
+const space_grotesk =  Space_Grotesk({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Learniix - A Top Affiliate Platform',
-  description: 'Learniix - Learn, Sell, Earn ',
+  title: 'Learniix -  A digital marketplace dedicated to assisting digital product creators in boosting their sales and expanding their customer base through our platform and a network of top-performing affiliates.',
+  description: 'Learniix stands as a digital marketplace dedicated to assisting digital product creators in boosting their sales and expanding their customer base through our platform and a network of top-performing affiliates. ',
 }
 
 export default function RootLayout({
@@ -25,7 +26,7 @@ export default function RootLayout({
   
 
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={space_grotesk.className}>{children}</body>
     </html>
   )
 }

@@ -262,7 +262,7 @@ export default function Home() {
 
 </p>
 
-<p className='text-sm mt-4 text-zinc-800 text-light'>Remember, the time to embark on this journey is now. Don't let the opportunities pass you by. Embrace the wealth of resources available to you, leverage your strengths, and chart a course towards a prosperous future.
+<p className='text-sm mt-4 text-zinc-800 text-light'>Remember, the time to embark on this journey is now. Don&apos;t let the opportunities pass you by. Embrace the wealth of resources available to you, leverage your strengths, and chart a course towards a prosperous future.
 
 Join us on this exciting adventure of skill acquisition, entrepreneurship, and success. The landscape is ripe, the stage is set, and your moment to shine in the Nigerian digital space has arrived.
 

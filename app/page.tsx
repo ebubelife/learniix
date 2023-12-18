@@ -215,7 +215,7 @@ export default function Home() {
       <img src="/images/home/undraw_online_learning_re_qw08.svg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
 
       </div>
-       <p className='text-xs font-normal  text-center  text-zinc-600'>Earn a solid living by marketing and selling products. You don't need a physical store. We handle the logistics and deliveries and we pay you your commissions weekly.</p>
+       <p className='text-xs font-normal  text-center  text-zinc-600'>Earn a solid living by marketing and selling products. You don&apos;t need a physical store. We handle the logistics and deliveries and we pay you your commissions weekly.</p>
        </div>
 
 

@@ -203,7 +203,7 @@ export default function Home() {
       <img src="/images/home/undraw_online_learning_re_qw08.svg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
 
       </div>
-       <p className='text-xs font-normal  text-center  text-zinc-600'>Acquire top sales and marketing skills from our online course. Know how to gather leads, create trust and prime your audience for explosive sales.</p>
+       <p className='text-xs font-normal  text-center  text-zinc-600'>Access an open marketplace of very quality products. We have an array of handpicked products and all you have to do is select on that appeals to your skills.</p>
        </div>
 
 
@@ -215,7 +215,7 @@ export default function Home() {
       <img src="/images/home/undraw_online_learning_re_qw08.svg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
 
       </div>
-       <p className='text-xs font-normal  text-center  text-zinc-600'>Acquire top sales and marketing skills from our online course. Know how to gather leads, create trust and prime your audience for explosive sales.</p>
+       <p className='text-xs font-normal  text-center  text-zinc-600'>Earn a solid living by marketing and selling products. You don't need a physical store. We handle the logistics and deliveries and we pay you your commissions weekly.</p>
        </div>
 
 
@@ -241,15 +241,32 @@ export default function Home() {
 <div>
 <h1 className='text-green-600 md:text-xl text-md font-normal'>The best time to learn profitable skills was yesterday</h1>
 
+
+
 <h1 className='text-black md:text-xl text-md font-medium'>The second best time is ... NOW</h1>
 
-<p className='text-sm mt-4 text-zinc-800 text-light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.
+
+
+
+
+
+<p className='text-sm mt-4 text-zinc-800 text-light'>Picture this: acquiring skills that not only align with your passion but also open the doors to lucrative opportunities. From content creation that resonates with diverse audiences to leveraging the power of affiliate marketing, the potential for success knows no bounds.
+
 </p>
 
-<p className='text-sm mt-4 text-zinc-800 text-light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.
+<p className='text-sm mt-4 text-zinc-800 text-light'>Imagine turning your hobbies or interests into a thriving online business that caters to a global audience, all from the comfort of your home in Nigeria. The digital realm offers a level playing field, where determination and skill trump geographical barriers.
+
 </p>
 
-<p className='text-sm mt-4 text-zinc-800 text-light'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.
+<p className='text-sm mt-4 text-zinc-800 text-light'>Moreover, our platform is your gateway to a world of resources, guidance, and support. We provide a nurturing environment that fosters growth and empowers you to transform your dreams into a sustainable source of income.
+
+</p>
+
+<p className='text-sm mt-4 text-zinc-800 text-light'>Remember, the time to embark on this journey is now. Don't let the opportunities pass you by. Embrace the wealth of resources available to you, leverage your strengths, and chart a course towards a prosperous future.
+
+Join us on this exciting adventure of skill acquisition, entrepreneurship, and success. The landscape is ripe, the stage is set, and your moment to shine in the Nigerian digital space has arrived.
+
+
 </p>
 </div>
       
@@ -298,7 +315,14 @@ export default function Home() {
 
 </div>
 
-<p className='font-light text-center  text-xs text-zinc-600 mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.</p>
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>1. Create an account. Our membership costs N10,000 ($20) for a year and it allows you to access our marketplace as a full affiliate and also educational resources and training videos</p>
+
+
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>2. Go through our training material. We want your business to succeed, so we have packaged a solid arrnagment of videos and materials to get the best out of your new affiliate marketing business.</p>
+
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>3. Start promoting and making sales. We pay between 20% and 40% in commissions for products you sell. The products are digital producst and can be delivered to anyon, anywhere. </p>
+
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>4. Start earning </p>
 
 
 </div>
@@ -328,7 +352,14 @@ export default function Home() {
 
 </div>
 
-<p className='font-light text-center  text-xs text-zinc-600 mt-4'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod quam eget risus cursus, sed elementum risus tristique. Phasellus vehicula libero at odio vulputate, sed bibendum est suscipit. ut.</p>
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>1. Create an account. Our membership for vendors costs N10,000 ($20) for a year and it allows you to create business as a vendor on our platform and submit your product(s) </p>
+
+
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>2. Review our terms and conditions for products that meet up with our standards and our specifications for sales and payouts.</p>
+
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>3. Submit your product with all the information needed and once approved, it appears on our marketplace. </p>
+
+<p className='font-light text-left  text-s text-zinc-600 mt-4'>4. We have a strong network of affiliates that will take it up from here, promoting your products. Delivery and payouts are handled efficiently and securely by our platform. </p>
 
 
 </div>

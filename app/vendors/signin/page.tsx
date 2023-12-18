@@ -8,7 +8,7 @@ import Footer from '../../components/Footer';
 import AppBar from '../../components/Appbar';
 
 
-import { useState, useEffect, forwardRef, Fragment } from "react";
+import { useState, useEffect, forwardRef, Fragment, CSSProperties } from "react";
 
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -17,15 +17,238 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { TransitionProps } from '@mui/material/transitions';
 
+import { useRouter } from 'next/navigation';
 
+import { Formik, useFormik } from 'formik';
+import axios, { AxiosError, AxiosResponse } from "axios";
+import * as yup from 'yup';
+import toast, { Toaster } from 'react-hot-toast'
+import Cookies from 'js-cookie';
+import { BeatLoader, ClipLoader, PropagateLoader } from 'react-spinners'
+import React from 'react'
 
 
 export default function Signin() {
 
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
+
+
+  let [color, setColor] = useState("#90EE90");
+
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  const [isLoading, setIsLoading] = React.useState(false);
+  var errorMessage ="";
+  const notifySuccess = () => toast.success("Login successful");
+  const notifyError = (message: any) => toast.error(message);
+  const notifyCustomSuccess = (message: any) => toast.error(message);
+  
+  const removeTrailingSpaces = (value: string) => (typeof value === 'string' ? value.trimEnd() : value);
+
+
+
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  
+
+   const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email('Enter a valid email')
+      .transform(removeTrailingSpaces)
+      .required('Email is required'),
+    password: yup
+      .string()
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required'),
+  });
+   const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+   
+
+      setIsLoading(true);
+     
+
+     
+
+       const formData = new FormData();
+
+       formData.append('email', values.email);
+       formData.append('password', values.password);
+
+      // alert(JSON.stringify(formData, null, 2));
+      
+
+      runAPI(formData );
+    },
+  });
+
+  const runAPI = async (values: FormData) => {
+
+    setIsLoading(true);
+
+
+
+    try {
+      const res = await axios.post(
+        `https://back.learniix.com/api/login`,
+        values,
+       
+        {
+         // withCredentials: true ,
+
+         headers:{
+          'Content-Type' :'multipart/form-data',
+        
+
+         
+         },
+         
+         // params: {values}
+        }
+       
+      );
+     
+      setIsLoading(false);
+     // notifySuccess();
+      console.log(res.data.user_details.firstName)
+      var user = {"user_id":res.data.user_details.id,"firstName":res.data.user_details.firstName, "total_sales_vendor_cash":res.data.user_details.total_vendor_sales_cash,"total_sales_vendor":res.data.user_details.total_vendor_sales, "bank":res.data.user_details.bank, "bank_account":res.data.user_details.bank_account_name, "bank_account_number":res.data.user_details.bank_account_number,
+      "unpaid_earnings_vendor":res.data.user_details.unpaid_balance_vendor, "total_aff_sales_cash":res.data.user_details.total_aff_sales_cash,"total_aff_sales": res.data.user_details.total_aff_sales ,"unpaid_balance":res.data.user_details.unpaid_balance,
+       "lastName":res.data.user_details.lastName, "isVendor":res.data.user_details.is_vendor, "id":res.data.user_details.id, "affiliate_id":res.data.user_details.affiliate_id, "logged_in":true,"auto_withdraw":res.data.user_details.withdrawal_settings,"naira_exchange_rate":res.data.naira_exchange_rate.value, "ghs_exchange_rate":res.data.ghs_exchange_rate.value, "convert_total_aff_sales_usd":res.data.convert_total_aff_sales_usd,
+       "convert_balance_usd":res.data.convert_balance_usd
+      };
+
+      const expiryDate = new Date();
+      expiryDate.setDate(expiryDate.getDate() + 7);
+
+      Cookies.set('user_details', JSON.stringify( user),{ expires: expiryDate });
+
+      if(res.data.user_details.is_payed=="true" && res.data.user_details.email_verified==true){
+
+         notifySuccess();
+         //wait for 3 seconds before redirecting
+        setTimeout(() => {
+          if(res.data.user_details.is_vendor == true)
+              router.push('dashboard');
+
+          else{
+            notifyError("You're attempting to sign into an affiliate account on the vendor portal. Please visit the affiliate login page");
+          }
+        //  router.push('/vendor');
+
+        }, 3000);
+
+      }
+      else if(res.data.user_details.is_vendor==true && (res.data.user_details.is_payed=="false" || res.data.user_details.is_payed == null)){
+        //user is a vendor that hasn't paid registration fees
+
+        notifyCustomSuccess("Your vendor account has not been activated. Redirecting to activation page....");
+
+         //wait for 3 seconds before redirecting
+         setTimeout(() => {
+        
+                router.push('/new/vendor/pay?user_id='+res.data.user_details.id);
+
+         
+
+        }, 3000);
+
+      }
+
+      else if(res.data.user_details.is_vendor==true && res.data.user_details.email_verified==false){
+        //user is a vendor with unverified email address
+
+        notifyCustomSuccess("Your vendor email account has not been verified ...");
+          Cookies.set("email",res.data.user_details.email)
+         //wait for 3 seconds before redirecting
+         setTimeout(() => {
+        
+                router.push('verify');
+
+        
+
+        }, 3000);
+
+      }
+
+      else if(res.data.user_details.is_vendor==false && (res.data.user_details.is_payed=="false" || res.data.user_details.is_payed == null)){
+        //user is an affiliate that hasn't paid reg fees
+
+        notifyCustomSuccess("Your affiliate account has not been activated. Redirecting to activation page....");
+
+         //wait for 3 seconds before redirecting
+         setTimeout(() => {
+        
+                router.push('/new/affiliate/pay?user_id='+res.data.user_details.id);
+
+                
+         
+
+        }, 3000);
+
+      }
+      else if(res.data.user_details.is_vendor==false && res.data.user_details.email_verified==false){
+
+        //user is an affiliate that has not verified email
+
+        notifyCustomSuccess("Your affiliate email has not been verified...");
+        Cookies.set("email",res.data.user_details.email)
+
+         //wait for 3 seconds before redirecting
+         setTimeout(() => {
+        
+          router.push('verify');
+
+         
+
+        }, 3000);
+
+      }
+
+      
+    
+     
+
+      
+    } catch (err ) {
+     
+
+      if (err instanceof Error) {
+        const axiosError = err as AxiosError;
+        if (axiosError.response) {
+          const errorResponse = axiosError.response as AxiosResponse;
+          if (errorResponse.data) {
+            errorMessage = errorResponse.data.message;
+          }
+        }
+
+        notifyError(errorMessage)
+
+         console.log(errorMessage);
+      }
+      
+    
+      setIsLoading(false);
+     
+     
+    }
+    finally {
+      setIsLoading(false);
+
+    }
   };
 
 
@@ -33,6 +256,7 @@ export default function Signin() {
   return (
 
     <>
+     <Toaster/>
    {/*Pop to display options for getting started*/}
 
 
@@ -127,15 +351,22 @@ export default function Signin() {
 
       <div className="w-screen justify-center flex md:mt-10 mt-6 mt-2 md:px-0 px-4 ">
 
-        <div className='md:w-1/3 p-4 w-full rounded-xl shadow-xl'>
+      <form onSubmit={formik.handleSubmit} className='md:w-1/3 p-4 w-full rounded-xl shadow-xl'>
+
 
        <div className="block">
 
        <TextField
         fullWidth
-        label="Email Or Phone Number"
+        id="email"
+        name="email"
+        label="Email"
         variant="outlined"
         margin="normal"
+        value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
       //  {...register('email', { required: true })}
         InputProps={{
           startAdornment: (
@@ -161,9 +392,16 @@ export default function Signin() {
 
       <TextField
         fullWidth
+        id="password"
+        name="password"
         label="Password"
+       
         variant="outlined"
         margin="normal"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        error={formik.touched.password && Boolean(formik.errors.password)}
+        helperText={formik.touched.password && formik.errors.password}
         type={showPassword ? 'text' : 'password'}
        // {...register('password', { required: true })}
         InputProps={{
@@ -200,16 +438,36 @@ export default function Signin() {
         }}
       />
 
-<button
+      {
+        isLoading==false?(<>
+        <button 
         type="submit"
         className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
       >
-        Submit
+        Login 
       </button>
+        
+        </>):(<> <div className='w-full flex justify-center mt-6'>
+
+<PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
+</div></>)
+      }
+
+
+    
 
 
 
-        </div>
+   
+
+        </form>
 
 
       </div>

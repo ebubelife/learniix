@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Header from '../../components/Header'
-import FAQs from '../../components/Faqs'
-import Footer from '../../components/Footer';
-import AppBar from '../../components/Appbar';
+import Header from '../../../components/Header'
+import FAQs from '../../../components/Faqs'
+import Footer from '../../../components/Footer';
+import AppBar from '../../../components/Appbar';
 
 
 import React, { useState, useEffect, forwardRef, Fragment, CSSProperties } from "react";
@@ -44,14 +44,10 @@ export default function Signin() {
 
   const [isLoading, setIsLoading] = React.useState(false);
   var errorMessage ="";
-  const notifySuccess = () => toast.success("Login successful");
+  const notifySuccess = () => toast.success("Your password has been successfully changed.");
   const notifyError = (message: any) => toast.error(message);
-  const notifyCustomSuccess = (message: any) => toast.error(message);
+ 
   
-  const removeTrailingSpaces = (value: string) => (typeof value === 'string' ? value.trimEnd() : value);
-
-
-
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -59,35 +55,52 @@ export default function Signin() {
 
   
 
-   const validationSchema = yup.object({
-    email: yup
-      .string()
-      .email('Enter a valid email')
-      .transform(removeTrailingSpaces)
-      .required('Email is required'),
+  const validationSchema = yup.object({
     password: yup
       .string()
       .min(8, 'Password should be of minimum 8 characters length')
       .required('Password is required'),
+    confirm_password: yup
+      .string()
+      .min(8, 'Password should be of minimum 8 characters length')
+      .oneOf([yup.ref('password')], 'Passwords must match')
+      .required('Password confirmation is required'),
   });
+
    const formik = useFormik({
     initialValues: {
-      email: '',
       password: '',
+      confirm_password: '',
+      
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-   
 
-      setIsLoading(true);
+
+        var email = Cookies.get('email');
+ 
+
+        setIsLoading(true);
      
 
      
 
        const formData = new FormData();
 
-       formData.append('email', values.email);
        formData.append('password', values.password);
+       email = Cookies.get('email');
+
+       if(email!=undefined){
+        formData.append('email',email)
+       }
+       
+       else{
+        notifyError("An error occured. We could not verify your identity, please contact the Admin")
+        return;
+
+       }
+          
+      
 
       // alert(JSON.stringify(formData, null, 2));
       
@@ -96,15 +109,13 @@ export default function Signin() {
     },
   });
 
-  const runAPI = async (values: FormData) => {
+  const runAPI= async (values: FormData) => {
 
-    setIsLoading(true);
-
-
-
+ 
+   
     try {
       const res = await axios.post(
-        `https://back.learniix.com/api/login`,
+        `https://back.learniix.com/api/account/change_password`,
         values,
        
         {
@@ -123,104 +134,16 @@ export default function Signin() {
       );
      
       setIsLoading(false);
-     // notifySuccess();
-      console.log(res.data.user_details.firstName)
-      var user = {"user_id":res.data.user_details.id,"firstName":res.data.user_details.firstName, "total_sales_vendor_cash":res.data.user_details.total_vendor_sales_cash,"total_sales_vendor":res.data.user_details.total_vendor_sales, "bank":res.data.user_details.bank, "bank_account":res.data.user_details.bank_account_name, "bank_account_number":res.data.user_details.bank_account_number,
-      "unpaid_earnings_vendor":res.data.user_details.unpaid_balance_vendor, "total_aff_sales_cash":res.data.user_details.total_aff_sales_cash,"total_aff_sales": res.data.user_details.total_aff_sales ,"unpaid_balance":res.data.user_details.unpaid_balance,
-       "lastName":res.data.user_details.lastName, "isVendor":res.data.user_details.is_vendor, "id":res.data.user_details.id, "affiliate_id":res.data.user_details.affiliate_id, "logged_in":true,"auto_withdraw":res.data.user_details.withdrawal_settings,"naira_exchange_rate":res.data.naira_exchange_rate.value, "ghs_exchange_rate":res.data.ghs_exchange_rate.value, "convert_total_aff_sales_usd":res.data.convert_total_aff_sales_usd,
-       "convert_balance_usd":res.data.convert_balance_usd
-      };
-
-      const expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() + 7);
-
-      Cookies.set('user_details', JSON.stringify( user),{ expires: expiryDate });
-
-      if(res.data.user_details.is_payed=="true" && res.data.user_details.email_verified==true){
-
-         notifySuccess();
-         //wait for 3 seconds before redirecting
-        setTimeout(() => {
-          if(res.data.user_details.is_vendor == false)
-                router.push('dashboard');
-
-          else
-          router.push('/vendor');
-
-        }, 3000);
-
-      }
-      else if(res.data.user_details.is_vendor==true && (res.data.user_details.is_payed=="false" || res.data.user_details.is_payed == null)){
-        //user is a vendor that hasn't paid registration fees
-
-        notifyCustomSuccess("Your vendor account has not been activated. Redirecting to activation page....");
-
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-                router.push('/new/vendor/pay?user_id='+res.data.user_details.id);
-
-         
-
-        }, 3000);
-
-      }
-
-      else if(res.data.user_details.is_vendor==true && res.data.user_details.email_verified==false){
-        //user is a vendor with unverified email address
-
-        notifyCustomSuccess("Your vendor email account has not been verified ...");
-          Cookies.set("email",res.data.user_details.email)
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-                router.push('/verify');
-
-        
-
-        }, 3000);
-
-      }
-
-      else if(res.data.user_details.is_vendor==false && (res.data.user_details.is_payed=="false" || res.data.user_details.is_payed == null)){
-        //user is an affiliate that hasn't paid reg fees
-
-        notifyCustomSuccess("Your affiliate account has not been activated. Redirecting to activation page....");
-
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-                router.push('/new/affiliate/pay?user_id='+res.data.user_details.id);
-
-                
-         
-
-        }, 3000);
-
-      }
-      else if(res.data.user_details.is_vendor==false && res.data.user_details.email_verified==false){
-
-        //user is an affiliate that has not verified email
-
-        notifyCustomSuccess("Your affiliate email has not been verified...");
-        Cookies.set("email",res.data.user_details.email)
-
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-          router.push('verify');
-
-         
-
-        }, 3000);
-
-      }
-
-      
-    
      
+      console.log(res.data.message)
 
-      
+      notifySuccess();
+    
+
+      setTimeout(() => {
+        router.push('/affiliates/dashboard')
+      }, 3000);
+
     } catch (err ) {
      
 
@@ -236,6 +159,7 @@ export default function Signin() {
         notifyError(errorMessage)
 
          console.log(errorMessage);
+         
       }
       
     
@@ -286,7 +210,7 @@ export default function Signin() {
 <div className='w-full md:h-2/3 h-[500px]  absolute z-10  grid md:grid-cols-2 grid-cols-1 md:py-2 py-8' style={{ backgroundColor:`rgba(0,0,0,0.8)`}}>
 
 <div className='h-full w-full md:px-20 md:py-10 md:p-0 p-4'>
-       <h1 className='text-green-600 md:text-4xl text-xl font-bold md:text-left text-center'>Become An Affiliate</h1>
+       <h1 className='text-green-600 md:text-4xl text-xl font-bold md:text-left text-center'>Affiliates Corner</h1>
 
        <h1 className='text-white text-md md:text-left text-center font-smibold mt-4 '>Join our prestigious network of affiliates, get trained and gain access to a market of useful products. Promote the products using different media and earn up to 50% in commissions. </h1>
        
@@ -328,7 +252,7 @@ export default function Signin() {
 
 <div className="md:w-1/3 p-4 text-center">
 
-  <p className="text-zinc-800 text-xl md:mt-0 mt-10">Login To Your <span className="text-green-500 font-semibold">LEARNIIX</span> Account</p>
+  <p className="text-zinc-800 text-xl md:mt-0 mt-10">Change Your <span className="text-green-500 font-semibold">LEARNIIX</span> Password</p>
 
 
   </div></div>
@@ -338,7 +262,7 @@ export default function Signin() {
 
   <div className="md:w-1/3 w-full  text-center">
 
-  <p className="text-green-500 text-md  font-semibold">Affiliate Login</p>
+  <p className="text-green-500 text-md  font-semibold">Enter A New Password Below</p>
 
 
   </div></div>
@@ -353,43 +277,7 @@ export default function Signin() {
   <form onSubmit={formik.handleSubmit} className='md:w-1/3 p-4 w-full rounded-xl shadow-xl'>
 
 
-       <div className="block">
-
-       <TextField
-        fullWidth
-        id="email"
-        name="email"
-        label="Email"
-        variant="outlined"
-        margin="normal"
-        value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-      //  {...register('email', { required: true })}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              {/* Icon for email (replace with your icon) */}
-              ✉️
-            </InputAdornment>
-          ),
-        }}
-
-        style={{
-          borderRadius: '12px', // Adjust the border-radius to make it curvier
-          marginTop: '10px', // Optional: Adjust the top margin
-        }}
-        inputProps={{
-          style: {
-            fontSize: '12px', // Adjust the font size
-            color: 'slategray', // Use the slate color for text
-          },
-        }}
-      />
-       </div>
-
-      <TextField
+  <TextField
         fullWidth
         id="password"
         name="password"
@@ -437,13 +325,65 @@ export default function Signin() {
         }}
       />
 
+
+
+<TextField
+        fullWidth
+        id="confirm_password"
+        name="confirm_password"
+        label="Confirm Password"
+       
+        variant="outlined"
+        margin="normal"
+        value={formik.values.confirm_password}
+        onChange={formik.handleChange}
+        error={formik.touched.confirm_password && Boolean(formik.errors.confirm_password)}
+        helperText={formik.touched.confirm_password && formik.errors.confirm_password}
+        type={showPassword ? 'text' : 'password'}
+       // {...register('password', { required: true })}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              {/* Icon for password (replace with your icon) */}
+              🔐
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={handleTogglePasswordVisibility}
+                edge="end"
+                size="large"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        
+
+        style={{
+          borderRadius: '20px', // Adjust the border-radius to make it curvier
+          marginTop: '10px',
+          // Optional: Adjust the top margin
+        }}
+        inputProps={{
+          style: {
+            fontSize: '12px', // Adjust the font size
+            color: 'slategray', // Use the slate color for text
+          },
+        }}
+      />
+
+     
+
       {
         isLoading==false?(<>
         <button 
         type="submit"
         className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
       >
-        Submit
+        Change Password
       </button>
         
         </>):(<> <div className='w-full flex justify-center mt-6'>

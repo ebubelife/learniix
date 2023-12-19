@@ -105,14 +105,14 @@ const toggleLoginPopUp = () => {
    </React.Fragment>
 
 
-      <div className=' w-screen bg-black shadow-md px-20 py-2 flex items-center justify-center '>
+      <div className=' w-screen bg-white shadow-md px-20 py-2 flex items-center justify-center '>
 
 
         
 <p className="main-logo text-black font-bold text-2xl"><Link href={"/"}><img src="/images/home/learniix_logo.jpeg" className="w-32 h-8" alt="learnix-log" /></Link></p>
 <ul className="main-menu text-black flex space-x-6 justify-center ml-40 pt-2">
 <li className="menu-item  text-sm cursor-pointer text-white hover:text-zinc-600 "><Link href={"../../about"}>About Us</Link></li>
-<li className="menu-item text-sm cursor-pointer text-white hover:text-zinc-600 "><Link href={"../../focus"}>Our Focus</Link></li>
+
 <li className="menu-item text-sm cursor-pointer text-white hover:text-zinc-600 ">Contact</li>
 <li className="menu-item text-sm cursor-pointer hover:text-zinc-200 bg-zinc-600 text-white px-4 py-2 ml-2 shadow-xl rounded-md hover:ml-2 " onClick={toggleLoginPopUp}>Login</li>
 

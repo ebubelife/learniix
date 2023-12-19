@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 
 import './globals.css'
 
-import { Space_Grotesk } from 'next/font/google'
-const space_grotesk =  Space_Grotesk({ subsets: ['latin'] })
+import { Montserrat } from 'next/font/google'
+const montserrat =  Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Learniix -  A digital marketplace dedicated to assisting digital product creators in boosting their sales and expanding their customer base through our platform and a network of top-performing affiliates.',
@@ -26,7 +26,7 @@ export default function RootLayout({
   
 
       </head>
-      <body className={space_grotesk.className}>{children}</body>
+      <body className={montserrat.className}>{children}</body>
     </html>
   )
 }

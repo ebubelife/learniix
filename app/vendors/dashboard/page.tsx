@@ -21,7 +21,7 @@ const AffiliateDashboard = () => {
 
   return (
     <div >
-      <AffiliateDashboardHeader title="Affiliate Dashboard" />
+      <AffiliateDashboardHeader title="Vendors Dashboard" />
 
       <div className="w-screen h-screen px-4 py-4">
 
@@ -88,7 +88,7 @@ const AffiliateDashboard = () => {
 
 <div className='h-28 shadow-md rounded-md border border-1 border-zinc-300 p-2'>
 
-<p className='font-medim text-md ml-auto  mt-2'>Today&apos;s Sales</p>
+<p className='font-medim text-md ml-auto  mt-2'>Unpaid Earnings</p>
 <div className='flex mt-2'>
 <div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
 
@@ -112,17 +112,6 @@ const AffiliateDashboard = () => {
        </div>
 
 
-       <div className='w-screen  flex justify-center'>
-
-<div className='h-60 w-1/3 mt-2 bg-zinc-200 rounded-md mt-4 grid place-content-center'>
-
-    <p className='text-zinc-400 text-xl'>Challenge Banner</p>
-
-</div>
-
-
-</div>
-       
 
      
     

@@ -47,7 +47,7 @@ const AffiliateDashboard = () => {
 
 
 
-<p className='text-xl font-medium ml-4 mt-2'>$500</p>
+<p className='text-xl font-medium ml-4 mt-2'>N500 </p>
 
 
 </div>
@@ -64,7 +64,7 @@ const AffiliateDashboard = () => {
 
 
 
-<p className='text-xl font-medium ml-4 mt-2'>$500</p>
+<p className='text-xl font-medium ml-4 mt-2'>N5000</p>
 
 
 </div>
@@ -80,7 +80,7 @@ const AffiliateDashboard = () => {
 
 
 
-<p className='text-xl font-medium ml-4 mt-2'>$500</p>
+<p className='text-xl font-medium ml-4 mt-2'>N500</p>
 
 
 </div>
@@ -89,7 +89,7 @@ const AffiliateDashboard = () => {
 
 <div className='h-28 shadow-md rounded-md border border-1 border-zinc-300 p-2'>
 
-<p className='font-medim text-md ml-auto  mt-2'>Today&apos;s Sales</p>
+<p className='font-medim text-md ml-auto  mt-2'>Unpaid Earnings</p>
 <div className='flex mt-2'>
 <div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
 
@@ -97,7 +97,7 @@ const AffiliateDashboard = () => {
 
 
 
-<p className='text-xl font-medium ml-4 mt-2'>$500</p>
+<p className='text-xl font-medium ml-4 mt-2'>N500</p>
 
 
 </div>

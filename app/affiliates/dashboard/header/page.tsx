@@ -1,6 +1,6 @@
 "use client"
 // Import necessary React and Material-UI components
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 
 import Link from 'next/link';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem } from '@mui/material';
@@ -10,6 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useTheme,useMediaQuery } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 
 const AffiliateDashboardHeader = (props:any) => {
@@ -23,8 +24,9 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     const [isMenuOpen, setMenuOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const router = useRouter();
-
+    var user_data = Cookies.get('user_details');
     const editorRef = useRef([]);
+    var loggedIn = "";
 
 
     const [content, setContent] = useState('');
@@ -81,6 +83,45 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     router.push("../affiliates/withdrawals")
    };
 
+   const goToLeaderboard = () =>{
+    router.push("../affiliates/leaderboard")
+
+   }
+
+   function logout(){
+    Cookies.remove('user_details');
+    router.push('../signin');
+  }
+  
+  
+  
+      useEffect(() => {
+        //check if logged in
+        
+  if(user_data != null){
+    var user = JSON.parse(user_data)
+  
+      
+    loggedIn =(user as any).logged_in;
+   
+  
+  
+  
+  }
+  else{
+  
+    
+            router.push('../signin');
+           
+  
+  
+  
+  }
+  
+  
+      }, []);
+  
+
 
 
 
@@ -129,8 +170,8 @@ marginTop: '5%',
   </ListItem>
   <hr></hr>
 
-  <ListItem button>
-    <ListItemText primary="Leaderboard" />
+  <ListItem  button>
+    <ListItemText onClick={goToLeaderboard}  primary="Leaderboard" />
   </ListItem>
   <hr></hr>
 
@@ -157,7 +198,7 @@ marginTop: '5%',
   <hr></hr>
 
   <ListItem button >
-    <ListItemText primary="Logout" />
+    <ListItemText onClick={logout} primary="Logout" />
   </ListItem>
 
        

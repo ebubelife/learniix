@@ -34,7 +34,7 @@ const AffiliateDashboard = () => {
 
        <div className='grid md:grid-cols-2 grid-cols-1 gap-6'>
 
-        <div className='h-screen'>
+        <div className=''>
 
             <div className='shadow-xl p-4'>
                 <p className='text-xl font-medium text-zinc-600'>Your Personal Details</p>
@@ -145,7 +145,7 @@ const AffiliateDashboard = () => {
 
 
 
-        <div className='h-screen'>
+        <div className=''>
 
 <div className='shadow-xl p-4'>
     <p className='text-xl font-medium text-zinc-600'>Your Bank Details</p>

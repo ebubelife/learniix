@@ -1,0 +1,75 @@
+
+
+ .loader {
+    border: 3px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 3px solid #bb37fe;
+    width: 40px;
+    height: 40px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .small-loader-container{
+  
+    border: 1px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 1px solid #1DB5BE;
+    width: 8px;
+    height: 8px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    margin-top:5px;
+  
+  }
+
+  .custom-select {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .custom-select select {
+    appearance: none; /* Hide the default arrow */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    width: 200px; /* Set the desired width */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+  }
+  
+  .custom-select::after {
+    content: '\25BC'; /* Display a custom arrow */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #aaa;
+  }
+  
+  /* Styles for when the select element is focused */
+  .custom-select select:focus {
+    outline: none;
+    border-color: #000;
+  }
+  
+  /* Styles for when the select element is hovered */
+  .custom-select select:hover {
+    border-color: #999;
+  }
+  

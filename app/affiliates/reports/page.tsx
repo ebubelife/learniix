@@ -8,12 +8,17 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import Cookies  from 'js-cookie';
-
+import styles from '/styles/style.module.css'
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+// or
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+// or
 
 
 
 // Your main component
 const Reports = () => {
+  
     const dataPatients = [2, 5.5, 2, 8.5, 1.5, 5];
 
     var user_data = Cookies.get('user_details');
@@ -203,7 +208,7 @@ const handleChange = (event:any) => {
         if(isVendor==true){
           
              // Make an HTTP GET request to the API endpoint using axios
-             axios.get("https://back.zenithstake.com/api/view/vendor_products/"+user_id)
+             axios.get("https://back.learniix.com/api/view/vendor_products/"+user_id)
         .then((response: any) => {
            
              setVendorProductsData(response.data);
@@ -222,7 +227,7 @@ const handleChange = (event:any) => {
         }else{
            
 
-            axios.get('https://back.zenithstake.com/api/products/view/100')
+            axios.get('https://back.learniix.com/api/products/view/100')
             .then((response: any) => {
                
                  setAllProductsData(response.data);
@@ -399,7 +404,7 @@ const handleChange = (event:any) => {
    
         try {
           const res = await axios.post(
-            `https://back.zenithstake.com/api/view/sales/affiliate`,
+            `https://back.learniix.com/api/view/sales/affiliate`,
             values,
            
             {
@@ -498,7 +503,7 @@ const handleChange = (event:any) => {
      
           try {
             const res = await axios.post(
-              "https://back.zenithstake.com/api/view/sales/vendor/as_affiliates",
+              "https://back.learniix.com/api/view/sales/vendor/as_affiliates",
               values,
              
               {
@@ -570,7 +575,7 @@ const handleChange = (event:any) => {
      
           try {
             const res = await axios.post(
-              `https://back.zenithstake.com/api/view/sales/vendor`,
+              `https://back.learniix.com/api/view/sales/vendor`,
               values,
              
               {
@@ -657,7 +662,7 @@ const handleChange = (event:any) => {
       useEffect(() => {
        
         // Make an HTTP GET request to the API endpoint using axios
-        axios.get('https://back.zenithstake.com/api/sales/today/affiliate/'+ affiliate_id )
+        axios.get('https://back.learniix.com/api/sales/today/affiliate/'+ affiliate_id )
           .then((response: any) => {
               
                
@@ -927,7 +932,7 @@ isLoading ?(<> <div className="mt-10 w-full justify-center flex">
 {
 //if user is a vendor, retrive vendor sales on button click, else retrieve affiliate sales
 }
-<button className="bg-gold p-2 text-white shadow-xl mt-2"  onClick={isVendor?submitVendorSales:submitAffilateSales}>Get sales</button>
+<button className="bg-green-500 p-2 text-white shadow-xl mt-2"  onClick={isVendor?submitVendorSales:submitAffilateSales}>Get sales</button>
 </div>
 
 
@@ -947,76 +952,14 @@ isLoading ?(<> <div className="mt-10 w-full justify-center flex">
 
 
 
-{
-/* <div className="text-grey_600 flex w-full mt-4 justify-center">
-
-<button className="bg-purple2 p-2 text-white shadow-xl mt-2">Get Sales Summary (PDF)</button>
-
-</div>*/
-}
 
 
 
 
 
-{
-isVendor && (
-<>
-<hr className='bg-grey_600 text-grey_600 mt-4'></hr>
 
 
 
-<p className="w-full flex justify-center mt-8 text-grey_600 mt-4">Filter results by Affiliates</p>
-
-{
-isLoading ?(<> <div className="mt-10 w-full justify-center flex">
-
-<div>
-<div className={styles['loader']}></div>
-</div>
-</div></>):(<>
-<div className="w-full flex justify-center mt-4 ">
-{
-//if user is a vendor
-}
-<button className="bg-gold p-2 text-white shadow-xl mt-2"  onClick={submitRequestGetDataAsAffSales}>Get sales by affiliates</button>
-</div>
-
-
-
-
-</>)
-}
-
-
-</>
-)
-
-}
-
-<div className="text-grey_600 flex justify-center w-full h-80 overflow-y-scroll">
-
-<div>
-
-{salesByAffiliateData.map((item:any) => (  
-
-<>
-<div className="bg-white shadow-xl p-4  mt-2  ">
-
-
-<p className='text-purple2'>{item.firstName +" "+item.lastName}</p>
-<p className='text-black'>Email: {item.email}</p>
-<p className='text-green'>Sales: {item.count}</p>
-
-
-
-</div>
-</>
-
-))}
-
-</div>    
-</div>
      
     </div>
        

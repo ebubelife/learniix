@@ -64,7 +64,47 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 <p className='text-md font-semibold text-green-500 '>$500</p>
 </div>
-<button className='ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</button>
+<Link href={"products/view?product=1"} className='grid place-content-center ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</Link>
+</div>
+<p className='font-medim text-md mt-2'>Commission:</p>
+
+<p className='text-md font-semibold text-green-500 '>50%</p>
+
+
+
+</div>
+
+
+<div className=' shadow-md rounded-md border border-1 border-zinc-300 p-2 mr-8 md:mr-0'>
+<p className='text-sm font-semibold'>How To Run Google Ads That Convert</p>
+<div className='flex w-full mt-4'>
+<div>
+<p className='font-medim text-md ml-auto  mt-2'>Product Price:</p>
+
+
+<p className='text-md font-semibold text-green-500 '>$500</p>
+</div>
+<Link href={"products/view?product=1"} className='grid place-content-center ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</Link>
+</div>
+
+<p className='font-medim text-md mt-2'>Commission:</p>
+
+<p className='text-md font-semibold text-green-500 '>50%</p>
+
+
+
+</div>
+
+<div className=' shadow-md rounded-md border border-1 border-zinc-300 p-2 mr-8 md:mr-0'>
+<p className='text-sm font-semibold'>How To Run Google Ads That Convert</p>
+<div className='flex w-full mt-4'>
+<div>
+<p className='font-medim text-md ml-auto  mt-2'>Product Price:</p>
+
+
+<p className='text-md font-semibold text-green-500 '>$500</p>
+</div>
+<Link href={"products/view?product=1"} className='grid place-content-center ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</Link>
 </div>
 
 <p className='font-medim text-md mt-2'>Commission:</p>
@@ -85,48 +125,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 <p className='text-md font-semibold text-green-500 '>$500</p>
 </div>
-<button className='ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</button>
-</div>
-
-<p className='font-medim text-md mt-2'>Commission:</p>
-
-<p className='text-md font-semibold text-green-500 '>50%</p>
-
-
-
-</div>
-
-<div className=' shadow-md rounded-md border border-1 border-zinc-300 p-2 mr-8 md:mr-0'>
-<p className='text-sm font-semibold'>How To Run Google Ads That Convert</p>
-<div className='flex w-full mt-4'>
-<div>
-<p className='font-medim text-md ml-auto  mt-2'>Product Price:</p>
-
-
-<p className='text-md font-semibold text-green-500 '>$500</p>
-</div>
-<button className='ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</button>
-</div>
-
-<p className='font-medim text-md mt-2'>Commission:</p>
-
-<p className='text-md font-semibold text-green-500 '>50%</p>
-
-
-
-</div>
-
-
-<div className=' shadow-md rounded-md border border-1 border-zinc-300 p-2 mr-8 md:mr-0'>
-<p className='text-sm font-semibold'>How To Run Google Ads That Convert</p>
-<div className='flex w-full mt-4'>
-<div>
-<p className='font-medim text-md ml-auto  mt-2'>Product Price:</p>
-
-
-<p className='text-md font-semibold text-green-500 '>$500</p>
-</div>
-<button className='ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</button>
+<Link href={"products/view?product=1"} className='grid place-content-center ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>SELL</Link>
 </div>
 
 <p className='font-medim text-md mt-2'>Commission:</p>

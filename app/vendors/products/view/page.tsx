@@ -2,7 +2,7 @@
 // Import necessary React and Material-UI components
 import React, { useState,useRef } from 'react';
 import toast, { Toaster } from 'react-hot-toast'
-import AffiliateDashboardHeader from '../../dashboard/header/page';
+import VendorDashboardHeader from '../../header/page';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Cookies from 'js-cookie';
 
@@ -17,22 +17,13 @@ const ProductView = () => {
     }
 
     var user_data = Cookies.get('user_details');
-    var productDetails = Cookies.get('product_details');
-    var productName ="";
-    var productDescription ="";
-    var vendorFirstName ="";
-    var vendorLastName="";
-    var productPrice ="";
-    var productCommission ="";
-    var productID = ""; var productJVLink =""; var imagePath = "";
-    var selected_currency = Cookies.get('selected_currency');
+   
     var naira_exchange_rate = ""; var convert_balance_usd ="";
     
     
-    var isVendor =false;var user_id =""; var affiliate_id = "";
-    const [text, setText] = useState('');
-    const [copied, setCopied] = useState(false);
-  
+    var user_id =""; var affiliate_id = "";
+   
+    
     if(user_data){
         var user = JSON.parse(user_data)
  
@@ -46,72 +37,14 @@ const ProductView = () => {
         
  
      }
-
-   
-     if(productDetails){
-        var details = JSON.parse(productDetails)
-        productDescription = (details as any).productDescription;
-        productName = (details as any).productName;
-        vendorFirstName = (details as any).vendor_data1.original.firstName ;
-        vendorLastName = (details as any).vendor_data1.original.lastName ;
-        productPrice = (details as any).productPrice;
-        productCommission = (details as any).productCommission;
-        productJVLink = (details as any).productJVLink;
-        productID = (details as any).id;
-        imagePath = (details as any).image_path;
-     }
-
-
-     const convertPriceCurrency =(value:any)=>{
-
-        if(selected_currency ){
   
-          if(selected_currency = "USD"){
-  
-              var product_price_usd = parseInt(value) / parseInt(naira_exchange_rate);
-  
-  
-              return "$ "+ (product_price_usd).toString();
-  
-  
-            
-          }
-  
-          else if(selected_currency = "NGN"){
-  
-           // var ngn_bal = (parseInt(convert_balance_usd) * parseInt(naira_exchange_rate));
-  
-            return "₦ "+value.toString();
-  
-  
-          }
-  
-  
-        }
-  
-        else{
-  
-          var product_price_usd = parseInt(value) / parseInt(naira_exchange_rate);
-  
-  
-          return "$ "+ (product_price_usd).toString();
-  
-        }
-  
-      
-       }
-  
-  
- 
-    
-
 
 
   return (
     <div >
         <Toaster/>
 
-      <AffiliateDashboardHeader title="Product - Google Ads Pro..." />
+      <VendorDashboardHeader title="Product - Google Ads Pro..." />
 
       <div className="w-screen h-screen px-4 py-4 overflow-y">
 
@@ -155,13 +88,13 @@ const ProductView = () => {
 
     <div className="block mt-6">
 
-<p className='font-semibold text-green-500'>{productName}</p>
+<p className='font-semibold text-green-500'>HOW TO RUN GOOGLE ADS THAT CONVERT</p>
 </div>
 
 
 <div className="block mt-6">
 
-<p className='text-left text-sm '>{productDescription}</p>
+<p className='text-left text-sm '>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 </div>
 
 
@@ -169,7 +102,7 @@ const ProductView = () => {
 
 <p>Affiliate Sales Materials</p>
 
-<p className='mt-4 text-green-500'>{productJVLink}</p>
+<p className='mt-4 text-green-500'>https://salesmaterialsgoogleads.com/affiliates/learniix</p>
 </div>
 
 
@@ -177,7 +110,7 @@ const ProductView = () => {
 
 <p>Product Price</p>
 
-<p className='mt-4 text-green-500'>{convertPriceCurrency(productPrice)}</p>
+<p className='mt-4 text-green-500'>$60</p>
 </div>
 
 
@@ -185,20 +118,19 @@ const ProductView = () => {
 
 <p>Affiliate Commission</p>
 
-<p className='mt-4 text-green-500'>{productCommission}%</p>
+<p className='mt-4 text-green-500'>50%</p>
 </div>
 
 
-{/*<div className="block mt-6">
+<div className="block mt-6">
 
 <p>Current Sales</p>
 
 <p className='mt-4 text-green-500'>Over 1200 sales</p>
 </div>
-*/
-}
 
-<CopyToClipboard text={"https://learniix.com/aff?aff_id="+affiliate_id +"&pid="+productID}
+
+<CopyToClipboard text={"https://learniix.com/aff?aff_id="+affiliate_id +"&pid="+"1"}
           onCopy={() => handleCopyClick()}>
         <button 
         type="submit"

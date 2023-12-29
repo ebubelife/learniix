@@ -141,7 +141,7 @@ export default function Signin() {
     
 
       setTimeout(() => {
-        router.push('/affiliates/dashboard')
+        router.push('/vendors/dashboard')
       }, 3000);
 
     } catch (err ) {

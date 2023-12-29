@@ -129,10 +129,11 @@ const ProductView = () => {
                 <p className='text-xl font-medium text-zinc-600'>Product Banner</p>
 
 
-<div className=" mt-6 h-96 w-full bg-zinc-200 grid place-content-center rounded-md">
+<div className=" mt-6 h-96 w-full bg-zinc-100 grid place-content-center rounded-md">
 
 
-<p>Product Banner</p>
+<img src={imagePath}  className='mt-1   h-96 w-full' alt="learniix marketplace" />
+                            
 
 </div>
                 

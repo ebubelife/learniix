@@ -83,7 +83,7 @@ const ProductView = () => {
 <div className=" mt-6 h-96 w-full bg-zinc-200 grid place-content-center rounded-md">
 
 
-<p>Product Banner</p>
+<p>Learniix Banner Encouraging Vendors to Add Their Products</p>
 
 </div>
                 

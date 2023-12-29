@@ -111,7 +111,7 @@ const ProductView = () => {
     <div >
         <Toaster/>
 
-      <AffiliateDashboardHeader title="Product - Google Ads Pro..." />
+      <AffiliateDashboardHeader title={"Product Info"} />
 
       <div className="w-screen h-screen px-4 py-4 overflow-y">
 

@@ -1,15 +1,24 @@
 "use client"
 // Import necessary React and Material-UI components
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef, useEffect } from 'react';
 import toast, { Toaster } from 'react-hot-toast'
-import VendorDashboardHeader from '../../header/page';
+import VendorDashboardHeader from '../../../header/page';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Cookies from 'js-cookie';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 
 // Your main component
 const ProductView = () => {
     const notifySuccess = () => toast.success("Affiliate Link Copied to Clipboard");
+    const router = useRouter(); 
+    
+    const [products, setData] = useState([]); 
+    const [isLoading, setLoading] = useState(true); 
+
+
+    const [open, setOpen] = React.useState(false);
 
     function handleCopyClick(){
         notifySuccess();
@@ -21,7 +30,7 @@ const ProductView = () => {
     var naira_exchange_rate = ""; var convert_balance_usd ="";
     
     
-    var user_id =""; var affiliate_id = "";
+    var user_id =""; var affiliate_id = ""; var firstname= "";
    
     
     if(user_data){
@@ -30,13 +39,22 @@ const ProductView = () => {
         user_id = (user as any).id;
 
         affiliate_id = (user as any).affiliate_id;
-        naira_exchange_rate = (user as any).naira_exchange_rate;
-        convert_balance_usd = (user as any).convert_balance_usd;
+        firstname =(user as any).firstName;
             
        
         
  
      }
+
+
+
+ 
+ 
+
+ 
+  
+
+   
   
 
 
@@ -44,7 +62,7 @@ const ProductView = () => {
     <div >
         <Toaster/>
 
-      <VendorDashboardHeader title="Product - Google Ads Pro..." />
+      <VendorDashboardHeader title="Integration" />
 
       <div className="w-screen h-screen px-4 py-4 overflow-y">
 
@@ -88,46 +106,25 @@ const ProductView = () => {
 
     <div className="block mt-6">
 
-<p className='font-semibold text-green-500'>HOW TO RUN GOOGLE ADS THAT CONVERT</p>
+<p className='font-semibold text-green-500'>HOW TO CONNECT THIS PRODUCT TO LEARNIIX MARKETPLACE</p>
 </div>
 
 
 <div className="block mt-6">
 
-<p className='text-left text-sm '>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p className='text-left text-sm '>After creating your product on Learniix through your vendor account, the next step is to connect your sales page properly to the market place. 
+This will make it super easy for our affiliates to recommed your products and also for the system to efficiently record every traffic and sale on your products through the links of our affiliates. To do so:</p>
 </div>
 
 
-<div className="block mt-6">
+<p className='text-left text-sm mt-2'><b>1.</b> Have a quality sales page ready. Our team will vet the sales pages submitted and shabby or poorly created pages will be rejected and products will not be approved.</p>
 
-<p>Affiliate Sales Materials</p>
-
-<p className='mt-4 text-green-500'>https://salesmaterialsgoogleads.com/affiliates/learniix</p>
-</div>
+<p className='text-left text-sm mt-2'><b>2.</b> Ensure that all "buy", "purchase", "buy now" and/or any button that should allow the prospect buy your product is connected to your purchasing link. You can copy your unique purchasing link below.</p>
 
 
-<div className="block mt-6">
-
-<p>Product Price</p>
-
-<p className='mt-4 text-green-500'>$60</p>
-</div>
 
 
-<div className="block mt-6">
 
-<p>Affiliate Commission</p>
-
-<p className='mt-4 text-green-500'>50%</p>
-</div>
-
-
-<div className="block mt-6">
-
-<p>Current Sales</p>
-
-<p className='mt-4 text-green-500'>Over 1200 sales</p>
-</div>
 
 
 <CopyToClipboard text={"https://learniix.com/aff?aff_id="+affiliate_id +"&pid="+"1"}
@@ -136,13 +133,13 @@ const ProductView = () => {
         type="submit"
         className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
       >
-        Copy Affiliate Link
+       Copy Purchase Link
       </button>
         </CopyToClipboard>
 
 
 
-      <p className='text-sm font-italics mt-2 text-center'>Copy your affiliate link for this product and start selling!</p>
+      <p className='text-sm font-italics mt-2 text-center'>Copy your purchase link for this product and integrate to your sales page.</p>
 
 
 </div>

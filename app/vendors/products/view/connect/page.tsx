@@ -77,7 +77,7 @@ const ProductView = () => {
         <div className=''>
 
             <div className='shadow-xl p-4'>
-                <p className='text-xl font-medium text-zinc-600'>Product Banner</p>
+                <p className='text-xl font-medium text-zinc-600'>Integration</p>
 
 
 <div className=" mt-6 h-96 w-full bg-zinc-200 grid place-content-center rounded-md">
@@ -119,7 +119,7 @@ This will make it super easy for our affiliates to recommed your products and al
 
 <p className='text-left text-sm mt-2'><b>1.</b> Have a quality sales page ready. Our team will vet the sales pages submitted and shabby or poorly created pages will be rejected and products will not be approved.</p>
 
-<p className='text-left text-sm mt-2'><b>2.</b> Ensure that all "buy", "purchase", "buy now" and/or any button that should allow the prospect buy your product is connected to your purchasing link. You can copy your unique purchasing link below.</p>
+<p className='text-left text-sm mt-2'><b>2.</b> Ensure that all &apos;buy&apos;, &apos;purchase&apos;, &apos;buy now&apos; and/or any button that should allow the prospect buy your product is connected to your purchasing link. You can copy your unique purchasing link below.</p>
 
 
 

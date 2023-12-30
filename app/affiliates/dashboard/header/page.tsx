@@ -90,7 +90,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
    function logout(){
     Cookies.remove('user_details');
-    router.push('../signin');
+    router.push('../affiliates/signin');
   }
   
   

@@ -8,7 +8,7 @@ import Footer from '../../components/Footer';
 import AppBar from '../../components/Appbar';
 
 
-import { useState, useEffect, forwardRef, Fragment } from "react";
+import { useState, useEffect, forwardRef, Fragment, CSSProperties } from "react";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -17,6 +17,17 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
+import { VisibilityOff, Visibility } from '@mui/icons-material'
+import { TextField, InputAdornment, IconButton } from '@mui/material'
+import { useRouter } from 'next/navigation';
+
+import { Formik, useFormik } from 'formik';
+import axios, { AxiosError, AxiosResponse } from "axios";
+import * as yup from 'yup';
+import toast, { Toaster } from 'react-hot-toast'
+import Cookies from 'js-cookie';
+import { BeatLoader, ClipLoader, PropagateLoader } from 'react-spinners'
+import React from 'react'
 
 
 const Transition = forwardRef(function Transition(
@@ -40,6 +51,172 @@ export default function Signup() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
+
+
+  let [color, setColor] = useState("#90EE90");
+
+  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  const [isLoading, setIsLoading] = React.useState(false);
+  var errorMessage ="";
+  const notifySuccess = () => toast.success("Vendor Account Created Successfully!");
+  const notifyError = (message: any) => toast.error(message);
+  const notifyCustomSuccess = (message: any) => toast.error(message);
+  
+  const removeTrailingSpaces = (value: string) => (typeof value === 'string' ? value.trimEnd() : value);
+
+
+
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const validationSchema = yup.object({
+    email: yup
+      .string()
+      .email('Email')
+      .transform(removeTrailingSpaces)
+      .required('Email is required'),
+
+      firstName: yup
+      .string()
+      //.email('Email')
+      .transform(removeTrailingSpaces)
+      .required('First name is required'),
+
+      lastName: yup
+      .string()
+      //.email('Email')
+      .transform(removeTrailingSpaces)
+      .required('Last name is required'),
+
+
+      phone: yup
+      .string()
+      //.email('Email')
+      .transform(removeTrailingSpaces)
+      .required('Phone number is required'),
+
+      
+    password: yup
+      .string()
+      .min(8, 'Password should be of minimum 8 characters length')
+      .required('Password is required'),
+  });
+   const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      phone:''
+
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+   
+
+      setIsLoading(true);
+     
+
+     
+
+       const formData = new FormData();
+
+       formData.append('email', values.email);
+       formData.append('password', values.password);
+       formData.append('firstName', values.firstName);
+       formData.append('lastName', values.lastName);
+       formData.append('phone', values.phone);
+       formData.append('is_payed', 'true');
+       formData.append('reg_type', 'VENDOR');
+       formData.append('req_source', 'USER');
+       formData.append('currency', 'NGN');
+
+      // alert(JSON.stringify(formData, null, 2));
+      
+
+      runAPI(formData );
+    },
+  });
+
+  const runAPI = async (values: FormData) => {
+
+    setIsLoading(true);
+
+
+
+      
+    try {
+      const res = await axios.post(
+        `https://back.zenithstake.com/api/signup`,
+        values,
+       
+        {
+         // withCredentials: true ,
+
+         headers:{
+          'Content-Type' :'multipart/form-data',
+        
+
+         
+         },
+         
+         // params: {values}
+        }
+       
+      );
+     
+    //  setIsLoading(false);
+    //  notifySuccess();
+     console.log(res)
+      var user_id = res.data.user_id.toString();
+
+      setTimeout(() => {
+        // router.push( './vendor/pay?user_id=' + user_id);
+        router.push('/vendors/verify')
+       }, 2000);
+
+
+    
+
+    } catch (err) {
+      
+    
+      if (err instanceof Error) {
+        const axiosError = err as AxiosError;
+        if (axiosError.response) {
+          const errorResponse = axiosError.response as AxiosResponse;
+          if (errorResponse.data) {
+            errorMessage = errorResponse.data.message;
+          }
+        }
+
+        notifyError(errorMessage)
+
+         console.log(errorMessage);
+      }
+      
+      setIsLoading(false);
+      console.log(err);
+    }
+    finally {
+      setIsLoading(false);
+
+    }
+  };
+
+
+
+  
   
 
   return (
@@ -137,6 +314,249 @@ export default function Signup() {
 
       </div>
 
+
+      <div className="w-screen justify-center flex md:mt-10 mt-20">
+
+<div className="md:w-1/3 p-4 text-center">
+
+  <p className="text-zinc-800 text-xl">Create Your <span className="text-green-500 font-semibold">LEARNIIX</span> Vendor Account</p>
+
+
+  </div></div>
+
+   <div className="w-screen justify-center flex md:mt-10 mt-6 mt-2 md:px-0 px-4 ">
+
+      <form onSubmit={formik.handleSubmit} className='md:w-1/3 p-4 w-full rounded-xl shadow-xl'>
+
+
+       <div className="block">
+
+       <TextField
+        fullWidth
+        id="email"
+        name="email"
+        label="Email"
+        variant="outlined"
+        margin="normal"
+        value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+      //  {...register('email', { required: true })}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              {/* Icon for email (replace with your icon) */}
+              ✉️
+            </InputAdornment>
+          ),
+        }}
+
+        style={{
+          borderRadius: '12px', // Adjust the border-radius to make it curvier
+          marginTop: '10px', // Optional: Adjust the top margin
+        }}
+        inputProps={{
+          style: {
+            fontSize: '12px', // Adjust the font size
+            color: 'slategray', // Use the slate color for text
+          },
+        }}
+      />
+       </div>
+
+       <div className="block">
+
+<TextField
+ fullWidth
+ id="firstName"
+ name="firstName"
+ label="First Name"
+ variant="outlined"
+ margin="normal"
+ value={formik.values.firstName}
+   onChange={formik.handleChange}
+   error={formik.touched.email && Boolean(formik.errors.email)}
+   helperText={formik.touched.email && formik.errors.email}
+//  {...register('email', { required: true })}
+ InputProps={{
+   startAdornment: (
+     <InputAdornment position="start">
+       {/* Icon for email (replace with your icon) */}
+       ✉️
+     </InputAdornment>
+   ),
+ }}
+
+ style={{
+   borderRadius: '12px', // Adjust the border-radius to make it curvier
+   marginTop: '10px', // Optional: Adjust the top margin
+ }}
+ inputProps={{
+   style: {
+     fontSize: '12px', // Adjust the font size
+     color: 'slategray', // Use the slate color for text
+   },
+ }}
+/>
+</div>
+
+
+<div className="block">
+
+<TextField
+ fullWidth
+ id="lastName"
+ name="lastName"
+ label="Last Name"
+ variant="outlined"
+ margin="normal"
+ value={formik.values.lastName}
+   onChange={formik.handleChange}
+   error={formik.touched.email && Boolean(formik.errors.email)}
+   helperText={formik.touched.email && formik.errors.email}
+//  {...register('email', { required: true })}
+ InputProps={{
+   startAdornment: (
+     <InputAdornment position="start">
+       {/* Icon for email (replace with your icon) */}
+       ✉️
+     </InputAdornment>
+   ),
+ }}
+
+ style={{
+   borderRadius: '12px', // Adjust the border-radius to make it curvier
+   marginTop: '10px', // Optional: Adjust the top margin
+ }}
+ inputProps={{
+   style: {
+     fontSize: '12px', // Adjust the font size
+     color: 'slategray', // Use the slate color for text
+   },
+ }}
+/>
+</div>
+
+<div className="block">
+
+<TextField
+ fullWidth
+ id="phone"
+ name="phone"
+ label="Phone"
+ variant="outlined"
+ margin="normal"
+ value={formik.values.phone}
+   onChange={formik.handleChange}
+   error={formik.touched.email && Boolean(formik.errors.email)}
+   helperText={formik.touched.email && formik.errors.email}
+//  {...register('email', { required: true })}
+ InputProps={{
+   startAdornment: (
+     <InputAdornment position="start">
+       {/* Icon for email (replace with your icon) */}
+       ✉️
+     </InputAdornment>
+   ),
+ }}
+
+ style={{
+   borderRadius: '12px', // Adjust the border-radius to make it curvier
+   marginTop: '10px', // Optional: Adjust the top margin
+ }}
+ inputProps={{
+   style: {
+     fontSize: '12px', // Adjust the font size
+     color: 'slategray', // Use the slate color for text
+   },
+ }}
+/>
+</div>
+
+
+
+
+      <TextField
+        fullWidth
+        id="password"
+        name="password"
+        label="Password"
+       
+        variant="outlined"
+        margin="normal"
+        value={formik.values.password}
+        onChange={formik.handleChange}
+        error={formik.touched.password && Boolean(formik.errors.password)}
+        helperText={formik.touched.password && formik.errors.password}
+        type={showPassword ? 'text' : 'password'}
+       // {...register('password', { required: true })}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              {/* Icon for password (replace with your icon) */}
+              🔐
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={handleTogglePasswordVisibility}
+                edge="end"
+                size="large"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        
+
+        style={{
+          borderRadius: '20px', // Adjust the border-radius to make it curvier
+          marginTop: '10px',
+          // Optional: Adjust the top margin
+        }}
+        inputProps={{
+          style: {
+            fontSize: '12px', // Adjust the font size
+            color: 'slategray', // Use the slate color for text
+          },
+        }}
+      />
+
+      {
+        isLoading==false?(<>
+        <button 
+        type="submit"
+        className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
+      >
+        Register 
+      </button>
+        
+        </>):(<> <div className='w-full flex justify-center mt-6'>
+
+<PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
+</div></>)
+      }
+
+
+    
+
+
+
+   
+
+        </form>
+
+        </div>
 
 
 

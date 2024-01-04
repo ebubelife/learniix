@@ -78,7 +78,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
  
   useEffect(() => {
      // Make an HTTP GET request to the API endpoint using axios
-     axios.get("https://back.zenithstake.com/api/view/vendor_products/"+"16")
+     axios.get("https://back.learniix.com/api/view/vendor_products/"+user_id)
      .then((response: any) => {
          
           
@@ -94,7 +94,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
        console.error(error);
        setLoading(false)
      });
-  }, []);
+  }, [user_id]);
 
    
   

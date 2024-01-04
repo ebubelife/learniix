@@ -138,10 +138,18 @@ return (<>
   <p className='text-white text-2xl'>{title}</p>
   {/* Your other top navigation bar content goes here */}
 
-  <div className="ml-auto">
-<Link href={"../admin/pharmacies/new"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">Notifications</Link>
+{
+title==""?
+  (<div className="ml-auto">
+  <Link href={"../notifications"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">Notifications</Link>
+  
+  </div>):(<div className="ml-auto">
+  <Link href={"../vendors/products/new"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">Add Product</Link>
+  
+  </div>) 
 
-</div>
+}
+ 
 </Toolbar>
 </AppBar>
 

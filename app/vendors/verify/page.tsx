@@ -44,7 +44,7 @@ export default function Signin() {
 
   const [isLoading, setIsLoading] = React.useState(false);
   var errorMessage ="";
-  const notifySuccess = () => toast.success("Your code has been successfully verified");
+  const notifySuccess = () => toast.success("Your code has been successfully verified. Please wait while we redirect.");
   const notifyError = (message: any) => toast.error(message);
  
   
@@ -132,7 +132,7 @@ export default function Signin() {
     
 
       setTimeout(() => {
-        router.push('vendors/dashboard')
+        router.push('dashboard')
       }, 3000);
 
     } catch (err ) {

@@ -66,7 +66,7 @@ export default function Signup() {
 
   const [isLoading, setIsLoading] = React.useState(false);
   var errorMessage ="";
-  const notifySuccess = () => toast.success("Vendor Account Created Successfully!");
+  const notifySuccess = () => toast.success("Vendor Account Created Successfully! Please wait while we redirect.");
   const notifyError = (message: any) => toast.error(message);
   const notifyCustomSuccess = (message: any) => toast.error(message);
   
@@ -178,7 +178,7 @@ export default function Signup() {
       );
      
       setIsLoading(false);
-      notifySuccess;
+      notifySuccess();
 
   
       console.log(res)
@@ -193,7 +193,7 @@ export default function Signup() {
       setTimeout(() => {
           // router.push( './vendor/pay?user_id=' + user_id);
           router.push('/vendors/verify')
-        }, 3000);
+        }, 2000);
 
 
     

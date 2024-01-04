@@ -106,7 +106,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
    
     useEffect(() => {
        // Make an HTTP GET request to the API endpoint using axios
-       axios.get('https://back.zenithstake.com/api/products/view/50')
+       axios.get('https://back.learniix.com/api/products/view/500')
        .then((response: any) => {
            
             
@@ -243,7 +243,11 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 <p className='text-grey_600 mt-2'>Owner:  {item.vendor_data1.original.firstName +" "+item.vendor_data1.original.lastName}</p>
 
-<p  className='text-grey_600 mt-2'>Launched:<br></br> {item.approved_date.slice(0, 10)}</p>
+<p  className='text-grey_600 mt-2'>Launched:<br></br> {
+//item.approved_date.slice(0, 10)
+}
+
+</p>
 
 
 

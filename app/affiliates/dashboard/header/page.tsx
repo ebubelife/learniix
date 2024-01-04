@@ -95,37 +95,37 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   
   
   
-      useEffect(() => {
-        //check if logged in
-        
-  if(user_data != null){
-    var user = JSON.parse(user_data)
-  
-      
-    loggedIn =(user as any).logged_in;
-   
-  
-  
-  
-  }
-  else{
-  
+  useEffect(() => {
+    //check if logged in
     
-            router.push('../signin');
-           
+if(user_data != null){
+var user = JSON.parse(user_data)
+
   
-  
-  
-  }
-  
-  
-      }, []);
-  
+loggedIn =(user as any).logged_in;
 
 
 
 
-return (<>
+}
+else{
+
+
+        router.push('../signin');
+       
+
+
+
+}
+
+
+  }, []);
+
+
+
+
+
+return  (<>
 {/* Top Navigation Bar */}
 <AppBar position="static">
 <Toolbar style={{ backgroundColor: 'black' }}>

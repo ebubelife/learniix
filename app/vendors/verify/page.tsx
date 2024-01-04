@@ -81,7 +81,8 @@ export default function Signin() {
        email = Cookies.get('email');
 
        if(email!=undefined){
-        formData.append('email',email)
+        formData.append('email',email);
+        runAPI(formData );
        }
        
        else{
@@ -95,7 +96,7 @@ export default function Signin() {
       // alert(JSON.stringify(formData, null, 2));
       
 
-      runAPI(formData );
+      
     },
   });
 
@@ -131,7 +132,7 @@ export default function Signin() {
     
 
       setTimeout(() => {
-        router.push('update/password')
+        router.push('vendors/dashboard')
       }, 3000);
 
     } catch (err ) {

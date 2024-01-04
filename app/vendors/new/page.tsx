@@ -141,6 +141,8 @@ export default function Signup() {
        formData.append('req_source', 'USER');
        formData.append('currency', 'NGN');
 
+       Cookies.set('email', values.email);
+
       // alert(JSON.stringify(formData, null, 2));
       
 
@@ -157,7 +159,7 @@ export default function Signup() {
       
     try {
       const res = await axios.post(
-        `https://back.zenithstake.com/api/signup`,
+        `https://back.learniix.com/api/signup`,
         values,
        
         {
@@ -175,15 +177,23 @@ export default function Signup() {
        
       );
      
-    //  setIsLoading(false);
-    //  notifySuccess();
-     console.log(res)
+      setIsLoading(false);
+      notifySuccess;
+
+  
+      console.log(res)
       var user_id = res.data.user_id.toString();
+      var email = res.data.email.toString();
+
+
+    //  Cookies.set('email', email);
+
+      Cookies.set('user_id', user_id);
 
       setTimeout(() => {
-        // router.push( './vendor/pay?user_id=' + user_id);
-        router.push('/vendors/verify')
-       }, 2000);
+          // router.push( './vendor/pay?user_id=' + user_id);
+          router.push('/vendors/verify')
+        }, 3000);
 
 
     
@@ -222,6 +232,7 @@ export default function Signup() {
   return (
 
     <>
+     <Toaster/>
    {/*Pop to display options for getting started*/}
 <Fragment>
      

@@ -168,6 +168,11 @@ marginTop: '5%',
 
   <hr></hr>
 
+  <ListItem button>
+   <Link href="https://chat.whatsapp.com/BsMXbvZ2w1DBQClIIAN1Gn"><ListItemText primary="Community" /></Link> 
+  </ListItem>
+  <hr></hr>
+
 
   <ListItem  button>
     <ListItemText onClick={goToProducts}  primary="Products" />

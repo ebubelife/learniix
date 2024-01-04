@@ -166,7 +166,7 @@ marginTop: '5%',
   <hr></hr>
 
   <ListItem button>
-    <ListItemText primary="Tutorials" />
+   <Link href="https://libcourse.com.ng/courses/"><ListItemText primary="Tutorials" /></Link> 
   </ListItem>
   <hr></hr>
 
@@ -186,7 +186,7 @@ marginTop: '5%',
   <hr></hr>
 
   <ListItem button>
-    <ListItemText primary="Community" />
+   <Link href="https://t.me/+Zo8quk4E0KgyNjI0"><ListItemText primary="Community" /></Link> 
   </ListItem>
   <hr></hr>
 

@@ -120,7 +120,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 
 
-<p className='font-medium text-xl md:text-left text-center text-green-500'>Learniix Product Marketplace</p>
+<p className='font-medium text-xl md:text-left text-center text-green-500'>Your Products</p>
 
 
 
@@ -155,6 +155,14 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
      <p className='font-medim text-md mt-2'>Commission:</p>
      
      <p className='text-md font-semibold text-green-500 '>{item.productCommission}%</p>
+
+     <p className='font-medim text-md mt-2'>Status:</p>
+     
+     {
+
+      item.approved==false?(<><p className='text-xs font-semibold text-green-500 '>Disabled</p></>):(<>Active</>)
+     }
+     
      
      
      

@@ -136,51 +136,26 @@ export default function Signin() {
 
       Cookies.set('user_details', JSON.stringify( user),{ expires: expiryDate });
 
-      if(res.data.user_details.is_payed=="true" && res.data.user_details.email_verified==true){
+      if(res.data.user_details.is_payed=="true"&&res.data.user_details.email_verified==true&&res.data.user_details.is_vendor==false){
 
          notifySuccess();
          //wait for 3 seconds before redirecting
         setTimeout(() => {
-          if(res.data.user_details.is_vendor == false)
-                router.push('dashboard');
+          router.push('dashboard');
 
-          else
-          router.push('/vendor');
 
         }, 3000);
 
-      }
-      else if(res.data.user_details.is_vendor==true && (res.data.user_details.is_payed=="false" || res.data.user_details.is_payed == null)){
-        //user is a vendor that hasn't paid registration fees
 
-        notifyCustomSuccess("Your vendor account has not been activated. Redirecting to activation page....");
-
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-                router.push('/new/vendor/pay?user_id='+res.data.user_details.id);
-
-         
-
-        }, 3000);
 
       }
+      
 
-      else if(res.data.user_details.is_vendor==true && res.data.user_details.email_verified==false){
-        //user is a vendor with unverified email address
+      else if(res.data.user_details.is_vendor==true){
 
-        notifyCustomSuccess("Your vendor email account has not been verified ...");
-          Cookies.set("email",res.data.user_details.email)
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-                router.push('/verify');
-
-        
-
-        }, 3000);
-
-      }
+        notifyError("You're attempting to sign into a vendor account on the affiliate portal. Please visit the vendor login page");
+     
+     }
 
       else if(res.data.user_details.is_vendor==false && (res.data.user_details.is_payed=="false" || res.data.user_details.is_payed == null)){
         //user is an affiliate that hasn't paid reg fees

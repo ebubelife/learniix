@@ -1,15 +1,17 @@
 "use client"
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/router';
+import { useRouter,useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function Purchase(){
 
     const router = useRouter();
+    const searchParams = useSearchParams();
 
    
-    const productID  = router?.query?.pid;
-
+    const productID  = searchParams.get('pid');
+    
+    
     var sales_details = Cookies.get('sales_details')
 
     var parsed_sales:any ;

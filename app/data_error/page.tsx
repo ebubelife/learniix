@@ -6,7 +6,6 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { useRouter } from 'next/router';
 
 
 export default function NoData(){

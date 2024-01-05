@@ -2,17 +2,22 @@
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { useRouter, useSearchParams } from 'next/navigation';
 
-interface VerifyAffiliateProps {
-  query: {
-    aff_id?: string;
-    pid?: string;
-  };
-}
 
-export default function VerifyAffiliate({ query }: VerifyAffiliateProps) {
+
+export default function VerifyAffiliate() {
+    const searchParams = useSearchParams();
+
   useEffect(() => {
-    const { aff_id: affiliateID, pid: productID } = query;
+
+   
+   
+    const productID  = searchParams.get('pid');
+    const affiliateID  = searchParams.get('aff_id');
+
+
+   
 
     const saledDetails = { affiliateID, productID };
     Cookies.set('sales_details', JSON.stringify(saledDetails));

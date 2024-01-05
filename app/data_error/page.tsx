@@ -35,12 +35,12 @@ export default function NoData(){
                 {
                 
               <>
-                <p className="text-grey_600 mt-4"> Either <b>affiliate code</b> or the  <b>product code</b> is missing. Please try again or contact support </p>
+                <p className="text-grey_600 mt-4"> Either <b>affiliate code</b> or the  <b>product code</b> is missing in your link. Please try again or contact support </p>
 
 <p className="text-grey_600 mt-4"> Go to <Link href={"https://learniix.com"}> learniix.com</Link>   for more information on how our affiliate system works. </p>
 
 <div className="w-full mt-7 flex justify-center">
-              <Link href={"https://learniix.com"} className="bg-gold text-white hover:bg-white hover:text-grey_600 rounded-full text-sm p-3 shadow-xl">
+              <Link href={"https://learniix.com"} className="bg-green-500 text-white hover:bg-white hover:text-green-500 rounded-full text-sm p-3 shadow-xl">
              Back To Home
                 </Link>
 

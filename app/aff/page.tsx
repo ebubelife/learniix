@@ -11,10 +11,15 @@ export default function VerifyAffiliate() {
 
   useEffect(() => {
 
+
+
    
    
     const productID  = searchParams.get('pid');
     const affiliateID  = searchParams.get('aff_id');
+
+    console.log(productID)
+    console.log(affiliateID)
 
 
    
@@ -24,12 +29,12 @@ export default function VerifyAffiliate() {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/api`, { params: { productID } });
+        const response = await axios.get(`https://back.learniix.com/api/view/product/`+ productID);
         const productSalesPageLink = response.data.productSalesPageLink;
         window.location.href = productSalesPageLink;
       } catch (error) {
         console.error(error);
-        window.location.href = 'https://learniix.com/data_error';
+     window.location.href = 'https://learniix.com/data_error';
       }
     };
 

@@ -1,4 +1,4 @@
-// pages/verify-affiliate.tsx
+"use client"
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';

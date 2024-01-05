@@ -762,7 +762,7 @@ const handleChange = (event:any) => {
 
 
 
-<p className='text-xl font-medium ml-4 mt-2'>$500 </p>
+<p className='text-xl font-medium ml-4 mt-2'>{todaySales } </p>
 
 
 </div>

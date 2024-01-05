@@ -1,4 +1,4 @@
-"use client"
+"user client"
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

@@ -1,5 +1,4 @@
-"use client"
-
+// pages/verify-affiliate.tsx
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
@@ -18,17 +17,15 @@ export default function VerifyAffiliate({ query }: VerifyAffiliateProps) {
     const saledDetails = { affiliateID, productID };
     Cookies.set('sales_details', JSON.stringify(saledDetails));
 
-    const fetchData = () => {
-      axios
-        .get(`https://back.learniix.com/api/view/product/` + productID)
-        .then((response) => {
-          const productSalesPageLink = response.data.productSalesPageLink;
-          window.location.href = productSalesPageLink;
-        })
-        .catch((error) => {
-          console.error(error);
-          window.location.href = 'https://learniix.com/data_error';
-        });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/api`, { params: { productID } });
+        const productSalesPageLink = response.data.productSalesPageLink;
+        window.location.href = productSalesPageLink;
+      } catch (error) {
+        console.error(error);
+        window.location.href = 'https://learniix.com/data_error';
+      }
     };
 
     if (productID) {
@@ -37,12 +34,4 @@ export default function VerifyAffiliate({ query }: VerifyAffiliateProps) {
   }, []);
 
   return null;
-}
-
-export async function getServerSideProps({ query }: { query: any }) {
-  return {
-    props: {
-      query,
-    },
-  };
 }

@@ -150,7 +150,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
      
      <p className='text-md font-semibold text-green-500 '>₦ {item.productPrice}</p>
      </div>
-     <Link href={"products/view/connect"} className='grid place-content-center ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>CONNECT</Link>
+     <Link href={"products/view/connect?pid="+item.id} className='grid place-content-center ml-auto w-20 text-sm bg-zinc-100 rounded-md shadow-xl'>CONNECT</Link>
      </div>
      <p className='font-medim text-md mt-2'>Commission:</p>
      

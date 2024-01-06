@@ -21,7 +21,7 @@ export default function NoData(){
        
          
 
-         <img src={"/images/logo.png"} height={40} width={40} alt={"course-image"} className="h-20 w-40"/>
+         <img src={"/images/logo.jpeg"} height={40} width={40} alt={"learniix-logo"} className="h-20 w-40"/>
       
            
          </div>

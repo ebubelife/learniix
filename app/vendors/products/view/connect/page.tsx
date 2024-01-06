@@ -6,19 +6,37 @@ import VendorDashboardHeader from '../../../header/page';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 
 // Your main component
 const ProductView = () => {
-    const notifySuccess = () => toast.success("Affiliate Link Copied to Clipboard");
+    const notifySuccess = () => toast.success("Product Purchase Link Copied to Clipboard");
     const router = useRouter(); 
+    const searchParams = useSearchParams();
     
-    const [products, setData] = useState([]); 
-    const [isLoading, setLoading] = useState(true); 
+  
+    const [isLoading, setLoading] = useState(""); 
+    const [productID, setProductID] = useState(""); 
 
 
     const [open, setOpen] = React.useState(false);
+
+    useEffect(() => {
+
+
+
+   
+   
+      const productID  = searchParams.get('pid');
+      const affiliateID  = searchParams.get('aff_id');
+
+      if(productID != null){
+        setProductID(productID);
+      }
+
+      
+    },[])
 
     function handleCopyClick(){
         notifySuccess();
@@ -46,16 +64,6 @@ const ProductView = () => {
  
      }
 
-
-
- 
- 
-
- 
-  
-
-   
-  
 
 
   return (
@@ -127,7 +135,7 @@ This will make it super easy for our affiliates to recommed your products and al
 
 
 
-<CopyToClipboard text={"https://learniix.com/aff?aff_id="+affiliate_id +"&pid="+"1"}
+<CopyToClipboard text={"https://learniix.com/purchase?pid="+productID}
           onCopy={() => handleCopyClick()}>
         <button 
         type="submit"

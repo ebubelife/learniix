@@ -348,7 +348,7 @@ export default function Buy(){
 
           
            <div className="paystack-button bg-white border-2 border-grey_300  text-white hover:bg-white hover:text-grey_600 w-full py-2 shadow-xl rounded-xl mt-6 flex">
-          <img src="/images/SquadCo-By-GTCO-logo-png-transparent.png" className="img-responsive h-10 w-20" alt="Paystack-zenithstake"/>
+          <img src="https://learniix.com/images/SquadCo-By-GTCO-logo-png-transparent.png" className="img-responsive h-10 w-20" alt="Paystack-zenithstake"/>
           <button
           className='text-green-500 font-semibold ml-4 text-sm'
         onClick={() => {
@@ -387,7 +387,7 @@ export default function Buy(){
           
               <p className='text-black'>{cc}</p>
 
-            <img src={"https://www.learniix.com/images/logo.jpeg"} height={40} width={40} alt={"learniix-main-logo"} className="h-20 w-40"/>
+            <img src={"https://www.learniix.com/images/learniix_logo.jpeg"} height={40} width={40} alt={"learniix-main-logo"} className="h-20 w-40"/>
          
 
             </div>

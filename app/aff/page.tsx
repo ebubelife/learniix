@@ -40,6 +40,8 @@ export default function VerifyAffiliate() {
 
     if (productID) {
       fetchData();
+    }else{
+        alert("No PID")
     }
   }, []);
 

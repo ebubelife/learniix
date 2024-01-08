@@ -432,6 +432,7 @@ required
 
 
 
+<p>Please ensure your email is correct</p>
         <div className='mt-6'>
 
 <TextField

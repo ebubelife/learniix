@@ -158,7 +158,7 @@ export default function Signin() {
    
     try {
       const res = await axios.post(
-        `https://back.zenithstake.com/api/signup`,
+        `https://back.learniix.com/api/signup`,
         values,
        
         {

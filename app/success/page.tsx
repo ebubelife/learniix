@@ -2,8 +2,7 @@
 import { Button } from '@mui/material';
 
 import Cookies from 'js-cookie'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 

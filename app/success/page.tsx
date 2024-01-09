@@ -6,7 +6,7 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 
 export default function Success(){

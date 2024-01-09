@@ -1,3 +1,5 @@
+
+"use client"
 import { Button } from '@mui/material';
 
 import Cookies from 'js-cookie'
@@ -8,7 +10,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
-export default function AdminSales(){
+export default function AdminMembers(){
 
    
     return(

@@ -201,7 +201,7 @@ export default function Buy(){
 
     try {
       const res = await axios.post(
-        `https://back.zenithstake.com/api/sales/add`,
+        `https://back.learniix.com/api/sales/add`,
         formData,
        
         {

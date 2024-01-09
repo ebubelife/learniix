@@ -143,7 +143,7 @@ return  (<>
   {/* Your other top navigation bar content goes here */}
 
   <div className="ml-auto">
-<Link href={""} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">+ New Sale</Link>
+<Link href={"../admin/affiliates/new"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">+ New Sale</Link>
 
 </div>
 </Toolbar>

@@ -1,3 +1,5 @@
+"use client"
+
 import Cookies from 'js-cookie';
 
 import Image from 'next/image'
@@ -6,17 +8,18 @@ import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
 
-import 'react-toastify/dist/ReactToastify.css';
+
 import { CurrencyBitcoin } from '@mui/icons-material';
 import { Button, MenuItem, TextField } from '@mui/material';
 import styles from '/styles/style.module.css';
 import React from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-import 'react-toastify/dist/ReactToastify.css';
+
 
 import Select from 'react-select';
 import toast, { Toaster } from 'react-hot-toast';
+import AdminHeader from '../../header/page';
 
 export default function Profile(){
     var user_data = Cookies.get('user_details');
@@ -162,7 +165,7 @@ export default function Profile(){
 
         try {
           const res = await axios.post(
-            `https://back.zenithstake.com/api/sales/add`,
+            `https://back.learniix.com/api/sales/add`,
             formData,
            
             {
@@ -219,7 +222,7 @@ export default function Profile(){
 
      useEffect(() => {
         // Make an HTTP GET request to the API endpoint using axios|Get Affiliates
-        axios.get('https://back.zenithstake.com/api/view/affiliates')
+        axios.get('https://back.learniix.com/api/view/affiliates')
           .then((response: any) => {
               
                
@@ -240,7 +243,7 @@ export default function Profile(){
 
         useEffect(() => {
             // Make an HTTP GET request to the API endpoint using axios| Get products
-            axios.get('https://back.zenithstake.com/api/products/view/100')
+            axios.get('https://back.learniix.com/api/products/view/100')
               .then((response: any) => {
                   
                    
@@ -269,7 +272,10 @@ export default function Profile(){
           
            <Toaster />
 
+           <AdminHeader title="Admin Sales" />
+
             <main className="dashboard bg-grey_100  w-screen flex ">
+           
            
                 
                 <div className=" grow bg-grey_100 p-6">
@@ -415,7 +421,7 @@ required
 <div className='mt-4'>
 {!isLoading?(
          <>
-        <button  type="submit" className="bg-gold text-white hover:bg-white hover:text-grey_600 w-full py-2 shadow-xl rounded-xl">
+        <button  type="submit" className="bg-green-500 text-white hover:bg-white hover:text-zinc-600 w-full py-2 shadow-xl rounded-xl">
         Add Record
         </button>
          </>):

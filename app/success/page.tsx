@@ -47,9 +47,8 @@ if( cookiesDetails == null ||  cookiesDetails == undefined){
           
        
          
-
-         <img src={"/images/logo.png"} height={40} width={40} alt={"course-image"} className="h-20 w-40"/>
-      
+         <img src={"/images/home/learniix_logo.jpeg"} height={40} width={60} alt={"learniix-main-logo"} className="h-20 w-60"/>
+            
            
          </div>
 

@@ -278,7 +278,7 @@ export default function Buy(){
         email: email,
        // amount: (amount + 150) * 100,
 
-       amount: (amount + 150)
+       amount: (amount + 150),
        
         // Enter amount in Naira or Dollar (Base value Kobo/cent already multiplied by 100)
         currency_code: "NGN"

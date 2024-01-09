@@ -384,7 +384,7 @@ export default function Signin() {
    startAdornment: (
      <InputAdornment position="start">
        {/* Icon for email (replace with your icon) */}
-       ✉️
+     
      </InputAdornment>
    ),
  }}

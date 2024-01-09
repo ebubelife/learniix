@@ -66,10 +66,14 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
    };
 
 
-   const goToProducts = () => {
-    router.push("../affiliates/products")
+   const goToAffiliates = () => {
+    router.push("../admin/affiliates")
    };
 
+
+   const goToProducts = () => {
+    router.push("../affiliates/reports")
+   };
 
    const goToReports = () => {
     router.push("../affiliates/reports")
@@ -163,9 +167,21 @@ marginTop: '5%',
     <ListItemText onClick={goToProducts}  primary="Products" />
   </ListItem>
 
+ 
+
+
+  <hr></hr>
+  <ListItem button>
+    <ListItemText onClick={goToAffiliates}  primary="Affiliates" />
+  </ListItem>
+
   <hr></hr>
 
+  <ListItem button>
+    <ListItemText onClick={goToProducts}  primary="Vendors" />
+  </ListItem>
 
+  <hr></hr>
 
   <ListItem  button>
     <ListItemText onClick={goToLeaderboard}  primary="Leaderboard" />

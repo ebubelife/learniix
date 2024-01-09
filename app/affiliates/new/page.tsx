@@ -67,7 +67,7 @@ export default function Signin() {
 
   const [isLoading, setIsLoading] = React.useState(false);
   var errorMessage ="";
-  const notifySuccess = () => toast.success("Vendor Account Created Successfully! Please wait while we redirect.");
+  const notifySuccess = () => toast.success("Your Affiliate Account Has Been Created Successfully! Please wait while we redirect you to signin.");
   const notifyError = (message: any) => toast.error(message);
   const notifyCustomSuccess = (message: any) => toast.error(message);
   
@@ -186,7 +186,7 @@ export default function Signin() {
     
 
       setTimeout(() => {
-        router.push( '../signin');
+        router.push( '../affiliates/signin');
       }, 3000);
 
 

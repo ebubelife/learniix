@@ -276,7 +276,7 @@ export default function Buy(){
         //key: "sandbox_pk_6cf0272dfe344bddca7727d739e2f75121597ac7013c",
         // Change key (test_pk_sample-public-key-1) to the key on your Squad Dashboard
         email: email,
-        amount: (amount + 150),
+        amount: (amount + 150) * 100,
        
         // Enter amount in Naira or Dollar (Base value Kobo/cent already multiplied by 100)
         currency_code: "NGN"

@@ -6,11 +6,11 @@ import Image from 'next/image'
 import Link from 'next/link';
 
 
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 
 
 import { CurrencyBitcoin } from '@mui/icons-material';
-import { Button, MenuItem, TextField } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Slide, TextField } from '@mui/material';
 import styles from '/styles/style.module.css';
 import React from 'react';
 import axios, { AxiosError, AxiosResponse } from 'axios';
@@ -20,6 +20,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios';
 import Select from 'react-select';
 import toast, { Toaster } from 'react-hot-toast';
 import AdminHeader from '../../header/page';
+import { PropagateLoader } from 'react-spinners';
+import { TransitionProps } from '@mui/material/transitions';
 
 export default function Profile(){
     var user_data = Cookies.get('user_details');
@@ -58,6 +60,11 @@ export default function Profile(){
     const [vendorID, setVendorID] = useState(null); 
 
     const [productPrice, setProductPrice] = useState(""); 
+
+    const [open, setOpen] = React.useState(false);
+    const [prospectName, setProspectName] = React.useState([]);
+    const [prospectEmail, setProspectEmail] = React.useState([]);
+
   
 
 
@@ -75,10 +82,14 @@ export default function Profile(){
       }));
 
    
-
+      const override: CSSProperties = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "red",
+      };
 
    
-
+      let [color, setColor] = useState("#90EE90");
   
 
   
@@ -262,15 +273,69 @@ export default function Profile(){
             }, []);
             
 
-            
+            const Transition = React.forwardRef(function Transition(
+              props: TransitionProps & {
+                children: React.ReactElement<any, any>;
+              },
+              ref: React.Ref<unknown>,
+            ) {
+              return <Slide direction="up" ref={ref} {...props} />;
+            }); 
 
+            const handleClickOpen = () => {
+              setOpen(true);
+            };
+            
+            const handleClose = () => {
+              setOpen(false);
+            };
+
+            function showProspectInf(prospectName:any, prospectEmail:any){
+
+ 
+              setProspectName(prospectName);
+              setProspectEmail(prospectEmail);
+             
+              setOpen(true);
+          
+          }
     
      return(
 
           <>
 
+
           
            <Toaster />
+
+           <React.Fragment>
+     
+     <Dialog
+       open={open}
+       TransitionComponent={Transition}
+       keepMounted
+       onClose={handleClose}
+       aria-describedby="alert-dialog-slide-description"
+     >
+       <DialogTitle className="font-semibold text-md">{"Request Details"}</DialogTitle>
+       <DialogContent>
+
+       
+
+       <p className='mt-4 font-medium text-sm'>Customer Name: {prospectName}</p>
+
+       <p className='mt-4 font-medium text-sm'>Customer Email: {prospectEmail}</p>
+
+     
+    
+        
+       </DialogContent>
+       <DialogActions>
+         <p className='text-zinc-400 cursor-pointer mr-10 hover:mb-1' onClick={handleClose}>Close</p>
+        
+       </DialogActions>
+     </Dialog>
+   </React.Fragment>
 
            <AdminHeader title="Admin Sales" />
 
@@ -425,7 +490,17 @@ required
         Add Record
         </button>
          </>):
-          ( <div className={styles['loader']}></div>)
+          ( <div className='w-full flex justify-center mt-6'>
+
+          <PropagateLoader
+             color={color}
+             //loading={isLoading}
+             cssOverride={override}
+             size={15}
+             aria-label="Loading Spinner"
+             data-testid="loader"
+           />
+          </div>)
 }
 
 </div>

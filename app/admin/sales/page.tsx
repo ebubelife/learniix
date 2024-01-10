@@ -3,7 +3,7 @@
 import React, { useState,useRef, useEffect, CSSProperties } from 'react';
 
 import Link from 'next/link';
-import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, Slide, TextField } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, Slide, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/navigation';
 import FormControl from '@mui/material/FormControl';
@@ -223,6 +223,35 @@ export default function AdminSales() {
 
   return (
     <div >
+      <React.Fragment>
+     
+     <Dialog
+       open={open}
+       TransitionComponent={Transition}
+       keepMounted
+       onClose={handleClose}
+       aria-describedby="alert-dialog-slide-description"
+     >
+       <DialogTitle className="font-semibold text-md">{"Request Details"}</DialogTitle>
+       <DialogContent>
+
+       
+
+       <p className='mt-4 font-medium text-sm'>Customer Name: {prospectName}</p>
+
+       <p className='mt-4 font-medium text-sm'>Customer Email: {prospectEmail}</p>
+
+     
+    
+        
+       </DialogContent>
+       <DialogActions>
+         <p className='text-zinc-400 cursor-pointer mr-10 hover:mb-1' onClick={handleClose}>Close</p>
+        
+       </DialogActions>
+     </Dialog>
+   </React.Fragment>
+
       <AdminHeader title="Admin Sales" />
 
       <div className="w-screen h-screen px-4 py-4">

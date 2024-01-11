@@ -21,7 +21,7 @@ export default function Faqs() {
           <Typography className="text-sm font-light">
           You can join Learniix either as an affiliate or a vendor.
 
-As an affiliate, you can earn up to 50% commission or more for each sale you successfully make on the platform. It's worthy to note that our products are in high demand in the digital market. Meaning that there is a hungry audience for our products.
+As an affiliate, you can earn up to 50% commission or more for each sale you successfully make on the platform. It&apos;s worthy to note that our products are in high demand in the digital market. Meaning that there is a hungry audience for our products.
 
 You can also become part of Learniix by signing up as vendor. We know that as a vendor or course creator, there is high need to increase sales capacity and reach out to a more hungry audience which will culminate into increased sales and massive profits.
 Learniix had the vendors in mind while creating this platform that makes it easier for them to connect with our high performing affiliates who are like evangelists of your products to that hungry audience willing to pay for your products. Thereby making commissions for themselves as well as skyrocketing the sales of your products. This is a win-win relationship!         </Typography>
@@ -61,7 +61,7 @@ We have a stress-free payment processor that saves you time.     </Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-         <p className="text-sm font-light">  We made provisions for weekly payments precisely on Sundays to both our affiliates and vendors which we  baptized to be 'HOLY ALERTZ'. The payments will be made into the accurate account details bearing your name that you provided.
+         <p className="text-sm font-light">  We made provisions for weekly payments precisely on Sundays to both our affiliates and vendors which we  baptized to be &apos;HOLY ALERTZ&apos;. The payments will be made into the accurate account details bearing your name that you provided.
 
 Note: Your bank account name must tally with the name you signed up with. This measure is to protect you from any form of fraud.</p>
 

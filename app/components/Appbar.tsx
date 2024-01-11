@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
-var navLinks = ['https://learniix.vercel.app/','https://learniix.vercel.app/about','https://learniix.vercel.app/contact','https://learniix.vercel.app/affiliates/signin','https://learniix.vercel.app/vendors/signin']
+var navLinks = ['https://learniix.com/','https://learniix.com/about','https://learniix.com/contact','https://learniix.com/affiliates/signin','https:/learniix.com/vendors/signin']
 
 export default function AppBar() {
 

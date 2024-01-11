@@ -62,35 +62,35 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
  
 
   const goToDashboard = () => {
-    router.push("../affiliates/dashboard")
+    router.push("https://learniix.com/affiliates/dashboard")
    };
 
 
    const goToProducts = () => {
-    router.push("../affiliates/products")
+    router.push("https://learniix.com/affiliates/products")
    };
 
 
    const goToReports = () => {
-    router.push("../affiliates/reports")
+    router.push("https://learniix.com/affiliates/reports")
    };
 
    const goToProfile = () => {
-    router.push("../affiliates/profile")
+    router.push("https://learniix.com/affiliates/profile")
    };
 
    const goToWithdrawals = () => {
-    router.push("../affiliates/withdrawals")
+    router.push("https://learniix.com/affiliates/withdrawals")
    };
 
    const goToLeaderboard = () =>{
-    router.push("../affiliates/leaderboard")
+    router.push("https://learniix.com/affiliates/leaderboard")
 
    }
 
    function logout(){
     Cookies.remove('user_details');
-    router.push('../affiliates/signin');
+    router.push('https://learniix.com/affiliates/signin');
   }
   
   

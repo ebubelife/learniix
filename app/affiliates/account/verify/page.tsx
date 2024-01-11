@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Header from '../../components/Header'
-import FAQs from '../../components/Faqs'
-import Footer from '../../components/Footer';
-import AppBar from '../../components/Appbar';
+import Header from '../../../components/Header'
+import FAQs from '../../../components/Faqs'
+import Footer from '../../../components/Footer';
+import AppBar from '../../../components/Appbar';
 
 
 import React, { useState, useEffect, forwardRef, Fragment, CSSProperties } from "react";
@@ -44,50 +44,53 @@ export default function Signin() {
 
   const [isLoading, setIsLoading] = React.useState(false);
   var errorMessage ="";
-  const notifySuccess = () => toast.success("Login successful");
+  const notifySuccess = () => toast.success("Your code has been successfully verified");
   const notifyError = (message: any) => toast.error(message);
-  const notifyCustomSuccess = (message: any) => toast.error(message);
+ 
   
-  const removeTrailingSpaces = (value: string) => (typeof value === 'string' ? value.trimEnd() : value);
-
-
-
-
-  const handleTogglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
 
   
 
    const validationSchema = yup.object({
-    email: yup
+    code: yup
       .string()
-      .email('Enter a valid email')
-      .transform(removeTrailingSpaces)
-      .required('Email is required'),
-    password: yup
-      .string()
-      .min(8, 'Password should be of minimum 8 characters length')
-      .required('Password is required'),
+     
+      .required('Please enter a valid code'),
+ 
   });
    const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      code: '',
+      
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-   
 
-      setIsLoading(true);
+
+        var email = Cookies.get('email');
+ 
+
+        setIsLoading(true);
      
 
      
 
        const formData = new FormData();
 
-       formData.append('email', values.email);
-       formData.append('password', values.password);
+       formData.append('code', values.code);
+       email = Cookies.get('email');
+
+       if(email!=undefined){
+        formData.append('email',email)
+       }
+       
+       else{
+        notifyError("An error occured. We could not verify your identity, please contact the Admin")
+        return;
+
+       }
+          
+      
 
       // alert(JSON.stringify(formData, null, 2));
       
@@ -96,15 +99,13 @@ export default function Signin() {
     },
   });
 
-  const runAPI = async (values: FormData) => {
+  const runAPI= async (values: FormData) => {
 
-    setIsLoading(true);
-
-
-
+ 
+   
     try {
       const res = await axios.post(
-        `https://back.learniix.com/api/login`,
+        `https://back.learniix.com/api/account/verify_code`,
         values,
        
         {
@@ -123,79 +124,16 @@ export default function Signin() {
       );
      
       setIsLoading(false);
-     // notifySuccess();
-      console.log(res.data.user_details.firstName)
-      var user = {"user_id":res.data.user_details.id,"firstName":res.data.user_details.firstName, "total_sales_vendor_cash":res.data.user_details.total_vendor_sales_cash,"total_sales_vendor":res.data.user_details.total_vendor_sales, "bank":res.data.user_details.bank, "bank_account":res.data.user_details.bank_account_name, "bank_account_number":res.data.user_details.bank_account_number,
-      "unpaid_earnings_vendor":res.data.user_details.unpaid_balance_vendor, "total_aff_sales_cash":res.data.user_details.total_aff_sales_cash,"total_aff_sales": res.data.user_details.total_aff_sales ,"unpaid_balance":res.data.user_details.unpaid_balance,
-       "lastName":res.data.user_details.lastName, "isVendor":res.data.user_details.is_vendor, "id":res.data.user_details.id, "affiliate_id":res.data.user_details.affiliate_id, "logged_in":true,"auto_withdraw":res.data.user_details.withdrawal_settings,"naira_exchange_rate":res.data.naira_exchange_rate.value, "ghs_exchange_rate":res.data.ghs_exchange_rate.value, "convert_total_aff_sales_usd":res.data.convert_total_aff_sales_usd,
-       "convert_balance_usd":res.data.convert_balance_usd
-      };
-
-      const expiryDate = new Date();
-      expiryDate.setDate(expiryDate.getDate() + 7);
-
-      Cookies.set('user_details', JSON.stringify( user),{ expires: expiryDate });
-
-      if(res.data.user_details.is_payed=="true"&&res.data.user_details.email_verified==true&&res.data.user_details.is_vendor==false){
-
-         notifySuccess();
-         //wait for 3 seconds before redirecting
-        setTimeout(() => {
-          router.push('dashboard');
-
-
-        }, 3000);
-
-
-
-      }
-      
-
-      else if(res.data.user_details.is_vendor==true){
-
-        notifyError("You're attempting to sign into a vendor account on the affiliate portal. Please visit the vendor login page");
      
-     }
+      console.log(res.data.message)
 
-      else if(res.data.user_details.is_vendor==false && (res.data.user_details.is_payed=="false" || res.data.user_details.is_payed == null)){
-        //user is an affiliate that hasn't paid reg fees
-
-        notifyCustomSuccess("Your affiliate account has not been activated. Redirecting to activation page....");
-
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-                router.push('/new/affiliate/pay?user_id='+res.data.user_details.id);
-
-                
-         
-
-        }, 3000);
-
-      }
-      else if(res.data.user_details.is_vendor==false && res.data.user_details.email_verified==false){
-
-        //user is an affiliate that has not verified email
-
-        notifyCustomSuccess("Your affiliate email has not been verified...");
-        Cookies.set("email",res.data.user_details.email)
-
-         //wait for 3 seconds before redirecting
-         setTimeout(() => {
-        
-          router.push('verify');
-
-         
-
-        }, 3000);
-
-      }
-
-      
+      notifySuccess();
     
-     
 
-      
+      setTimeout(() => {
+        router.push('../update/password')
+      }, 3000);
+
     } catch (err ) {
      
 
@@ -211,6 +149,7 @@ export default function Signin() {
         notifyError(errorMessage)
 
          console.log(errorMessage);
+         
       }
       
     
@@ -261,7 +200,7 @@ export default function Signin() {
 <div className='w-full md:h-2/3 h-[500px]  absolute z-10  grid md:grid-cols-2 grid-cols-1 md:py-2 py-8' style={{ backgroundColor:`rgba(0,0,0,0.8)`}}>
 
 <div className='h-full w-full md:px-20 md:py-10 md:p-0 p-4'>
-       <h1 className='text-green-600 md:text-4xl text-xl font-bold md:text-left text-center'>Become An Affiliate</h1>
+       <h1 className='text-green-600 md:text-4xl text-xl font-bold md:text-left text-center'>Affiliates Corner</h1>
 
        <h1 className='text-white text-md md:text-left text-center font-smibold mt-4 '>Join our prestigious network of affiliates, get trained and gain access to a market of useful products. Promote the products using different media and earn up to 50% in commissions. </h1>
        
@@ -303,7 +242,7 @@ export default function Signin() {
 
 <div className="md:w-1/3 p-4 text-center">
 
-  <p className="text-zinc-800 text-xl md:mt-0 mt-10">Login To Your <span className="text-green-500 font-semibold">LEARNIIX</span> Account</p>
+  <p className="text-zinc-800 text-xl md:mt-0 mt-10">Verify Your <span className="text-green-500 font-semibold">LEARNIIX</span> Email</p>
 
 
   </div></div>
@@ -313,7 +252,7 @@ export default function Signin() {
 
   <div className="md:w-1/3 w-full  text-center">
 
-  <p className="text-green-500 text-md  font-semibold">Affiliate Login</p>
+  <p className="text-green-500 text-md  font-semibold">A Code Was Sent To Your Email, Enter It Below</p>
 
 
   </div></div>
@@ -332,15 +271,15 @@ export default function Signin() {
 
        <TextField
         fullWidth
-        id="email"
-        name="email"
-        label="Email"
+        id="code"
+        name="code"
+        label="Code"
         variant="outlined"
         margin="normal"
-        value={formik.values.email}
+        value={formik.values.code}
           onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
+          error={formik.touched.code && Boolean(formik.errors.code)}
+          helperText={formik.touched.code && formik.errors.code}
       //  {...register('email', { required: true })}
         InputProps={{
           startAdornment: (
@@ -364,53 +303,7 @@ export default function Signin() {
       />
        </div>
 
-      <TextField
-        fullWidth
-        id="password"
-        name="password"
-        label="Password"
-       
-        variant="outlined"
-        margin="normal"
-        value={formik.values.password}
-        onChange={formik.handleChange}
-        error={formik.touched.password && Boolean(formik.errors.password)}
-        helperText={formik.touched.password && formik.errors.password}
-        type={showPassword ? 'text' : 'password'}
-       // {...register('password', { required: true })}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              {/* Icon for password (replace with your icon) */}
-              🔐
-            </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                onClick={handleTogglePasswordVisibility}
-                edge="end"
-                size="large"
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-        
-
-        style={{
-          borderRadius: '20px', // Adjust the border-radius to make it curvier
-          marginTop: '10px',
-          // Optional: Adjust the top margin
-        }}
-        inputProps={{
-          style: {
-            fontSize: '12px', // Adjust the font size
-            color: 'slategray', // Use the slate color for text
-          },
-        }}
-      />
+     
 
       {
         isLoading==false?(<>
@@ -439,12 +332,9 @@ export default function Signin() {
 
 
 
-   <div className='mt-2 text-center text-green-500'>
+   
 
-   <Link href={"../affiliates/account/recover"} >Forgot password? Recover Account</Link>  
-  
-   </div>
-      </form>
+        </form>
 
 
       </div>

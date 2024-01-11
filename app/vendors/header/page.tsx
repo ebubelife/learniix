@@ -62,35 +62,35 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
  
 
   const goToDashboard = () => {
-    router.push("../vendors/dashboard")
+    router.push("https://learniix.com/vendors/dashboard")
    };
 
 
    const goToProducts = () => {
-    router.push("../vendors/products")
+    router.push("https://learniix.com/vendors/products")
    };
 
 
    const goToReports = () => {
-    router.push("../vendors/reports")
+    router.push("https://learniix.com/vendors/reports")
    };
 
    const goToProfile = () => {
-    router.push("../vendors/profile")
+    router.push("https://learniix.com/vendors/profile")
    };
 
    const goToWithdrawals = () => {
-    router.push("../vendors/withdrawals")
+    router.push("https://learniix.com/vendors/withdrawals")
    };
 
    const goToLeaderboard = () =>{
-    router.push("../vendors/leaderboard")
+    router.push("https://learniix.com/vendors/leaderboard")
 
    }
 
    function logout(){
     Cookies.remove('user_details');
-    router.push('../signin');
+    router.push('https://learniix.com/signin');
   }
   
   
@@ -111,7 +111,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   else{
   
     
-            router.push('../signin');
+            router.push('https://learniix.com/signin');
            
   
   
@@ -141,10 +141,10 @@ return (<>
 {
 title==""?
   (<div className="ml-auto">
-  <Link href={"../notifications"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">Notifications</Link>
+  <Link href={"https://learniix.com/notifications"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">Notifications</Link>
   
   </div>):(<div className="ml-auto">
-  <Link href={"../vendors/products/new"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">Add Product</Link>
+  <Link href={"https://learniix.com/vendors/products/new"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">Add Product</Link>
   
   </div>) 
 

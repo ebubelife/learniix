@@ -29,9 +29,8 @@ export default function TOS(){
 
             <p>
 
-          <p className="text-green mt-4 font-semibold text-xl">Zenithstake Terms & Conditions</p> 
-
-
+       
+<p className='text-sm text-zinc-500 mt-4'>
 
        
 
@@ -48,7 +47,7 @@ The following conditions are what you are expected to comply to as a buyer upon 
 
 Easy Access to Marketplace: As a buyer, you can easily access the marketplace and choose what you want.
 
-Non-Resale Rights: As a buyer, you’re expected to purchase a product for private use. You’re expected not to resell, alter, or revamp any purchased product
+Non-Resale Rights: As a buyer, you&apos;re expected to purchase a product for private use. You&apos;re expected not to resell, alter, or revamp any purchased product
 Money-back Guarantee: There is 30-day money-back guarantee on any listed product on this platform.
 
 Personal Liability: You must not divulge in any security information about your account to anyone. You are solely responsible for any actions that may result from disclosing your credentials.
@@ -58,7 +57,7 @@ Personal Liability: You must not divulge in any security information about your 
 
 
 
-<p className="mt-2 font-semibold">AFFILIATES</p>  
+<p className="mt-4 font-semibold">AFFILIATES</p>  
 
 <p className="mt-2 ">
 The following conditions are what you are expected to adhere to as an affiliate upon registering on the Learniix platform, these are:
@@ -95,7 +94,7 @@ The following conditions are what you are expected to adhere to as an affiliate 
                     </p>
 
                     <p className="mt-2 ">
-     Withdrawals: All payment will be paid via a Nigerian bank deposit. Take note that you’re earning in dollars but you will be paid in your local currency
+     Withdrawals: All payment will be paid via a Nigerian bank deposit. Take note that you&apos;re earning in dollars but you will be paid in your local currency
 </p>
 
 
@@ -159,7 +158,7 @@ Compliance: As a vendor, you must comply with every requested information on the
 
 
 
-
+</p>
 
 
           </p>

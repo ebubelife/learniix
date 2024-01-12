@@ -38,6 +38,19 @@ if( cookiesDetails == null ||  cookiesDetails == undefined){
 
 }, []);
 
+    useEffect(() => {
+      //check if logged in
+      
+if( cookiesDetails == null ||  cookiesDetails == undefined){
+ 
+
+  router.push('https://learniix.com');
+
+}
+
+
+}, []);
+
     return(
     
         <>

@@ -189,10 +189,10 @@ export default function Home() {
        <div className='md:border-r border-t px-2 md:py-0 py-2 md:border-r-zinc-300  border-t-zinc-300 md:mt-0 mt-8 '>
 
       <div className='w-full flex justify-center'>
-      <img src="/images/home/undraw_online_learning_re_qw08.svg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
+      <img src="/images/home/download (1).jpeg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
 
       </div>
-       <p className='text-xs font-normal  text-center  text-zinc-600'>Acquire top sales and marketing skills from our online course. Know how to gather leads, create trust and prime your audience for explosive sales.</p>
+       <p className='text-xs font-normal  text-center  text-zinc-600 mt-4'>Acquire top sales and marketing skills from our online course. Know how to gather leads, create trust and prime your audience for explosive sales.</p>
        </div>
 
 
@@ -200,10 +200,10 @@ export default function Home() {
        <div className='border-r px-2 border-r-zinc-300 md:mt-0 mt-8'>
 
       <div className='w-full flex justify-center'>
-      <img src="/images/home/undraw_online_learning_re_qw08.svg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
+      <img src="/images/home/best-affiliate-marketing-courses.jpeg" style={{height:180}} className='hero-image h-full w-full h-40 w-32 md:ml-8'  alt="hero-image" />
 
       </div>
-       <p className='text-xs font-normal  text-center  text-zinc-600'>Access an open marketplace of very quality products. We have an array of handpicked products and all you have to do is select on that appeals to your skills.</p>
+       <p className='text-xs font-normal  text-center  text-zinc-600 mt-4'>Access an open marketplace of very quality products. We have an array of handpicked products and all you have to do is select on that appeals to your skills.</p>
        </div>
 
 
@@ -212,10 +212,10 @@ export default function Home() {
        <div className='md:border-r border-t px-2 md:py-0 py-2 md:border-r-zinc-300  border-t-zinc-300 md:mt-0 mt-8'>
 
       <div className='w-full flex justify-center'>
-      <img src="/images/home/undraw_online_learning_re_qw08.svg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
+      <img src="/images/home/website-pics-1270-×-720px-76-1200x750.png" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
 
       </div>
-       <p className='text-xs font-normal  text-center  text-zinc-600'>Earn a solid living by marketing and selling products. You don&apos;t need a physical store. We handle the logistics and deliveries and we pay you your commissions weekly.</p>
+       <p className='text-xs font-normal  text-center  text-zinc-600 mt-4'>Earn a solid living by marketing and selling products. You don&apos;t need a physical store. We handle the logistics and deliveries and we pay you your commissions weekly.</p>
        </div>
 
 
@@ -236,7 +236,7 @@ export default function Home() {
     {
   //words from founder section
 }
-      <div className='grid md:grid-cols-2 md:gap-4 grid-cols-1 mt-8 md:mt-20'>
+      <div className='grid md:grid-cols-2 md:gap-10 grid-cols-1 mt-8 md:mt-20'>
 
 <div>
 <h1 className='text-green-600 md:text-xl text-md font-normal'>The best time to learn profitable skills was yesterday</h1>
@@ -272,10 +272,10 @@ Join us on this exciting adventure of skill acquisition, entrepreneurship, and s
       
 
 
-<img src="/images/home/slanting_shapes.png" alt="" style={{marginTop:`-80px`}} />
+<img className="transition-opacity ease-in duration-2000 opacity-100 hover:opacity-0" src="/images/home/check-out-happy-african-american-man-pointing-fingers-left-sale-logo-showing-promo-text-smiling-cheerful-recommending-product-white-background_176420-46839.jpg" alt="" style={{marginTop:`-50px`}} />
        </div>
 
-    
+     
       
     </div>
 
@@ -374,6 +374,17 @@ Join us on this exciting adventure of skill acquisition, entrepreneurship, and s
 
 </div>
 
+
+
+
+<div className=' w-screen bg-black  mt-10' style={{backgroundImage: 'url("/images/home/computer-buy-money-banknotes-163056.jpeg")', backgroundSize: 'cover', backgroundPosition: 'center center'}}>
+<div className='py-10 w-full h-full bg-black opacity-80 p-x10 text-center grid place-content-center'>
+<p className=' text-white md:text-xl font-medium md:text-md'>Get paid for every sale!</p>
+    
+  <p className=' text-green-500 md:text-xl font-bold md:text-md mt-2'>Our robust tracking code guarantees that you receive commmisions <br></br>for every sale generated through your link as an affiliate. <br></br>Starting is simple and straightforward.</p>
+    
+  </div>
+</div>
 
 <p className='text-center text-3xl text-grey_600 mt-10 font-semibold text-green-600'>
 FAQs

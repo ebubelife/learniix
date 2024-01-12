@@ -41,7 +41,7 @@ export default function Purchase(){
             window.location.replace("https://learniix.com/data_error");
           }
         
-        }, 200);
+        }, 3000);
     
         return () => clearTimeout(timeout);
       }, [productID]);

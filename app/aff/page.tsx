@@ -32,7 +32,7 @@ export default function VerifyAffiliate() {
         window.location.href = productSalesPageLink;
       } catch (error) {
 
-        if(count_tries == 10){
+        if(count_tries == 100){
             console.error(error);
             window.location.href = 'https://learniix.com/data_error';
         }else{

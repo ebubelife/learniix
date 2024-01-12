@@ -421,7 +421,7 @@ export default function AffiliateDashboard() {
 
 
 
-<p className='text-xl font-medium ml-4 mt-2'>{ convertTodayEarningCurrency()}</p>
+<p className='text-xl font-medium ml-4 mt-2'>{ convertAffBalanceCurrency()}</p>
 
 
 </div>
@@ -439,11 +439,15 @@ export default function AffiliateDashboard() {
 
        <div className='w-screen  flex justify-center'>
 
-<div className='h-60 w-1/3 mt-2 bg-zinc-200 rounded-md mt-4 grid place-content-center'>
+{
+  
+/*  <div className='h-60 w-1/3 mt-2 bg-zinc-200 rounded-md mt-4 grid place-content-center'>
 
-    <p className='text-zinc-400 text-xl'>Challenge Banner</p>
+    <p className='text-zinc-400 text-xl'>Learniix Challenge Banner</p>
 
-</div>
+</div>*/
+
+}
 
 
 </div>

@@ -186,7 +186,7 @@ export default function Home() {
      <div className='md:w-2/3 mt-20 w-full   bg-white  rounded-md shadow-md z-20 grid  md:grid-cols-3 grid-cols-1 p-4 gap-2' >
        
        
-       <div className='md:border-r border-t px-2 md:py-0 py-2 md:border-r-zinc-300  border-t-zinc-300 md:mt-0 mt-8 '>
+       <div className='md:border-r border-t px-2 md:py-0 py-2 md:border-r-zinc-300  border-t-zinc-300 md:mt-8 mt-8 '>
 
       <div className='w-full flex justify-center'>
       <img src="/images/home/download (1).jpeg" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />

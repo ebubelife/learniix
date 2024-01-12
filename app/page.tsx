@@ -197,7 +197,7 @@ export default function Home() {
 
 
        
-       <div className='border-r px-2 border-r-zinc-300 md:mt-0 mt-8'>
+       <div className='border-r px-2 border-r-zinc-300 md:mt-0 md:mt-8 mt-20 '>
 
       <div className='w-full flex justify-center'>
       <img src="/images/home/best-affiliate-marketing-courses.jpeg" style={{height:180}} className='hero-image h-full w-full h-40 w-32 md:ml-8'  alt="hero-image" />
@@ -209,7 +209,7 @@ export default function Home() {
 
 
       
-       <div className='md:border-r border-t px-2 md:py-0 py-2 md:border-r-zinc-300  border-t-zinc-300 md:mt-0 mt-8'>
+       <div className='md:border-r border-t px-2 md:py-0 py-2 md:border-r-zinc-300  border-t-zinc-300 md:mt-0 md:mt-8 mt-20'>
 
       <div className='w-full flex justify-center'>
       <img src="/images/home/website-pics-1270-×-720px-76-1200x750.png" className='hero-image h-full w-full h-32 w-32 md:ml-8'  alt="hero-image" />
@@ -228,7 +228,7 @@ export default function Home() {
      
 
 
-     <p className='text-center md:text-2xl text-xl text-black font-semibold mt-10 md:mt-20'>Words From The Learniix Team</p>
+     <p className='text-center md:text-2xl text-xl text-black font-semibold mt-10 md:mt-20 mt-10'>Words From The Learniix Team</p>
   
 
     <div className='flex justify-center px-4 md:px-20'>
@@ -272,7 +272,7 @@ Join us on this exciting adventure of skill acquisition, entrepreneurship, and s
       
 
 
-<img className="transition-opacity ease-in duration-2000 opacity-100 hover:opacity-0" src="/images/home/check-out-happy-african-american-man-pointing-fingers-left-sale-logo-showing-promo-text-smiling-cheerful-recommending-product-white-background_176420-46839.jpg" alt="" style={{marginTop:`-50px`}} />
+<img className="transition-opacity ease-in duration-2000 opacity-100 hover:opacity-60 md:mt-0 mt-20" src="/images/home/check-out-happy-african-american-man-pointing-fingers-left-sale-logo-showing-promo-text-smiling-cheerful-recommending-product-white-background_176420-46839.jpg" alt="" />
        </div>
 
      

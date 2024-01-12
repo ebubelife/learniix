@@ -9,10 +9,10 @@ export default function Footer() {
 
 
         <>
-        <div className='h-32'></div>
+        <div className='md:h-32'></div>
 
 
-        <div className="grid grid-cols-3 h-[300px] bg-black mt-auto">
+        <div className="grid md:grid-cols-3 grid-cols-1 md:h-[300px] bg-black mt-auto">
   {/* First Section with Right Border */}
   <div className="border-r border-zinc-500 p-4 text-center  text-slate-300">
    <img src="/images/home/79DFB8E8-E625-4406-8B37-A6572D695310_4_5005_c.jpeg" className="h-20 w-80" alt="alt-logo-learniix"/>
@@ -53,13 +53,13 @@ export default function Footer() {
 
    <p className="mt-2 text-green-500">Send us an email - admin@learniix.com</p>
 
-   <div className="grid grid-cols-3 gap-4 mt-4 place-content-center">
+   <div className="grid grid-cols-3 gap-4 mt-4 place-content-center md:px-0 px-10">
 
-    <img src="/images/home/facebook-svgrepo-com (2).svg" className="h-16 w-16" alt=" "/>
+    <img src="/images/home/facebook-svgrepo-com (2).svg" className="md:h-16 md:w-16 h-8 w-8" alt=" "/>
 
-    <img src="/images/home/twitter-social-logotype-svgrepo-com.svg" className="h-16 w-16" alt=" "/>
+    <img src="/images/home/twitter-social-logotype-svgrepo-com.svg" className="md:h-16 md:w-16 h-8 w-8" alt=" "/>
 
-    <img src="/images/home/youtube-svgrepo-com (2).svg" className="h-16 w-16" alt=" "/>
+    <img src="/images/home/youtube-svgrepo-com (2).svg" className="md:h-16 md:w-16 h-8 w-8" alt=" "/>
    </div>
   </div>
 </div>

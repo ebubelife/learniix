@@ -138,7 +138,11 @@ export default function Buy(){
 
     var c_details = {'product_price':productPrice, 'product_name':productName, 'productTYPage': thankYouPage, 'product_id':productID }
 
-    console.log(JSON.stringify(c_details ));
+    console.log(JSON.stringify(c_details )); 
+
+
+
+
 
     Cookies.set("course_details",JSON.stringify(c_details ));
 
@@ -150,6 +154,7 @@ export default function Buy(){
                {'vendor_id':productVendor},
                {'affiliate_id':affiliateID},
                {'product_id':productID}
+               //
               
               ]*/
 

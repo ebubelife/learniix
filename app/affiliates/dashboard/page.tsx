@@ -348,10 +348,10 @@ export default function AffiliateDashboard() {
     <div >
       <AffiliateDashboardHeader title="Affiliate Dashboard" />
 
-      <div className="w-screen h-screen px-4 py-4">
+      <div className="w-screen h-screen py-4">
 
 
-      
+     <h2 className='text-xl font-semibold text-green-500'> Hi {firstname}, </h2>
 
 
        <div className="mt-6"></div>
@@ -441,9 +441,9 @@ export default function AffiliateDashboard() {
 
 {
   
-/*  <div className='h-60 w-1/3 mt-2 bg-zinc-200 rounded-md mt-4 grid place-content-center'>
+ /*<div className=' md:w-1/3 mt-2 h-96 rounded-md mt-4 flex justify-center'>
 
-    <p className='text-zinc-400 text-xl'>Learniix Challenge Banner</p>
+   <img src="/images/home/WhatsApp Image 2024-01-13 at 12.56.32 PM.jpeg" className='h-full w-full' alt="learniix promo banner" />
 
 </div>*/
 

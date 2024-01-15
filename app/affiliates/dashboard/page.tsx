@@ -454,7 +454,7 @@ export default function AffiliateDashboard() {
 
 
   
- <div className=' md:w-1/3 mt-2 h-20 mt-4 rounded-md mt-4 grid place-content-center text-xl font-semibold text-green-500 shadow-md'>
+ <div className=' md:w-1/3 w-full mt-2 h-20 mt-4 rounded-md mt-4 grid place-content-center text-xl font-semibold text-green-500 shadow-md'>
  <p className='text-sm text-black text-center'>TIME LEFT</p>
  {timeLeft.days} days, {timeLeft.hours} hours
 

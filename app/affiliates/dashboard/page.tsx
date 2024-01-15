@@ -64,17 +64,29 @@ export default function AffiliateDashboard() {
    }
  
 
-   const moveToProductScreen=(id: any, item:any)=> {
+   
 
-      Cookies.set('product_details',JSON.stringify(item));
-      router.push("product?id="+id)
-  
-      
-  
-     
-  }
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0 });
 
- 
+  const calculateTimeLeft = () => {
+    const now = new Date();
+    const targetDate = new Date('2024-02-14'); // Set the target date (year-month-day)
+
+    const difference = targetDate.getTime() - now.getTime();
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+    setTimeLeft({ days, hours });
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      calculateTimeLeft();
+    }, 1000);
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
   const convertAffTotalCurrency =()=>{
 
@@ -437,20 +449,42 @@ export default function AffiliateDashboard() {
        </div>
 
 
+
+       <div className='w-screen  flex justify-center'>
+
+
+  
+ <div className=' md:w-1/3 mt-2 h-20 mt-4 rounded-md mt-4 grid place-content-center text-xl font-semibold text-green-500 shadow-md'>
+ <p className='text-sm text-black text-center'>TIME LEFT</p>
+ {timeLeft.days} days, {timeLeft.hours} hours
+
+</div>
+
+
+
+
+</div>
+
+
+
        <div className='w-screen  flex justify-center'>
 
 {
   
- /*<div className=' md:w-1/3 mt-2 h-96 rounded-md mt-4 flex justify-center'>
+ <div className=' md:w-1/3 mt-2 h-96 rounded-md mt-4 flex justify-center'>
 
    <img src="/images/home/WhatsApp Image 2024-01-13 at 12.56.32 PM.jpeg" className='h-full w-full' alt="learniix promo banner" />
 
-</div>*/
+</div>
 
 }
 
 
 </div>
+
+
+
+
        
 
      

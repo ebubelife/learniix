@@ -1,6 +1,6 @@
 "use client"
 // Import necessary React and Material-UI components
-import React, { useState,useRef, useEffect } from 'react';
+import React, { useState,useRef, useEffect, CSSProperties } from 'react';
 
 import Link from 'next/link';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, InputAdornment, TextField } from '@mui/material';
@@ -11,9 +11,11 @@ import Select from '@mui/material/Select';
 import { useTheme,useMediaQuery } from '@mui/material';
 import AffiliateDashboardHeader from '../dashboard/header/page';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
+import { BeatLoader, ClipLoader, PropagateLoader } from 'react-spinners'
 
+import Autocomplete from '@mui/material/Autocomplete';
 
 
 
@@ -42,10 +44,21 @@ const AffiliateDashboard = () => {
   const [userDataAccNum, setUserDataAccNum] = useState(null); 
   const [userDataBank, setUserDataBank] = useState(null); 
   const [userDataCurrency, setUserDataCurrency] = useState(null); 
-
+  
   
   const [accountValidText, setAccountValidText] = useState("Your account has been successfully validated"); 
+  const [all_banks, setAllBanks] = useState([
+   
+  ]);
 
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
+
+
+  let [color, setColor] = useState("#90EE90");
 
   
   const [selectedCurrencies, setSelectedCurrencies] = useState(""); // Initialize with an empty array
@@ -141,6 +154,8 @@ const countries = [
  
   const submitPfofileDetails = async(event: any) => {
 
+    setIsLoading(true)
+   
   
 
     event.preventDefault();
@@ -231,10 +246,9 @@ const countries = [
         
             
              
-             for(var i=0; i < response.data.length; i++){
-
-
-             }
+          const apiOptions = response.data.map((item: { code: any; bank: any; }) => ({ value: item.code, label: item.bank }));
+   
+          setAllBanks(apiOptions)
 
              console.log(banks);
              setData(response.data);
@@ -286,6 +300,7 @@ const countries = [
 
   return (
     <div >
+       <Toaster/>
       <AffiliateDashboardHeader title="Affiliate Profile" />
 
       <div className="w-screen h-screen px-4 py-4 overflow-y">
@@ -311,6 +326,7 @@ const countries = [
  label="Email"
  variant="outlined"
  margin="normal"
+ disabled
 //  {...register('email', { required: true })}
  InputProps={{
    startAdornment: (
@@ -341,6 +357,7 @@ const countries = [
 
 <TextField
 value ={userDataFirstName}
+disabled
  fullWidth
  label="First Name"
  variant="outlined"
@@ -373,6 +390,7 @@ value ={userDataFirstName}
 
 <TextField
 value ={userDataLastName}
+disabled
  fullWidth
  label="Last Name"
  variant="outlined"
@@ -399,12 +417,7 @@ value ={userDataLastName}
  }}
 />
 </div>
-<button 
-        type="submit"
-        className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
-      >
-        Update Profile
-      </button>
+
 
             </div>
 
@@ -423,7 +436,7 @@ value ={userDataLastName}
 
 <TextField
 value ={userDataAccName}
-
+onChange={(e:any) => setUserDataAccName(e.target.value)}
 fullWidth
 label="Bank Account Name"
 variant="outlined"
@@ -456,6 +469,7 @@ color: 'slategray', // Use the slate color for text
 
 <TextField
  value ={userDataAccNum}
+ onChange={setOnChangeForAccountNumber}
 fullWidth
 label="Bank Account Number"
 variant="outlined"
@@ -490,42 +504,54 @@ color: 'slategray', // Use the slate color for text
 <div className="block mt-6">
     <p className='mb-2 text-zinc-600'>Select A Bank</p>
 
-    <select id="mySelect" className='bg-white text-grey_600 p-3 border-2 border-grey_300 rounded-lg w-full' onChange={(e:any)=>setUserDataBank(e.target.value)}>
-
-{ userDataCurrency=="GHS"?(
-
-banks.map((option:any) => (
-
-        
-          option.country="GHS"&&(<>
-          
-          </>)
-          
-       
-        ))):(banks.map((option:any) => (
-
-        
-          option.country="NGN"&&(<>
-             <option key={option?.code} value={option.code}  selected={option.code === bank}>
-            {option.bank}
-          </option>
-          </>)
-          
-       
-        )))
-        
+    
+ <Autocomplete
+      disablePortal
+      id="combo-box-demo"
+      options={all_banks}
+      onChange={(event, selectedOption) => {
+        if (selectedOption) {
+          // Access the selected option and do something with it
+          console.log('Selected Option:', selectedOption.value);
+          setUserDataBank(selectedOption.value); // Assuming you want to set some state with the selected value
+        } else {
+          // Handle the case when no option is selected
+          console.log('No option selected');
         }
+      }}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Select Bank" />}
+    />
 
-</select>
+  
 </div>
 
 
-<button 
-        type="submit"
+
+
+      {
+        isLoading==false?(<>
+      <button 
+        onClick={submitPfofileDetails}
+        
         className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
       >
         Submit Bank Details
       </button>
+
+        
+        </>):(<> <div className='w-full flex justify-center mt-6'>
+
+<PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
+</div></>)
+      }
 
 
 </div>

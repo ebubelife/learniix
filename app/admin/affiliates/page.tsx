@@ -505,7 +505,7 @@ color: 'black',
                         </div>
 
                         <div className="mt-8">
-                        <Link className='p-3 rounded-xl bg-green-500 text-white  shadow-2xl' href="new/affiliate" >Add New Affiliate</Link>
+                        <Link className='p-3 rounded-xl bg-green-500 text-white  shadow-2xl' href="affiliates/new" >Add New Affiliate</Link>
 
 
                         </div>
@@ -608,8 +608,8 @@ color: 'black',
 
 <button className='p-3 rounded-xl bg-black text-white' onClick={()=>handleClickOpen(item.id)}>Delete</button>
                                
-                               <button onClick={()=>handleClickOpen1(item.email, item?.unpaid_balance,item?.total_aff_sales_cash, item?.total_aff_sales, item?.id)} className='p-3 rounded-xl bg-grey_600 text-white mt-4 ml-4' >Edit</button>
-                               <button className='p-3 rounded-xl bg-green text-white' onClick={()=>handleClickOpen(item.id)}>Sales</button>
+                               <button onClick={()=>handleClickOpen1(item.email, item?.unpaid_balance,item?.total_aff_sales_cash, item?.total_aff_sales, item?.id)} className='p-3 rounded-xl bg-zinc-600 text-white  mx-2' >Edit</button>
+                               <button className='p-3 rounded-xl bg-green-500 text-white' onClick={()=>handleClickOpen(item.id)}>Sales</button>
                       
                                
 </div>

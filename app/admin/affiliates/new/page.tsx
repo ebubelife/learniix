@@ -1,87 +1,73 @@
 "use client"
-
 import Cookies from 'js-cookie';
 
-import Image from 'next/image'
-import Link from 'next/link';
-
-
-import { CSSProperties, useEffect, useState } from 'react';
-
-
-import { CurrencyBitcoin } from '@mui/icons-material';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Slide, TextField } from '@mui/material';
-import styles from '/styles/style.module.css';
-import React from 'react';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControl, IconButton, InputAdornment, InputLabel, Link, MenuItem, NativeSelect, Select } from '@mui/material';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import React, { CSSProperties, useEffect, useState } from 'react';
+import styles from '/styles/style.module.css'
+import { useRouter } from 'next/navigation';
 
 
-
-import Select from 'react-select';
 import toast, { Toaster } from 'react-hot-toast';
 import AdminHeader from '../../header/page';
 import { PropagateLoader } from 'react-spinners';
 import { TransitionProps } from '@mui/material/transitions';
 
-export default function Profile(){
-    var user_data = Cookies.get('user_details');
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { ErrorMessage, Formik, useFormik } from 'formik';
+import * as yup from 'yup';
 
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+
+
+function convertDate(dateString: any){
+
+    const date = new Date(dateString);
+const formattedDate = date.toLocaleString('en-US', {
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+});
+return formattedDate;
+
+
+}
+
+
+export default function AdminCreateAffiliates(){
+
+    const [isLoading, setIsLoading] = useState(false);
     
-    var isVendor =false;var user_id =""; var affiliate_id = "";
+    const [affiliatesData, setAffiliatesData] = useState([]); 
+    const [searchTerm, setSearchTerm] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
+    const [affiliate_id_delete, setAffiliateIdDelete] = useState("");
+    const [showPassword, setShowPassword] = React.useState(false);
+    var errorMessage ="";
     
-    const [text, setText] = useState('');
-    const [copied, setCopied] = useState(false);
-    const notifySuccess = () => toast.success("Records updated");
-    var errorMessage =""; var bank = "";
-    var payment_reference_paystack =""
-    const notifyFailure = (message:  any) => toast.error(message);
- 
-    const [isLoading, setIsLoading] = React.useState(false);
-    
-    const [affiliateData, setDataAffiliates] = useState([]); 
-    const [selectedAff, setSelectedAffiliates] = useState(); 
-    const [selectedAffID, setSelectedAffiliateID] = useState(""); 
-
-    const [selectedVendorID, setSelectedVendorID] = useState(""); 
-
-    const [newAffiliatesSelectArray, setNewAffiliatesSelectArray] = useState([]); 
-
-    const [productsData, setDataProducts] = useState([]); 
-    const [selectedProduct, setSelectedProduct] = useState(""); 
-
-
-    const [selectedProductID, setSelectedProductID] = useState(""); 
-
-    const [customerDataEmail, setUserDataEmail] = useState(""); 
-    const [customerDataFullName, setUserDataFirstName] = useState(""); 
-   
-    const [customerDataPhone, setUserDataPhone] = useState(""); 
-    const [affiliateCommission, setAffiliateCommission] = useState(""); 
-    const [vendorID, setVendorID] = useState(null); 
-
-    const [productPrice, setProductPrice] = useState(""); 
 
     const [open, setOpen] = React.useState(false);
-    const [prospectName, setProspectName] = React.useState([]);
-    const [prospectEmail, setProspectEmail] = React.useState([]);
+    const notifySuccess = () => toast.success("Account added successfully!");
+    const notifyFailure = (message: string) => toast.error(message);
+ 
+    const router = useRouter();
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+      };
+    
+      const handleMouseDownPassword = (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+      };
 
-  
 
-
-    //loop through affiliates array and add each affiliate name and id into array for dropdown
-    const affArray = affiliateData.map((affiliate) => ({
-        value: affiliate?.affiliate_id,
-        label: affiliate?.email,
-      }));
-
-
-         //loop through affiliates array and add each product name and id into array for dropdown
-    const productArray = productsData.map((product) => ({
-        value: {id:product?.id, productPrice:product?.productPrice, productCommission: product?.productCommission,  productName: product?.productName, vendorID:product?.vendor_id},
-        label: product?.productName,
-      }));
-
-   
       const override: CSSProperties = {
         display: "block",
         margin: "0 auto",
@@ -90,94 +76,82 @@ export default function Profile(){
 
    
       let [color, setColor] = useState("#90EE90");
-  
+    
 
-  
-     if(user_data){
-      var user = JSON.parse(user_data)
 
-      user_id = user.id;
+    const validationSchema = yup.object({
+        email: yup
+          .string()
+          .email('Enter a valid email')
+          .required('Email is required'),
+    
+    
+          firstName: yup
+          .string()
+        
+          .required('Please enter your first name'),
+    
+    
+          lastName: yup
+          .string()
+       
+          .required('Please enter your last name'),
+    
+          phone: yup
+          .string()
+         // .min(20, 'Please enter a valid Nigerian number')
+          .required('Please enter a valid phone number'),
+    
+    
+         password: yup
+            .string()
+            .min(8, 'Password should be of minimum 8 characters length')
+            .required('Password is required'),
+      });
 
-      user_id = user_id.toString()
+      const formik = useFormik({
+        initialValues: {
+          email: 'foobar@example.com',
+          password: 'learniix@learniix.com',
+          firstName:'First Name',
+          lastName:'Last Name',
+          phone:'Phone'
+        },
+        validationSchema: validationSchema,
+        onSubmit: (values) => {
+          setIsLoading(true);
+       // alert(JSON.stringify(values, null, 2));
 
-      affiliate_id = (user as any).affiliate_id;
-
-      bank = (user as any).bank;
-
-      payment_reference_paystack = (user as any).payment_reference_paystack;
-
-     
-
-     
-          
-     
       
 
-   }
+        const formData = new FormData();
+
+        formData.append('email', values.email);
+        formData.append('firstName', values.firstName);
+        formData.append('lastName', values.lastName);
+        formData.append('phone', values.phone);
+        formData.append('password', values.password);
+        formData.append('is_payed', 'true');
+        formData.append('reg_type', 'AFFILIATE');
+        formData.append('req_source', 'ADMIN');
+        formData.append('currency', 'NGN');
+
+        runAPI(formData );
+
+      
+
+
+        },
+      });
+
+const runAPI = async (values: FormData) => {
+
+     
    
-    const submitPfofileDetails = async(event: any) => {
-
-    
-
-      event.preventDefault();
- 
-
-      var formData = new FormData();
-
-     // formData.append('id',user_id)
-      if(customerDataFullName!=null)
-        formData.append('customer_name',customerDataFullName)
-
-        if(customerDataEmail!=null)
-        formData.append('customer_email',customerDataEmail)
-    
-
-      if(customerDataPhone!=null)
-        formData.append('customer_phone',customerDataPhone)
-
-
-      if(selectedVendorID!=null)
-        formData.append('vendor_id',selectedVendorID.toString())
-
-
-      if(selectedProduct!=null)
-        formData.append('product_id',selectedProductID.toString())
-
-      if(selectedAffID !=null){
-
-        formData.append('affiliate_id',selectedAffID)
-      }
-
-
-      if(affiliateCommission !=null){
-
-        formData.append('commission',affiliateCommission)
-      }
-
-
-      if(productPrice !=null){
-
-        formData.append('product_price',productPrice.toString())
-
-      }
-
-      formData.append('currency',"NGN")
-      
-
-
-      formData.append('tx_id',generateRandomString(20))
-
-     
-
-     alert(JSON.stringify({"product price":productPrice,  "vendor_id":selectedVendorID,"product_id":selectedProductID, "affiliate_ID":selectedAffID, "tx_id":generateRandomString(20), "commission":affiliateCommission,"customer_name":customerDataFullName, "customer_email":customerDataEmail, "customer_phone":customerDataPhone}))
-
-
-
-
         try {
           const res = await axios.post(
-            `https://back.learniix.com/api/sales/add`,
-            formData,
+            `https://back.learniix.com/api/signup`,
+            values,
            
             {
              // withCredentials: true ,
@@ -196,8 +170,19 @@ export default function Profile(){
          
           setIsLoading(false);
           notifySuccess();
-         // console.log(res.data.message.toString())
-         
+          console.log(res.data.message.toString())
+
+          //wait for 2 seconds before redirecting
+
+           
+        
+
+          setTimeout(() => {
+           // router.push( '../signin');
+          }, 3000);
+
+
+          
         } catch (err) {
           
         
@@ -222,188 +207,51 @@ export default function Profile(){
           setIsLoading(false);
 
         }
-      
-
-      
-
-    }    
-
-
-   
-
-     useEffect(() => {
-        // Make an HTTP GET request to the API endpoint using axios|Get Affiliates
-        axios.get('https://back.learniix.com/api/view/affiliates')
-          .then((response: any) => {
-              
-               
-
+      };
              
-               setDataAffiliates(response.data);
-              // setIsLoading(false)
-
-               
-          })
-          .catch((error: any) => {
-            // Handle errors if any
-            console.error(error);
-            setIsLoading(false)
-          });
-        }, []);
-        
-
-        useEffect(() => {
-            // Make an HTTP GET request to the API endpoint using axios| Get products
-            axios.get('https://back.learniix.com/api/products/view/100')
-              .then((response: any) => {
-                  
-                   
-    
-                 
-                   setDataProducts(response.data);
-                  // setIsLoading(false)
-    
-                   
-              })
-              .catch((error: any) => {
-                // Handle errors if any
-                console.error(error);
-                setIsLoading(false)
-              });
-            }, []);
-            
-
-            const Transition = React.forwardRef(function Transition(
-              props: TransitionProps & {
-                children: React.ReactElement<any, any>;
-              },
-              ref: React.Ref<unknown>,
-            ) {
-              return <Slide direction="up" ref={ref} {...props} />;
-            }); 
-
-            const handleClickOpen = () => {
-              setOpen(true);
-            };
-            
-            const handleClose = () => {
-              setOpen(false);
-            };
-
-            function showProspectInf(prospectName:any, prospectEmail:any){
-
- 
-              setProspectName(prospectName);
-              setProspectEmail(prospectEmail);
-             
-              setOpen(true);
-          
-          }
     
      return(
 
           <>
 
+<Toaster />
+<AdminHeader title="New Affiliate" />
 
-          
-           <Toaster />
+<main className="dashboard  w-screen flex ">
+              
 
-           <React.Fragment>
-     
-     <Dialog
-       open={open}
-       TransitionComponent={Transition}
-       keepMounted
-       onClose={handleClose}
-       aria-describedby="alert-dialog-slide-description"
-     >
-       <DialogTitle className="font-semibold text-md">{"Request Details"}</DialogTitle>
-       <DialogContent>
-
-       
-
-       <p className='mt-4 font-medium text-sm'>Customer Name: {prospectName}</p>
-
-       <p className='mt-4 font-medium text-sm'>Customer Email: {prospectEmail}</p>
-
-     
-    
-        
-       </DialogContent>
-       <DialogActions>
-         <p className='text-zinc-400 cursor-pointer mr-10 hover:mb-1' onClick={handleClose}>Close</p>
-        
-       </DialogActions>
-     </Dialog>
-   </React.Fragment>
-
-           <AdminHeader title="Admin Sales" />
-
-            <main className="dashboard bg-grey_100  w-screen flex ">
-           
-           
                 
                 <div className=" grow bg-grey_100 p-6">
-                    
-                   
-                   
                    
 
-                  
+                        <div className="mt-10">
+                              <Link href={"../affiliates"} className="text-green-500 mt-6 font-bold">All Affiliates</Link>
 
-                        <div className="dashboard-profile justify-center "> 
 
-                     
+                        </div>
 
-                            <form className='lg:w-2/3 bg-white p-6 mt-6 shadow-xl rounded-lg w-full sm:w-full' onSubmit={submitPfofileDetails} >
+                      
+                        <div className="text-2xl font-bold text-purple3 mt-16">New  Affiliate  <span className="yellow-dot"></span>  </div>
 
-                          
-                            <p className='font-semibold text-2xl text-gold'>Add A New Sale Record</p>
-           
-                            <div className='mt-6'>
+<p className="mt-4 text-grey_600">Fill The Form To Create An Account For An Affiliate </p>
 
-<TextField
-required
-          className='mt-6'
-       ///   onChange={(e) => setProductDescription(e.target.value)}
-          fullWidth
-          id="outlined-multiline-static"
-          label="Customer Name"
-          onChange={(e:any) => setUserDataFirstName(e.target.value)}
-          value ={customerDataFullName}
-          sx={{
-            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#A569BD',
-            },
-          }}
-          InputLabelProps={{
-            sx: {
-              color: '#FCFCFC',
-              '&.Mui-focused': {
-                color: 'black',
-              },
-            },
-          }}
-        
-        />
-        </div>
-       
+<form onSubmit={formik.handleSubmit} className="px-8">
 
-        <div className='mt-6'>
+<div className="mt-10">
 
+     
         <TextField
-            required
-            
-          className='mt-6'
-       ///   onChange={(e) => setProductDescription(e.target.value)}
-          onChange={(e:any) => setUserDataEmail(e.target.value)} 
+        required
+          variant="outlined"
           fullWidth
-          id="outlined-multiline-static"
-          label="Customer Email"
-          
-         value ={customerDataEmail}
-      
-         
+          id="firstName"
+          name="firstName"
+          label="First Name"
+         // value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+          placeholder="First  Name"
           sx={{
             '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
               borderColor: '#A569BD',
@@ -421,161 +269,194 @@ required
         />
         </div>
 
-        <div className='mt-6'>
+        <div className="mt-10">
+     
+     <TextField
+     
+       variant="outlined"
+       fullWidth
+       id="lastName"
+       name="lastName"
+       label="Last Name"
+       //value={formik.values.email}
+       onChange={formik.handleChange}
+       error={formik.touched.email && Boolean(formik.errors.email)}
+       helperText={formik.touched.email && formik.errors.email}
+       placeholder="Last Name"
+       sx={{
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: '#A569BD',
+        },
+      }}
+      InputLabelProps={{
+        sx: {
+          color: '#cdcdcd',
+          '&.Mui-focused': {
+            color: 'black',
+          },
+        },
+      }}
+    
+     />
+     </div>
 
-<TextField
-    required
-    aria-readonly
-  className='mt-6'
-///   onChange={(e) => setProductDescription(e.target.value)}
-  fullWidth
-  id="outlined-multiline-static"
-  label="Customer Phone"
-  onChange={(e:any) => setUserDataPhone(e.target.value)}
-  value ={customerDataPhone}
-  sx={{
-    '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: '#A569BD',
-    },
-  }}
-  InputLabelProps={{
-    sx: {
-      color: '#cdcdcd',
-      '&.Mui-focused': {
-        color: 'black',
-      },
-    },
-  }}
-
-/>
-</div>
-
-  
-  
-
-
-<div className='mt-6 '>
-
-
-<Select className="text-grey_600"
-  options={affArray}
-  placeholder={"Select an affiliate"}
-  value={selectedAff}
-  onChange={handleSelectAffiliate}
-  isSearchable={true}
-/>
-
-
-
-</div>
-
-<div className='mt-6 '>
-
-<Select className="text-grey_600"
-  options={productArray}
-  placeholder={"Select a product"}
-  value={selectedProduct}
-  onChange={handleSelectProduct}
-  isSearchable={true}
-/>
-
-</div>
-
-
-
-<div className='mt-4'>
-{!isLoading?(
-         <>
-        <button  type="submit" className="bg-green-500 text-white hover:bg-white hover:text-zinc-600 w-full py-2 shadow-xl rounded-xl">
-        Add Record
-        </button>
-         </>):
-          ( <div className='w-full flex justify-center mt-6'>
-
-          <PropagateLoader
-             color={color}
-             //loading={isLoading}
-             cssOverride={override}
-             size={15}
-             aria-label="Loading Spinner"
-             data-testid="loader"
-           />
-          </div>)
-}
-
-</div>
-
-
-
+        <div className="mt-10">
+     
+        <TextField
+        required
+          variant="outlined"
+          fullWidth
+          id="email"
+          name="email"
+          label="Email"
+         // value={formik.values.email}
+          onChange={formik.handleChange}
+          error={formik.touched.email && Boolean(formik.errors.email)}
+          helperText={formik.touched.email && formik.errors.email}
+          placeholder="Email Address"
+          sx={{
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#A569BD',
+            },
+          }}
+          InputLabelProps={{
+            sx: {
+              color: '#cdcdcd',
+              '&.Mui-focused': {
+                color: 'black',
+              },
+            },
+          }}
         
+        />
+        </div>
 
-                            </form>
+        <div className="mt-10">
+     
+     <TextField
+     required
+       variant="outlined"
+       fullWidth
+       id="phone"
+       name="phone"
+       label="Phone"
+      // value={formik.values.email}
+       onChange={formik.handleChange}
+       error={formik.touched.email && Boolean(formik.errors.email)}
+       helperText={formik.touched.email && formik.errors.email}
+       placeholder="Phone Number"
+       sx={{
+        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+          borderColor: '#A569BD',
+        },
+      }}
+      InputLabelProps={{
+        sx: {
+          color: '#cdcdcd',
+          '&.Mui-focused': {
+            color: 'black',
+          },
+        },
+      }}
+    
+     />
+     </div>
 
-                      </div>
-                    
+       
+
+<div className="mt-10">
+        <TextField
+         variant="outlined"
+          fullWidth
+          id="password"
+          name="password"
+          label="Password"
+          type={showPassword ? 'text' : 'password'}
+          required
+         // value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+          placeholder="Password"
+           sx={{
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#A569BD',
+            },
+          }}
+          InputLabelProps={{
+            sx: {
+              color: '#cdcdcd',
+              '&.Mui-focused': {
+                color: 'black',
+              },
+            },
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+        
+        />
+
+        </div>
+
+     
+                  
+        {isLoading && <div className="mt-10 w-full justify-center flex">
+
+          <div>
+          <div className='w-full flex justify-center mt-6'>
+
+<PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
+</div>
+          </div>
+        </div>}
+
+
+        {!isLoading && <div className="mt-4">
+        <button  type="submit" className="bg-green-500 text-white hover:bg-white hover:text-zinc-600 w-full py-2 shadow-xl rounded-xl">
+           FINISH
+        </button>
+        </div>}
+      </form>
+
+     
+
+                        
+
                     </div>
 
-            </main>
+
+              
+                   
+                   </main>
+
+
+
+         
+         
+           
           </>
      )
 
-     function handleSelectAffiliate(data:any) {
-        setSelectedAffiliates(data);
 
-       
-
-        setSelectedAffiliateID(data.value)
-
-        alert(selectedAffID)
-       
-       
-      }
-
-      function handleSelectProduct(data:any) {
-        setSelectedProduct(data);
-
-       
-
-        let commission_percentage = parseInt(data.value.productCommission);
-        let price = parseInt(data.value.productPrice);
-
-       // let aff_commission = (commission_percentage/100) * price;
-
-        setSelectedProductID(data.value.id)
-
-        setAffiliateCommission(commission_percentage.toString())
-       // alert(affiliateCommission)
-        
-        setSelectedVendorID(data.value.vendorID)
-
-        alert(selectedVendorID)
-
-       
-
-        setProductPrice(price.toString())
-
-      
-
-        
-
-      
-
-      }
-
-      function generateRandomString(length: number) {
-        let result = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-      
-        for (let i = 0; i < length; i++) {
-          const randomIndex = Math.floor(Math.random() * charactersLength);
-          result += characters.charAt(randomIndex);
-        }
-      
-        return result;
-      }
-
-    
 }
 
 

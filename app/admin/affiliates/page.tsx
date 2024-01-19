@@ -512,7 +512,7 @@ color: 'black',
 
                      
 
-<div className="top-vendors-courses  md:w-[98%]  mt-4 p-2 max-h-96   overflow-x-auto  ">
+<div className="top-vendors-courses  md:w-[98%]  mt-4 p-2 max-[550]   overflow-x-auto  ">
 
 <div className='w-full mt-4 text-grey_600 lg:block hidden sm:hidden overflow-x-auto '>
 

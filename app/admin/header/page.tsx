@@ -61,8 +61,8 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
  
 
-  const goToDashboard = () => {
-    router.push("../affiliates/dashboard")
+  const goToSales = () => {
+    router.push("../admin/sales")
    };
 
 
@@ -75,16 +75,16 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
     router.push("../affiliates/reports")
    };
 
-   const goToReports = () => {
-    router.push("../affiliates/reports")
+   const goToVendors = () => {
+    router.push("../vendors/vendors")
    };
 
    const goToProfile = () => {
     router.push("../affiliates/profile")
    };
 
-   const goToWithdrawals = () => {
-    router.push("../affiliates/withdrawals")
+   const goToPayments= () => {
+    router.push("../admin/payments")
    };
 
    const goToLeaderboard = () =>{
@@ -143,7 +143,7 @@ return  (<>
   {/* Your other top navigation bar content goes here */}
 
   <div className="ml-auto">
-<Link href={"../admin/affiliates/new"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">+ New Sale</Link>
+<Link href={"../admin/sales/new"} className="font-medium text-sm text-white  border-1 border-white  border p-2 rounded-md">+ New Sale</Link>
 
 </div>
 </Toolbar>
@@ -159,7 +159,7 @@ marginTop: '5%',
 <List>
   {/* Add your menu items here */}
   <ListItem button >
-    <ListItemText onClick={goToDashboard} primary="Sales" />
+    <ListItemText onClick={goToSales} primary="Sales" />
   </ListItem>
 
   <hr></hr>
@@ -177,24 +177,16 @@ marginTop: '5%',
 
   <hr></hr>
 
+ 
+
+
   <ListItem button>
-    <ListItemText onClick={goToProducts}  primary="Vendors" />
-  </ListItem>
-
-  <hr></hr>
-
-  <ListItem  button>
-    <ListItemText onClick={goToLeaderboard}  primary="Leaderboard" />
+    <ListItemText onClick={goToVendors}  primary="Vendors" />
   </ListItem>
   <hr></hr>
 
   <ListItem button>
-    <ListItemText onClick={goToReports}  primary="Vendors" />
-  </ListItem>
-  <hr></hr>
-
-  <ListItem button>
-    <ListItemText onClick={goToWithdrawals} primary="Payments" />
+    <ListItemText onClick={goToPayments} primary="Payments" />
   </ListItem>
   <hr></hr>
 

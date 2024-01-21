@@ -558,7 +558,7 @@ export default function AdminSales() {
                     }</span></p>
 
 
-<p className='mt-2'><span className='text-green mt-2'>zenith commision:</span> <span className='text-grey_600'>    ₦{
+<p className='mt-2'><span className='text-green mt-2'>Learniix commision:</span> <span className='text-grey_600'>    ₦{
                        getZenithstakeCommission(parseInt(item.commission), parseInt(item.product_price))
                     }</span></p>
 

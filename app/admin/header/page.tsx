@@ -99,32 +99,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   
   
   
-  useEffect(() => {
-    //check if logged in
-    
-if(user_data != null){
-var user = JSON.parse(user_data)
-
   
-loggedIn =(user as any).logged_in;
-
-
-
-
-}
-else{
-
-
-        router.push('../signin');
-       
-
-
-
-}
-
-
-  }, []);
-
 
 
 

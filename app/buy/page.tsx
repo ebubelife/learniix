@@ -373,7 +373,7 @@ export default function Buy(){
 
 
           <div className="paystack-button bg-white border-2 border-grey_300  text-white hover:bg-white hover:text-grey_600 w-full py-2 shadow-xl rounded-xl mt-6 flex">
-          <img src="https://learniix.com/images/Paystack_Logo.png" className="img-responsive h-10 w-20" alt="Paystack-zenithstake"/>
+          <img src="https://learniix.com/images/Paystack_Logo.png" className="img-responsive h-10 w-28" alt="Paystack-zenithstake"/>
           <button
           className='text-green-500 font-semibold ml-4 text-sm'
         onClick={() => {

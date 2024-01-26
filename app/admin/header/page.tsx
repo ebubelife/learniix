@@ -72,7 +72,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
 
    const goToProducts = () => {
-    router.push("../affiliates/reports")
+    router.push("../admin/products")
    };
 
    const goToVendors = () => {

@@ -6,7 +6,7 @@ import AffiliateDashboardHeader from '../dashboard/header/page';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 import Cookies from 'js-cookie'
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 
@@ -161,7 +161,11 @@ const AffiliateWithdrawals = () => {
 
 
   return (
-    <div >
+    <>
+      <Toaster/>
+      <div >
+     
+
       <AffiliateDashboardHeader title="Withdrawals History" />
 
 
@@ -269,6 +273,7 @@ const AffiliateWithdrawals = () => {
    
        
        </div>
+        </>
  
   );
 };

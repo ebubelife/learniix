@@ -160,7 +160,7 @@ export default function Signin() {
          //wait for 3 seconds before redirecting
          setTimeout(() => {
         
-                router.push('/new/vendor/pay?user_id='+res.data.user_details.id);
+                router.push('../vendors/pay?user_id='+res.data.user_details.id);
 
          
 

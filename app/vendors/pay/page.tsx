@@ -84,7 +84,7 @@ export default function Buy(){
             notifySuccess();
       
             setTimeout(() => {
-              router.push("success")
+              router.push("../vendors/success")
             }, 3000);
       
       
@@ -132,7 +132,7 @@ export default function Buy(){
     script.onload = () => {
       const squadInstance = new window.squad({
         onClose: () => console.log("Widget closed"),
-        
+
         onLoad: () => console.log("Widget loaded successfully"),
         onSuccess: () => {saveTransaction(vendorID!.toString())},
         key: "pk_b8dd4911cc914a3cc35d08bfce1099ceb3aa34ad",

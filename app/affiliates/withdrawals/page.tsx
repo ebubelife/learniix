@@ -2,20 +2,136 @@
 // Import necessary React and Material-UI components
 import React, { useState,useRef } from 'react';
 
-import Link from 'next/link';
-import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, InputAdornment, TextField } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import { useRouter } from 'next/navigation';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { useTheme,useMediaQuery } from '@mui/material';
 import AffiliateDashboardHeader from '../dashboard/header/page';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+
+import Cookies from 'js-cookie'
+import toast from 'react-hot-toast';
 
 
 
 
 // Your main component
 const AffiliateWithdrawals = () => {
+
+  var user_data = Cookies.get('user_details');
+    var firstname =""; var isVendor =false; var user_id="";
+    var auto_withdraw = true;
+
+    const [alignment, setAlignment] = React.useState('true');
+    const [encashments, setEncashments] = useState([]);
+    
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    const notifySuccess = () => toast.success("Withdrawal settings successfully updated!");
+    var errorMessage =""; var bank = "";
+ 
+    const notifyFailure = (message: string ) => toast.error(message);
+ 
+
+    const handleAlignment = (event: any, newAlignment: React.SetStateAction<string>) => {
+      setAlignment(newAlignment);
+
+      alert(alignment);
+
+      
+    };
+
+
+    if(user_data){
+        var user = JSON.parse(user_data)
+ 
+          
+        firstname =(user as any).firstName;
+        isVendor =(user as any).isVendor;
+        user_id = user.id;
+        user_id = user_id.toString()
+
+        auto_withdraw = (user as any).auto_withdraw;
+       
+        
+ 
+     }
+
+     const setWithdrawSettings = async(selection:string)=> {
+
+     
+
+      var formData = new FormData();
+
+      formData.append('id',user_id)
+      if(selection!=null ){
+        formData.append('selected',selection);
+
+        try {
+          const res = await axios.get(
+            `https://back.zenithstake.com/api/member/update_withdrawal/`+user_id,
+           
+           
+            {
+             // withCredentials: true ,
+
+             headers:{
+              'Content-Type' :'multipart/form-data',
+            
+
+             
+             },
+             
+             // params: {values}
+            }
+           
+          );
+         
+          setIsLoading(false);
+          notifySuccess();
+         // console.log(res.data.message.toString())
+
+         if((user as any).auto_withdraw == true) {
+         (user as any).auto_withdraw = false;
+
+         Cookies.set('user_details', JSON.stringify(user))
+
+
+         }
+         else{
+          (user as any).auto_withdraw = true;
+          Cookies.set('user_details', JSON.stringify(user))
+         }
+
+        
+         
+        } catch (err) {
+          
+        
+          if (err instanceof Error) {
+            const axiosError = err as AxiosError;
+            if (axiosError.response) {
+              const errorResponse = axiosError.response as AxiosResponse;
+              if (errorResponse.data) {
+                errorMessage = errorResponse.data.message;
+              }
+            }
+
+            notifyFailure(errorMessage)
+
+             console.log(errorMessage);
+          }
+          
+          setIsLoading(false);
+          console.log(err);
+        }
+        finally {
+          setIsLoading(false);
+
+        }
+      
+
+
+      }
+        
+    }
+
 
   
 
@@ -30,7 +146,34 @@ const AffiliateWithdrawals = () => {
       
 
 
-       <div className="mt-6"></div>
+       <div className="mt-6">
+
+       <p className="text-grey_600 text-center mt-6">Would you like to get paid weekly?</p>
+                        <p className="text-grey_600 text-center mt-2">Use the switch below to activate or deactive automatic withdrawals every week</p>
+
+                       <div className='flex justify-center '>
+
+                     
+                       <div className='mt-10'>
+
+
+<select id="mySelect" className='bg-white text-grey_600 p-3 border-2 border-grey_300 rounded-lg w-full' onChange={(e:any)=>setWithdrawSettings(e.target.value)}>
+<option  value="true" selected={auto_withdraw == true} >
+          Yes
+          </option>
+
+          <option  value="false" selected={auto_withdraw == false}  >
+         No
+          </option>
+
+</select>
+
+</div>
+
+                          
+                                </div>
+
+       </div>
 
      
 

@@ -61,6 +61,7 @@ export default function AdminSales() {
   const [editAffiliateUnpaid,   setEditAffiliateUnpaid] = useState(null); 
   const [editAffiliateSales,    setEditAffiliateSales] = useState(null); 
   const [ selected_id,    setSelectedID] = useState(""); 
+  const [ searchText,    setSearchText] = useState(""); 
 
  
   
@@ -497,9 +498,9 @@ color: 'black',
 
       <p className='text-green text-xl mt-3'>All Affiliates</p>
 <div className='mt-4 flex'>
-                        <TextField id="outlined-basic" type="text" label="Search Affiliates" variant="outlined" onChange={handleSearch} />
+                        <TextField id="outlined-basic" type="text" label="Search Affiliates" variant="outlined"  onChange={(e) => setSearchText(e.target.value)}   />
 
-                        <div className='bg-grey_300 text-grey_600 rounded-sm w-32 ml-1 grid place-content-center shadow-2xl'>Search</div>
+                        <button onClick={handleSearch} className='bg-grey_300  text-grey_600 rounded-sm w-32 ml-1 grid place-content-center shadow-2xl'>Search</button>
 
 
                         </div>

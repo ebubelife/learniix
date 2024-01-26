@@ -277,7 +277,7 @@ export default function Buy(){
         onClose: () => console.log("Widget closed"),
         onLoad: () => console.log("Widget loaded successfully"),
         onSuccess: () => runAPI("NGN"),
-        key: "pk_23f99ede02dca01abc34b3a629dfaaadd4f8501c",
+        key: "pk_b8dd4911cc914a3cc35d08bfce1099ceb3aa34ad",
         //key: "sandbox_pk_6cf0272dfe344bddca7727d739e2f75121597ac7013c",
         // Change key (test_pk_sample-public-key-1) to the key on your Squad Dashboard
         email: email,

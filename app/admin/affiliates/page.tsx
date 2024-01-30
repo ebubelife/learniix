@@ -14,7 +14,7 @@ import Cookies from 'js-cookie';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { TransitionProps } from '@mui/material/transitions';
 
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { BeatLoader, ClipLoader, PropagateLoader } from 'react-spinners'
 
 
@@ -300,6 +300,7 @@ export default function AdminSales() {
   return (
 
     <>
+    <Toaster />
 
 <Dialog open={open} onClose={handleClose}>
         <DialogTitle className="text-center text-gold">Delete Affiliate?</DialogTitle>

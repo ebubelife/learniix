@@ -165,8 +165,8 @@ export default function AdminSales() {
        
 
  const handleSearch = (event: any) => {
-  const searchText = event.target.value;
-  setSearchTerm(searchText);
+//  const text = searchText;
+  //setSearchTerm(searchText);
 
   const filteredData = affiliatesData.filter((item: any) =>
     item.email.toLowerCase().includes(searchText.toLowerCase()) ||

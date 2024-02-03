@@ -76,7 +76,7 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
    };
 
    const goToVendors = () => {
-    router.push("../vendors/vendors")
+    router.push("../admin/vendors")
    };
 
    const goToProfile = () => {

@@ -227,7 +227,7 @@ export default function AdminAffiliates(){
              <div className=" grow bg-grey_100 p-6">
                  <div className="top-bar-container w-full border-b-2 border-grey_100 shadow-xl py-4 px-6">
                      <p className="dashboard-title text-grey_600 text-xl hidden sm:hidden lg:block">
-                        Admin Payments
+                        Admin Products
                      </p>
 
                      <div className="lg:hidden sm:block block">

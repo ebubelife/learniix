@@ -267,7 +267,7 @@ export default function AdminSales() {
 
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle className="text-center text-gold">Delete Affiliate?</DialogTitle>
+        <DialogTitle className="text-center text-gold">Delete Sale?</DialogTitle>
         <DialogContent>
           <DialogContentText className={"text-center"}>
 Do you really want to delete this sale? Please ensure to update the balances for vendor and affiliate and all affected parties after deletion   </DialogContentText>

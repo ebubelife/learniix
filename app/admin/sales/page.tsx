@@ -3,7 +3,7 @@
 import React, { useState,useRef, useEffect, CSSProperties } from 'react';
 
 import Link from 'next/link';
-import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, Slide, TextField, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, Slide, TextField, Dialog, DialogActions, DialogContent, DialogTitle, Button, DialogContentText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useRouter } from 'next/navigation';
 import FormControl from '@mui/material/FormControl';
@@ -14,6 +14,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { TransitionProps } from '@mui/material/transitions';
 import { PropagateLoader } from 'react-spinners';
+import toast from 'react-hot-toast';
 
 
 function convertDate(dateString: any){
@@ -93,10 +94,13 @@ export default function AdminSales() {
     const [ adminSalesData, setAdminSalesData] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-
+    const [sale_id_delete, setSaleIdDelete] = useState("");
     const [inputText, setInputText] = useState('');
 
     let [color, setColor] = useState("#90EE90");
+
+    const notifySuccess = () => toast.success("Sale deleted successfully!");
+    const notifyFailure = (message: any) => toast.error(message);
 
 
     
@@ -106,6 +110,17 @@ export default function AdminSales() {
       margin: "0 auto",
       borderColor: "red",
     };
+
+    const handleClickOpenDelete = (affiliate_id: any) => {
+
+    
+
+      setSaleIdDelete(affiliate_id)
+    
+      setOpen(true);
+
+
+  };
   
 
 
@@ -220,10 +235,67 @@ export default function AdminSales() {
             }
  
 
+            const deleteSale = () =>{
+              setIsLoading(true)
+             
+             
+          
+            
+                 // Make an HTTP GET request to the API endpoint using axios
+                 axios.get('https://back.learniix.com/api/sale/remove/'+sale_id_delete )
+                   .then((response: any) => {
+                      setIsLoading(false)
+                       
+                      notifySuccess();
+        
+                      handleClose();
+                        
+                   })
+                   .catch((error: any) => {
+                     // Handle errors if any
+                     notifyFailure(error.message)
+                     console.error(error);
+                     setIsLoading(false)
+                   });
+                
+         }
+
 
   return (
     <div >
       <React.Fragment>
+
+
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle className="text-center text-gold">Delete Affiliate?</DialogTitle>
+        <DialogContent>
+          <DialogContentText className={"text-center"}>
+Do you really want to delete this sale? Please ensure to update the balances for vendor and affiliate and all affected parties after deletion   </DialogContentText>
+       
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+
+         {
+            isLoading == true?(<><div className='h-full w-full grid place-content-center'> <div>
+            <div className='w-full flex justify-center mt-6'>
+
+<PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
+</div>
+           </div></div></>):(<> <Button onClick={deleteSale}>Proceed</Button></>)
+         } 
+         
+        
+        </DialogActions>
+      </Dialog>
+
      
      <Dialog
        open={open}
@@ -419,6 +491,10 @@ export default function AdminSales() {
                 <th scope="col" className="px-6 py-3">
                     Z.Comm
                 </th>
+
+                <th scope="col" className="px-6 py-3">
+                    Action
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -471,6 +547,11 @@ export default function AdminSales() {
                     }
                 </td>  
 
+                <td className="px-6 py-4 dark:text-grey_600">
+
+                <button className='p-3 rounded-xl bg-black text-white' onClick={()=>handleClickOpenDelete(item.id)}>Delete</button>
+  
+</td>
                 </tr>           
 
          
@@ -561,6 +642,12 @@ export default function AdminSales() {
 <p className='mt-2'><span className='text-green mt-2'>Learniix commision:</span> <span className='text-grey_600'>    ₦{
                        getZenithstakeCommission(parseInt(item.commission), parseInt(item.product_price))
                     }</span></p>
+
+<p className='mt-2'>
+<button className='p-3 rounded-xl bg-black text-white' onClick={()=>handleClickOpenDelete(item.id)}>Delete</button>
+  
+
+</p>
 
 
 </div>   

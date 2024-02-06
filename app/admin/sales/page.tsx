@@ -356,7 +356,7 @@ export default function AdminSales() {
 <div className='mt-4 flex'>
                         <TextField id="outlined-basic" type="text" label="Search By Affiliate" variant="outlined" onChange={(e) => setInputText(e.target.value)} />
 
-                        <div onClick={handleSearch} className='bg-grey_300 text-grey_600 rounded-sm w-32 ml-1 grid place-content-center shadow-2xl'>Search</div>
+                        <div onClick={handleSearch} className='bg-grey_300 text-grey_600 rounded-sm w-32 ml-1 grid place-content-center shadow-2xl cursor-pointer'>Search</div>
 
 
                         </div>

@@ -113,7 +113,7 @@ export default function AdminSales() {
 
     const handleClickOpenDelete = (sale_id: any) => {
 
-    alert(sale_id)
+   // alert(sale_id)
 
       setSaleIdDelete(sale_id)
     

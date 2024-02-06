@@ -5,7 +5,7 @@ import React, { useState,useRef, useEffect, CSSProperties } from 'react';
 import Link from 'next/link';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, Slide, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useRouter } from 'next/navigation';
+
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useTheme,useMediaQuery } from '@mui/material';
@@ -16,6 +16,8 @@ import { TransitionProps } from '@mui/material/transitions';
 
 import toast, { Toaster } from 'react-hot-toast';
 import { BeatLoader, ClipLoader, PropagateLoader } from 'react-spinners'
+
+import { useRouter } from 'next/navigation';
 
 
 function convertDate(dateString: any){
@@ -35,7 +37,7 @@ return formattedDate;
 }
 
 
-export default function AdminSales() {
+export default function AdminAffiliates() {
 
   const override: CSSProperties = {
     display: "block",
@@ -68,11 +70,13 @@ export default function AdminSales() {
 
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
+  const [openTwo, setOpenTwo] = React.useState(false);
   const notifySuccess = () => toast.success("Account deleted successfully!");
   const notifySuccess1 = () => toast.success("Account updated successfully!");
   const notifySuccess2 = () => toast.success("Email approved successfully!");
   const notifyFailure = (message: any) => toast.error(message);
   var errorMessage ="";
+  const router = useRouter();
  
 
 
@@ -86,6 +90,17 @@ export default function AdminSales() {
 
 
   };
+
+  const handleClickOpenTwo = () => {
+
+    
+
+  
+  
+    setOpenTwo(true);
+
+
+};
   const handleClickOpen1 = (email: any,unpaid_balance:any,total_aff_sales_cash:any, total_aff_sales:any, selected_id:any) => {
 
     
@@ -103,6 +118,11 @@ export default function AdminSales() {
 };
   
   const handleClose = () => {
+    setOpen(false);
+  };
+
+
+  const handleCloseTwo = () => {
     setOpen(false);
   };
 
@@ -294,13 +314,60 @@ export default function AdminSales() {
       
           }    
  
+function handleFilterSales(data:string){
 
+  router.push("../admin/sales/aff");
+
+}
+
+function sendEmail(){
+
+
+}
 
 
   return (
 
     <>
     <Toaster />
+
+{
+  //confirmation dialog for emailing affiliate
+
+
+}
+
+<Dialog open={openTwo} onClose={handleCloseTwo}>
+        <DialogTitle className="text-center text-gold">Email Affiliate?</DialogTitle>
+        <DialogContent>
+          <DialogContentText className={"text-center"}>
+Send Payment Email To affiliate?  </DialogContentText>
+       
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseTwo}>Cancel</Button>
+
+         {
+            isLoading == true?(<><div className='h-full w-full grid place-content-center'> <div>
+            <div className='w-full flex justify-center mt-6'>
+
+<PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
+</div>
+           </div></div></>):(<> <Button onClick={sendEmail}>Proceed</Button></>)
+         } 
+         
+        
+        </DialogActions>
+      </Dialog>
+
+
 
 <Dialog open={open} onClose={handleClose}>
         <DialogTitle className="text-center text-gold">Delete Affiliate?</DialogTitle>
@@ -611,9 +678,9 @@ color: 'black',
 <button className='p-3 rounded-xl bg-black text-white' onClick={()=>handleClickOpen(item.id)}>Delete</button>
                                
                                <button onClick={()=>handleClickOpen1(item.email, item?.unpaid_balance,item?.total_aff_sales_cash, item?.total_aff_sales, item?.id)} className='p-3 rounded-xl bg-zinc-600 text-white  mx-2' >Edit</button>
-                               <button className='p-3 rounded-xl bg-green-500 text-white' onClick={()=>handleClickOpen(item.id)}>Sales</button>
-                      
-                               
+                            
+                                
+<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500 ml-2 text-white' >Email</button>
 </div>
 
 
@@ -715,7 +782,8 @@ color: 'black',
 
 <button className='p-3 rounded-xl bg-black text-white mt-4' onClick={()=>handleClickOpen(item.id)}>Delete</button>
 
-<button className='p-3 rounded-xl bg-green text-white' onClick={()=>handleClickOpen(item.id)}>Sales</button>
+
+<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500' onClick={handleClickOpenTwo} >Email</button>
  
 
 
@@ -746,6 +814,9 @@ item.email_verified == false&&(
 (<button onClick={()=>handleClickOpen1(item.email, item?.unpaid_balance,item?.total_aff_sales_cash, item?.total_aff_sales, item?.id)} className='p-3 rounded-xl bg-grey_600 text-white mt-4 ml-4' >Edit</button>)
 
 }
+
+<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500' onClick={handleClickOpenTwo} >Email</button>
+ 
 
 
 </div>   

@@ -326,7 +326,7 @@ export default function AdminAffiliates() {
           const sendEmail= async() => {
 
   
-alert(selectedEmailAffiliate)
+//alert(selectedEmailAffiliate)
 
   try {
     const res = await axios.get(

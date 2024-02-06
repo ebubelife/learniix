@@ -71,10 +71,19 @@ export default function AdminAffiliates() {
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
   const [openTwo, setOpenTwo] = React.useState(false);
+
+  const [selectedEmailAffiliate, setSelectedEmailAffiliate] = React.useState(0);
+
+  
   const notifySuccess = () => toast.success("Account deleted successfully!");
   const notifySuccess1 = () => toast.success("Account updated successfully!");
   const notifySuccess2 = () => toast.success("Email approved successfully!");
+
+  const notifySuccess3 = () => toast.success("Email sent successfully!");
   const notifyFailure = (message: any) => toast.error(message);
+
+
+
   var errorMessage ="";
   const router = useRouter();
  
@@ -91,13 +100,13 @@ export default function AdminAffiliates() {
 
   };
 
-  const handleClickOpenTwo = () => {
+  const handleClickOpenTwo = (id:any) => {
 
-    
-
-  
+   
   
     setOpenTwo(true);
+
+    setSelectedEmailAffiliate(id);
 
 
 };
@@ -123,7 +132,7 @@ export default function AdminAffiliates() {
 
 
   const handleCloseTwo = () => {
-    setOpen(false);
+    setOpenTwo(false);
   };
 
   const handleClose1 = () => {
@@ -313,14 +322,52 @@ export default function AdminAffiliates() {
             
       
           }    
- 
-function handleFilterSales(data:string){
 
-  router.push("../admin/sales/aff");
+          const sendEmail= async() => {
 
-}
+  
+alert(selectedEmailAffiliate)
 
-function sendEmail(){
+  try {
+    const res = await axios.get(
+      `https://back.learniix.com/api/member/email/`+selectedEmailAffiliate,
+     
+     
+   
+       
+       // params: {values}
+      
+     
+    );
+   
+    setIsLoading(false);
+    notifySuccess3();
+   // console.log(res.data.message.toString())
+   
+  } catch (err) {
+    
+  
+    if (err instanceof Error) {
+      const axiosError = err as AxiosError;
+      if (axiosError.response) {
+        const errorResponse = axiosError.response as AxiosResponse;
+        if (errorResponse.data) {
+          errorMessage = errorResponse.data.message;
+        }
+      }
+
+      notifyFailure(errorMessage)
+
+       console.log(errorMessage);
+    }
+    
+    setIsLoading(false);
+    console.log(err);
+  }
+  finally {
+    setIsLoading(false);
+
+  }
 
 
 }
@@ -680,7 +727,7 @@ color: 'black',
                                <button onClick={()=>handleClickOpen1(item.email, item?.unpaid_balance,item?.total_aff_sales_cash, item?.total_aff_sales, item?.id)} className='p-3 rounded-xl bg-zinc-600 text-white  mx-2' >Edit</button>
                             
                                 
-<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500 ml-2 text-white' >Email</button>
+<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500 ml-2 text-white' onClick={()=>handleClickOpenTwo(item.id)} >Email</button>
 </div>
 
 
@@ -783,7 +830,7 @@ color: 'black',
 <button className='p-3 rounded-xl bg-black text-white mt-4' onClick={()=>handleClickOpen(item.id)}>Delete</button>
 
 
-<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500' onClick={handleClickOpenTwo} >Email</button>
+<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500' onClick={()=>handleClickOpenTwo(item.id)} >Email</button>
  
 
 
@@ -815,7 +862,7 @@ item.email_verified == false&&(
 
 }
 
-<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500' onClick={handleClickOpenTwo} >Email</button>
+<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500' onClick={()=>handleClickOpenTwo(item.id)}>Email</button>
  
 
 

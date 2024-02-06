@@ -14,7 +14,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { TransitionProps } from '@mui/material/transitions';
 import { PropagateLoader } from 'react-spinners';
-import toast from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 
 function convertDate(dateString: any){
@@ -111,11 +111,11 @@ export default function AdminSales() {
       borderColor: "red",
     };
 
-    const handleClickOpenDelete = (affiliate_id: any) => {
+    const handleClickOpenDelete = (sale_id: any) => {
 
-    
+    alert(sale_id)
 
-      setSaleIdDelete(affiliate_id)
+      setSaleIdDelete(sale_id)
     
       setOpen(true);
 
@@ -263,6 +263,7 @@ export default function AdminSales() {
 
   return (
     <div >
+       <Toaster />
       <React.Fragment>
 
 

@@ -642,6 +642,8 @@ Do you really want to delete this sale? Please ensure to update the balances for
 
 <p className='mt-2'><span className='text-green mt-2'>Learniix commision:</span> <span className='text-grey_600'>    ₦{
                        getZenithstakeCommission(parseInt(item.commission), parseInt(item.product_price))
+
+                       
                     }</span></p>
 
 <p className='mt-2'>

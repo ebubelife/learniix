@@ -72,6 +72,10 @@ export default function AdminAffiliates() {
   const [open1, setOpen1] = React.useState(false);
   const [openTwo, setOpenTwo] = React.useState(false);
 
+  const [banksData, setBanksData] = React.useState([]);
+
+  
+
   const [selectedEmailAffiliate, setSelectedEmailAffiliate] = React.useState(0);
 
   
@@ -138,6 +142,17 @@ export default function AdminAffiliates() {
   const handleClose1 = () => {
     setOpen1(false);
   };
+
+  function getBankName(data:any){
+
+  
+
+  const filteredData = banksData.filter((item:any) => item.code === data);
+
+  return filteredData[0]?.bank;
+
+
+  }
 
   const deleteAffiliate = () =>{
       setIsLoading(true)
@@ -206,6 +221,33 @@ export default function AdminAffiliates() {
   setAffiliatesData(filteredData);
 };
 
+
+//get banks
+
+useEffect(() => {
+  // Make an HTTP GET request to the API endpoint using axios
+  axios.get('https://back.learniix.com/api/banks/view/')
+    .then((response: any) => {
+
+    
+        
+         
+   
+    
+
+       
+         setBanksData(response.data);
+         setIsLoading(false)
+
+         
+    })
+    .catch((error: any) => {
+      // Handle errors if any
+      console.error(error);
+      setIsLoading(false)
+    });
+  }, []);
+  
 
  
 
@@ -378,11 +420,17 @@ export default function AdminAffiliates() {
     <>
     <Toaster />
 
+   
+
+
+
 {
   //confirmation dialog for emailing affiliate
 
 
 }
+
+
 
 <Dialog open={openTwo} onClose={handleCloseTwo}>
         <DialogTitle className="text-center text-gold">Email Affiliate?</DialogTitle>
@@ -664,6 +712,18 @@ color: 'black',
                 </th>
 
                 <th scope="col" className="px-6 py-3">
+                   Account Name
+                </th>
+
+                <th scope="col" className="px-6 py-3">
+                   Bank
+                </th>
+
+                <th scope="col" className="px-6 py-3">
+                   Account Number
+                </th>
+
+                <th scope="col" className="px-6 py-3">
                    Actions
                 </th>
             </tr>
@@ -715,6 +775,31 @@ color: 'black',
                 {
                        item.last_sale_time
                     }
+                </td> 
+
+
+                <td className="px-6 py-4 dark:text-grey_600">
+            {
+                       item.bank_account_name
+                    }</td>  
+
+<td className="px-6 py-4 dark:text-grey_600">
+
+
+                       {
+                        item.bank_account_number
+                       }
+                     
+                    </td> 
+
+                    <td className="px-6 py-4 dark:text-grey_600">
+
+{
+getBankName(item.bank)
+}
+
+                      
+                
                 </td> 
                 
                  
@@ -830,7 +915,7 @@ color: 'black',
 <button className='p-3 rounded-xl bg-black text-white mt-4' onClick={()=>handleClickOpen(item.id)}>Delete</button>
 
 
-<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500' onClick={()=>handleClickOpenTwo(item.id)} >Email</button>
+<button className='p-3 rounded-xl bg-yellow-500 text-zinc-500 ml-2' onClick={()=>handleClickOpenTwo(item.id)} >Edit</button>
  
 
 

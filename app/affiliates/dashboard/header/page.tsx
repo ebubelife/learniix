@@ -175,10 +175,14 @@ marginTop: '5%',
 
   <hr></hr>
 
-  <ListItem  button>
+  { /*
+    
+    <ListItem  button>
     <ListItemText onClick={goToLeaderboard}  primary="Leaderboard" />
   </ListItem>
-  <hr></hr>
+  <hr></hr>*/
+
+}
 
   <ListItem button>
     <ListItemText onClick={goToReports}  primary="Reports" />

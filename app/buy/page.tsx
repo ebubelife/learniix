@@ -50,7 +50,7 @@ export default function Buy(){
 
   const notifySuccess = () => toast.success("Transaction Successful!");
   var errorMessage =""
-  const notifyFailure = (message: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | ((props: ToastContentProps<unknown>) => React.ReactNode) | null | undefined) => toast.error(message);
+  const notifyFailure = (message: string ) => toast.error(message);
   var cc;
   const [isLoading, setIsLoading] = React.useState(false);
   
@@ -401,8 +401,10 @@ export default function Buy(){
 
           </div>
 
+{
+  /*
 
-          <div className="paystack-button bg-white border-2 border-grey_300  text-white hover:bg-white hover:text-grey_600 w-full py-2 shadow-xl rounded-xl mt-6 flex">
+   <div className="paystack-button bg-white border-2 border-grey_300  text-white hover:bg-white hover:text-grey_600 w-full py-2 shadow-xl rounded-xl mt-6 flex">
           <img src="https://learniix.com/images/Paystack_Logo.png" className="img-responsive h-10 w-28" alt="Paystack-zenithstake"/>
           <PaystackButton publicKey={paystackPublic} className="text-sm text-grey_600 hover:text-purple2 font-semibold ml-3" {...componentProps} text='Pay with Paystack' >Pay with Paystack</PaystackButton>
 
@@ -411,12 +413,9 @@ export default function Buy(){
           <p className='text-green-500 mr-4 font-semibold'>Pay with Paystack (USD)</p>
           </div>
 
+  */
+}
          
-          
-      
-         
-
-        
 
 
         </DialogContent>

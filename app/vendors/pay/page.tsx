@@ -14,7 +14,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import { PaystackButton } from 'react-paystack';
 
 
 export default function Buy(){
@@ -47,6 +47,25 @@ export default function Buy(){
    const [email, setEmail] = useState("vendorpayments@learniix.com")
    
   const [ reference ,  setReference] = React.useState(Date.now().toString());
+  const [paystackPublic, setPaystackPublick] = React.useState("pk_live_f27aa22ced88d8d87bee5c58b19625409bc4c7a8");
+
+   //component props for Paystack
+   const componentProps =  {
+    reference:reference,
+    currency: 'USD',
+    email,
+    amount:((amount +150)),
+    channels:['card'],
+
+   
+    
+  
+    text: "Complete Purchase",
+    onSuccess: () =>
+     {saveTransaction(vendorID!.toString())},
+    onClose: () => {router.back()}
+  }
+
 
    
       async function   saveTransaction(newUserID: string ) {
@@ -220,6 +239,18 @@ export default function Buy(){
 
 
           </div>
+
+          <div className="paystack-button bg-white border-2 border-grey_300  text-white hover:bg-white hover:text-grey_600 w-full py-2 shadow-xl rounded-xl mt-6 flex">
+          <img src="https://learniix.com/images/Paystack_Logo.png" className="img-responsive h-10 w-28" alt="Paystack-zenithstake"/>
+          <PaystackButton publicKey={paystackPublic} className="text-sm text-grey_600 hover:text-purple2 font-semibold ml-3" {...componentProps} text='Pay with Paystack'  >Pay with Paystack</PaystackButton>
+
+
+          <p className='text-green-500 mr-4 font-semibold'>Pay with Paystack (NGN)</p>
+
+          </div>
+
+
+        
 
          
           

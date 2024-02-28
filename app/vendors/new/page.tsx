@@ -192,7 +192,7 @@ export default function Signup() {
 
       setTimeout(() => {
           // router.push( './vendor/pay?user_id=' + user_id);
-          router.push('/vendors/verify')
+          router.push('/vendors/pay')
         }, 2000);
 
 

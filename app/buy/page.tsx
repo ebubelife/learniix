@@ -130,9 +130,9 @@ export default function Buy(){
    //component props for Paystack
    const componentProps =  {
     reference:reference,
-    currency: 'USD',
+    //currency: 'USD',
     email,
-    amount:((amount +150)),
+    amount:((amount*100 )+150),
     channels:['card'],
 
    

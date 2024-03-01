@@ -133,6 +133,7 @@ export default function Buy(){
     //currency: 'USD',
     email,
     amount:((amount*100 )+150),
+    
     channels:['card'],
 
    

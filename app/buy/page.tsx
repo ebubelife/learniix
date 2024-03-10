@@ -22,6 +22,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { PaystackButton } from 'react-paystack';
+import Script from 'next/script';
 
 
 export default function Buy(){
@@ -456,8 +457,8 @@ const payWithPaystack = () => {
 <>
 
 <button onClick={payWithPaystack}>Pay with Paystack (USD)</button>
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<Script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" ></Script>
+<Script src="https://js.paystack.co/v1/inline.js"></Script>
 
 </>
   

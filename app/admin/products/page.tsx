@@ -121,6 +121,8 @@ export default function AdminAffiliates(){
                     setIsLoading(false);
                     notifySuccess();
                    // console.log(res.data.message.toString())
+
+                   window.location.reload();
                    
                   } catch (err) {
                     
@@ -179,6 +181,7 @@ export default function AdminAffiliates(){
                  
                   setIsLoading(false);
                   notifySuccess1();
+                  window.location.reload();
                  // console.log(res.data.message.toString())
                  
                 } catch (err) {

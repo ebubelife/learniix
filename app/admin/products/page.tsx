@@ -218,6 +218,8 @@ export default function AdminAffiliates(){
      return(
 
           <>
+
+          <Toaster />
          
          <main className="dashboard bg-grey_100  w-screen flex ">
              
@@ -348,7 +350,7 @@ export default function AdminAffiliates(){
                     {item.productCommission}
                 </td>
              
-                <td className="px-6 py-4 dark:text-grey_600">
+                <td  className="px-6 py-4 dark:text-grey_600">
                 {
                        item.approved ==false?(<>False</>):(<>True</>)
                     }
@@ -428,7 +430,7 @@ export default function AdminAffiliates(){
 <p className='mt-2'><span className='text-green mt-2'>Commission %:</span> <span className='text-grey_600'>   {item.productCommission}</span></p>
 
 
-<p className='mt-2'><span className='text-green mt-2'>Approved:</span> <span className='text-grey_600'>     {
+<p onClick={approveProduct}  className='mt-2'><span className='text-green mt-2'>Approved:</span> <span className='text-grey_600'>     {
                        item.approved ==false?(<>False</>):(<>True</>)
                     }</span></p>
 

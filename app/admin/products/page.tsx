@@ -218,8 +218,6 @@ export default function AdminAffiliates(){
      return(
 
           <>
-
-          <Toaster />
          
          <main className="dashboard bg-grey_100  w-screen flex ">
              

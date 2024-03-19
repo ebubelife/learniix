@@ -754,9 +754,12 @@ const handleChange = (event:any) => {
 
 <div className='h-28 shadow-md rounded-md border border-1 border-zinc-300 p-2'>
 
-<p className='font-medim text-md ml-auto  mt-2'>Total&apos;s Sales</p>
+<p className='font-medim text-md ml-auto  mt-2'>Total Sales</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/sales-amount-svgrepo-com.svg" className='h-[30px] w-[30px]' alt=""/>
+
+
 
 </div>
 
@@ -773,9 +776,12 @@ const handleChange = (event:any) => {
 
 <p className='font-medim text-md ml-auto  mt-2'>Today&apos;s Earnings</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/target-svgrepo-com.svg" className='h-[30px] w-[30px]' alt=""/>
+
 
 </div>
+
 
 
 
@@ -789,10 +795,12 @@ const handleChange = (event:any) => {
 
 <p className='font-medim text-md ml-auto  mt-2'>Today&apos;s Sales</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/money-svgrepo-com (1).svg" className='h-[30px] w-[30px]' alt=""/>
+
+
 
 </div>
-
 
 
 <p className='text-xl font-medium ml-4 mt-2'>{todaySales}</p>
@@ -806,10 +814,12 @@ const handleChange = (event:any) => {
 
 <p className='font-medim text-md ml-auto  mt-2'>Unpaid Earnings</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/debt-svgrepo-com (1).svg" className='h-[30px] w-[30px]' alt=""/>
+
+
 
 </div>
-
 
 
 <p className='text-xl font-medium ml-4 mt-2'>{convertAffBalanceCurrency()}</p>

@@ -378,7 +378,9 @@ export default function AffiliateDashboard() {
 
 <p className='font-medim text-md ml-auto  mt-2'>Today&apos;s Sales</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/target-svgrepo-com.svg" className='h-[30px] w-[30px]' alt=""/>
+
 
 </div>
 
@@ -395,7 +397,9 @@ export default function AffiliateDashboard() {
 
 <p className='font-medim text-md ml-auto  mt-2'>Total Earnings</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/money-svgrepo-com (1).svg" className='h-[30px] w-[30px]' alt=""/>
+
 
 </div>
 
@@ -411,11 +415,12 @@ export default function AffiliateDashboard() {
 
 <p className='font-medim text-md ml-auto  mt-2'>Total Sales</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/sales-amount-svgrepo-com.svg" className='h-[30px] w-[30px]' alt=""/>
+
+
 
 </div>
-
-
 
 <p className='text-xl font-medium ml-4 mt-2'>{total_aff_sales}</p>
 
@@ -428,7 +433,10 @@ export default function AffiliateDashboard() {
 
 <p className='font-medim text-md ml-auto  mt-2'>Unpaid Earnings</p>
 <div className='flex mt-2'>
-<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl grid place-content-center'>
+<img src="/images/debt-svgrepo-com (1).svg" className='h-[30px] w-[30px]' alt=""/>
+
+
 
 </div>
 

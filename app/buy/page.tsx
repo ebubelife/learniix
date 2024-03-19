@@ -133,13 +133,10 @@ export default function Buy(){
     reference:reference,
     //currency: 'USD',
     email,
-    amount:((amount*100 )+150),
+    amount:((amount*100 )+200),
 
     channels:['card'],
 
-   
-    
-  
     text: "Complete Purchase",
     onSuccess: () =>
      {runAPI("NGN")},

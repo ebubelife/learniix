@@ -436,7 +436,7 @@ const payWithPaystack = () => {
 
 <>
 
-<button onClick={payWithPaystack} className='mt-4 bg-green-500 shadow-md'>Pay with Paystack (USD)</button>
+<button onClick={payWithPaystack} className='mt-4  shadow-md w-full p-2 text-green-500 rounded-sm'>Pay with Paystack (USD)</button>
 <Script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" ></Script>
 <Script src="https://js.paystack.co/v1/inline.js"></Script>
 

@@ -319,7 +319,7 @@ const payWithPaystack = () => {
     var handler = window.PaystackPop.setup({ 
       key: 'pk_live_f27aa22ced88d8d87bee5c58b19625409bc4c7a8', //put your public key here
       email: email, //put your customer's email here
-      amount: productID =="1"?20: ((amount/1600)*100)+(5 *100), //amount the customer is supposed to pay
+      amount: productID =="1"?(20 * 100): ((amount/1600)*100)+(5 *100), //amount the customer is supposed to pay
       currency: "USD",
 
       metadata: {

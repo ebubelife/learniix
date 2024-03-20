@@ -133,7 +133,7 @@ export default function Buy(){
     reference:reference,
     //currency: 'USD',
     email,
-    amount:((amount*100 )+200),
+    amount:((amount*100 )+(200*100)),
 
     channels:['card'],
 
@@ -318,42 +318,22 @@ export default function Buy(){
 const payWithPaystack = () => {
     var handler = window.PaystackPop.setup({ 
       key: 'pk_live_f27aa22ced88d8d87bee5c58b19625409bc4c7a8', //put your public key here
-      email: 'customer@email.com', //put your customer's email here
-      amount: 370000, //amount the customer is supposed to pay
+      email: email, //put your customer's email here
+      amount: 11.50, //amount the customer is supposed to pay
       currency: "USD",
+
       metadata: {
         custom_fields: [
           {
-            display_name: "Mobile Number",
-            variable_name: "mobile_number",
-            value: "+2348012345678" //customer's mobile number
+            display_name: customerName,
+            customer_email: customerEmail,
+            phone: customerPhone //customer's mobile number
           }
         ]
       },
       callback: function (response:any) {
         //after the transaction have been completed
-        //make post call  to the server with to verify payment 
-        //using transaction reference as post data
-        fetch("verify.php", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ reference: response.reference })
-        })
-        .then(response => response.text())
-        .then(status => {
-          if(status === "success")
-            //successful transaction
-            alert('Transaction was successful');
-          else
-            //transaction failed
-            alert('Transaction failed');
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          alert('An error occurred');
-        });
+        runAPI("USD")
       },
       onClose: function () {
         //when the user close the payment modal
@@ -438,9 +418,10 @@ const payWithPaystack = () => {
 
 
           <div className="paystack-button bg-white border-2 border-grey_300  text-white hover:bg-white hover:text-grey_600 w-full py-2 shadow-xl rounded-xl mt-6 flex">
-          <PaystackButton publicKey={paystackPublic} className="text-sm text-grey_600 hover:text-purple2 font-semibold ml-3" {...componentProps} text='Pay with Paystack'  >
+          <p className='text-green-500 mr-4 font-semibold' >Pay with Paystack (NGN)</p>
+         
+          <PaystackButton publicKey={paystackPublic} className="text-sm text-grey_600 hover:text-purple2 font-semibold ml-3" {...componentProps}   >
           <img src="https://learniix.com/images/Paystack_Logo.png" className="img-responsive h-10 w-28" alt="Paystack-zenithstake"/>
-          <p className='text-green-500 mr-4 font-semibold'>Pay with Paystack (NGN)</p>
           </PaystackButton>
 
 
@@ -455,7 +436,7 @@ const payWithPaystack = () => {
 
 <>
 
-<button onClick={payWithPaystack}>Pay with Paystack (USD)</button>
+<button onClick={payWithPaystack} className='mt-4 bg-green-500 shadow-md'>Pay with Paystack (USD)</button>
 <Script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" ></Script>
 <Script src="https://js.paystack.co/v1/inline.js"></Script>
 

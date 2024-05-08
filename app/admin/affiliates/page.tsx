@@ -661,7 +661,7 @@ color: 'black',
       <div className="w-screen h-screen px-4 py-4">
 
 
-      <p className='text-green text-xl mt-3'>All Affiliatesss</p>
+      <p className='text-green text-xl mt-3'>All Affiliates</p>
 <div className='mt-4 flex'>
                         <TextField id="outlined-basic" type="text" label="Search Affiliates" variant="outlined"  onChange={(e) => setSearchText(e.target.value)}   />
 

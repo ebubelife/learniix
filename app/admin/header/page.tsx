@@ -3,7 +3,7 @@
 import React, { useState,useRef, useEffect } from 'react';
 
 import Link from 'next/link';
-import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem, InputAdornment, TextField } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import FormControl from '@mui/material/FormControl';
@@ -13,7 +13,35 @@ import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+
 const AdminHeader = (props:any) => {
+
+  const [open, setOpen] = React.useState(true);
+  const [code, setCode] = React.useState("");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    if(code == "100124"){
+     
+      setOpen(false);
+     
+        
+          
+     }else{
+      alert("Wrong code")
+     }
+   
+  };
 
     const { title } = props;
 
@@ -98,13 +126,85 @@ const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   }
   
   
-  
-  
 
+  function _checkCode(){
+
+   if(code == "100124"){
+    handleClose
+
+    alert("l")
+      
+        
+   }else{
+    alert("Wrong code")
+   }
+  
+  }
 
 
 
 return  (<>
+
+<>
+{
+  //signin 
+}
+<React.Fragment>
+    
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Sign Into Your Admin"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          <TextField
+ fullWidth
+ id="code"
+ name="code"
+ label="Enter Code"
+ variant="outlined"
+ margin="normal"
+ onChange={(e:any) =>setCode(e.target.value)}
+
+ InputProps={{
+   startAdornment: (
+     <InputAdornment position="start">
+       {/* Icon for email (replace with your icon) */}
+       
+     </InputAdornment>
+   ),
+ }}
+
+ style={{
+   borderRadius: '12px', // Adjust the border-radius to make it curvier
+   marginTop: '10px', // Optional: Adjust the top margin
+ }}
+ inputProps={{
+   style: {
+     fontSize: '12px', // Adjust the font size
+     color: 'slategray', // Use the slate color for text
+   },
+ }}
+/>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+
+
+       
+          <Button onClick={handleClose} autoFocus>
+            Login
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </React.Fragment>
+
+</>
 {/* Top Navigation Bar */}
 <AppBar position="static">
 <Toolbar style={{ backgroundColor: 'black' }}>
@@ -175,6 +275,8 @@ marginTop: '5%',
 </List>
 </Drawer>
 </>)
+
+
 
 }
 

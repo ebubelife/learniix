@@ -16,7 +16,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '/styles/style.module.css'
 import { useRouter } from 'next/router';
 import toast, { Toaster } from 'react-hot-toast';
-import LoginDialog from '../login_dialog';
+import LoginDialog from '../../login_dialog';
 
 
 function convertDate(dateString: any){

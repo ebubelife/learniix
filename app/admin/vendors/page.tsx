@@ -240,6 +240,7 @@ export default function AdminAffiliates(){
      return(
 
           <>
+          <LoginDialog />
             <Toaster />
 
 <Dialog open={open} onClose={handleClose}>

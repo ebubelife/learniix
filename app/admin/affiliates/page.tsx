@@ -18,6 +18,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { BeatLoader, ClipLoader, PropagateLoader } from 'react-spinners'
 
 import { useRouter } from 'next/navigation';
+import LoginDialog from '../login_dialog';
 
 
 function convertDate(dateString: any){
@@ -418,6 +419,7 @@ useEffect(() => {
   return (
 
     <>
+    <LoginDialog />
     <Toaster />
 
    

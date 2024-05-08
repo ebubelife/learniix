@@ -15,6 +15,7 @@ import axios from 'axios';
 import { TransitionProps } from '@mui/material/transitions';
 import { PropagateLoader } from 'react-spinners';
 import toast, { Toaster } from 'react-hot-toast';
+import LoginDialog from '../login_dialog';
 
 
 function convertDate(dateString: any){
@@ -263,6 +264,8 @@ export default function AdminSales() {
 
   return (
     <div >
+
+      <LoginDialog />
        <Toaster />
       <React.Fragment>
 

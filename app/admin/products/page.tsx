@@ -14,10 +14,12 @@ import TextField from '@mui/material/TextField';
 import toast, { Toaster } from 'react-hot-toast'
 
 import { BeatLoader, ClipLoader, PropagateLoader } from 'react-spinners'
+import { Dialog, DialogTitle, DialogContent, DialogContentText, InputAdornment, DialogActions, Button } from '@mui/material';
+import LoginDialog from '../login_dialog';
 
 
 
-export default function AdminAffiliates(){
+export default function AdminProducts(){
 
     const [isLoading, setIsLoading] = useState(false);
     
@@ -33,7 +35,8 @@ export default function AdminAffiliates(){
    
     const notifyFailure = (message: string) => toast.error(message);
  
-
+   
+  
    
    
 
@@ -221,12 +224,14 @@ export default function AdminAffiliates(){
      return(
 
           <>
+       
+
 
           <Toaster />
          
          <main className="dashboard bg-grey_100  w-screen flex ">
              
-              
+         <LoginDialog />
 
                 
              <div className=" grow bg-grey_100 p-6">

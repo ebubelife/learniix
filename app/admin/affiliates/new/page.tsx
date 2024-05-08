@@ -23,6 +23,7 @@ import { ErrorMessage, Formik, useFormik } from 'formik';
 import * as yup from 'yup';
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import LoginDialog from '../../login_dialog';
 
 
 function convertDate(dateString: any){
@@ -213,7 +214,7 @@ const runAPI = async (values: FormData) => {
      return(
 
           <>
-
+<LoginDialog />
 <Toaster />
 <AdminHeader title="New Affiliate" />
 

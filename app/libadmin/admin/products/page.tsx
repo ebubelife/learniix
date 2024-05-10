@@ -231,8 +231,9 @@ export default function AdminProducts(){
          
          <main className="dashboard bg-grey_100  w-screen flex ">
              
-         <LoginDialog />
-
+         {
+//<LoginDialog />
+   } 
                 
              <div className=" grow bg-grey_100 p-6">
                  <div className="top-bar-container w-full border-b-2 border-grey_100 shadow-xl py-4 px-6">

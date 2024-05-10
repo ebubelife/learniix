@@ -338,7 +338,9 @@ export default function AdminPayments(){
      return(
 
           <>
-          <LoginDialog />
+         {
+//<LoginDialog />
+   } 
            <Toaster />
           <Dialog open={open1} onClose={handleCloseCancel1}>
         <DialogTitle className="text-center text-green">Pay All Affiliates?</DialogTitle>

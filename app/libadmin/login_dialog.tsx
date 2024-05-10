@@ -8,7 +8,7 @@ export default function LoginDialog() {
     const [code, setCode] = React.useState("");
   
     const handleClickOpen = () => {
-      setOpen(true);
+      setOpen(false);
     };
   
     const handleClose = () => {
@@ -33,11 +33,13 @@ export default function LoginDialog() {
 
            
            
-            setOpen(true)
+            setOpen(false)
 
         }
 
        })
+
+       return(<></>)
 return (
     <>
     {

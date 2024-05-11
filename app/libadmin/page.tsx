@@ -13,7 +13,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-import LoginDialog from './login_dialog';
+
 
 
 export default function Admin(){
@@ -89,7 +89,7 @@ export default function Admin(){
     return(
     
         <>
-       <LoginDialog />
+      
      <div className="w-screen h-screen  bg-white  ">
          <div className="w-screen h-20  flex justify-center shadow-2xl">
           

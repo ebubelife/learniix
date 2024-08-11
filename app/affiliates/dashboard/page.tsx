@@ -23,7 +23,7 @@ export default function AffiliateDashboard() {
   var user_data = Cookies.get('user_details');
 
   var selected_currency = Cookies.get('selected_currency');
-  var naira_exchange_rate = ""; var convert_balance_usd ="";
+  var naira_exchange_rate = ""; var convert_balance_usd =""; var created_at ="", renewed_at = "";
   var firstname =""; var isVendor =false; var id=""; var affiliate_id =""
   const [isLoading, setIsLoading] = React.useState(false);
   var unpaid_balance_affiliate =" "; var total_affiliate_cash ="";var  total_aff_sales ="";
@@ -59,6 +59,8 @@ export default function AffiliateDashboard() {
       total_aff_sales = (user as any).total_aff_sales;
       naira_exchange_rate = (user as any).naira_exchange_rate;
       convert_balance_usd = (user as any).convert_balance_usd;
+      created_at = (user as any).created_at;
+      renewed_at = (user as any).renewed_at;
      
       
 
@@ -205,6 +207,96 @@ export default function AffiliateDashboard() {
 
   
    }
+
+   function getCurrentMonth(){
+
+    // Create a new Date object
+const currentDate = new Date();
+
+// Get the current month (0-based, so January is 0, February is 1, etc.)
+const monthNumber = currentDate.getMonth() + 1; // Adding 1 to make it 1-based
+
+let monthName = '';
+  
+if (monthNumber === 1) {
+  monthName = 'January';
+} else if (monthNumber === 2) {
+  monthName = 'February';
+} else if (monthNumber === 3) {
+  monthName = 'March';
+} else if (monthNumber === 4) {
+  monthName = 'April';
+} else if (monthNumber === 5) {
+  monthName = 'May';
+} else if (monthNumber === 6) {
+  monthName = 'June';
+} else if (monthNumber === 7) {
+  monthName = 'July';
+} else if (monthNumber === 8) {
+  monthName = 'August';
+} else if (monthNumber === 9) {
+  monthName = 'September';
+} else if (monthNumber === 10) {
+  monthName = 'October';
+} else if (monthNumber === 11) {
+  monthName = 'November';
+} else if (monthNumber === 12) {
+  monthName = 'December';
+} else {
+  monthName = 'Invalid Month'; // Handle invalid month numbers
+}
+
+return monthName;
+   }
+
+
+   function calculateDaysDifference() {
+
+    var givenDate;
+    // Convert the date string to a Date object
+    if(renewed_at == null)
+     givenDate = new Date(created_at);
+
+    else
+     givenDate = new Date(renewed_at);
+
+  
+    // Get today's date
+    const today = new Date();
+  
+    // Calculate the time difference in milliseconds
+    const timeDifference = today.getTime() - givenDate.getTime();
+  
+    // Convert the time difference from milliseconds to days
+    const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  
+    return 365-daysDifference;
+  }
+ 
+
+   useEffect(() => {
+       
+    // Make an HTTP GET request to the API endpoint using axios
+    axios.get('https://back.learniix.com/api/top_affiliate/product/view/1',
+   )
+      .then((response: any) => {
+          
+           
+
+          
+           setTopAffiliatesData(response.data);
+          
+           setIsLoading(false)
+           console.log(response.data);
+
+           
+      })
+      .catch((error: any) => {
+        // Handle errors if any
+        console.error(error);
+        setIsLoading(false)
+      });
+    }, []);
 
 
 
@@ -364,7 +456,7 @@ export default function AffiliateDashboard() {
       <div className="w-screen h-screen py-4">
 
 
-     <h2 className='text-xl font-semibold text-green-500'> Hi {firstname}, </h2>
+     <h2 className='text-xl font-semibold text-green-500 ml-4'> Hi {firstname}, </h2>
 
 
        <div className="mt-6"></div>
@@ -457,6 +549,9 @@ export default function AffiliateDashboard() {
        
        </div>
 
+       <p className='text-zinc-600 mt-4 font-light text-center my-6 mt-4'>You have  <span className='text-2xl text-green-500  font-semibold'>{calculateDaysDifference()}</span> days left on your membership</p>
+
+
 
 
        <div className='w-screen  flex justify-center'>
@@ -498,7 +593,89 @@ export default function AffiliateDashboard() {
 
 </div>
 
+<div className='grid md:grid-cols-2 w-full md:px-10 px-4 mt-6 gap-4 '>
+  <div className='md:h-96 border border-zinc-300 rounded-md md:overflow-y-scroll grid place-content-center'>
 
+    <p className='text-center'>No recent activity yet <br></br> Your sales, withdrawals and other activity will show here</p>
+
+    
+    
+  </div>
+
+  <div className='md:h-96 border border-zinc-300 rounded-md md:overflow-y-scroll p-2'>
+
+  <div className='text-grey_600 text-md font-semibold  p-2 rounded-xl mt-3'>Top Selling Affiliates in : <span className='text-green-500'>{getCurrentMonth()}</span></div> 
+                           
+
+  { topAffiliatesData.map((item: any, index) => (
+
+                                
+<>
+ 
+     <div className="w-full bg-white mt-4 shadow-lg py-2 px-2 flex rounded-md " key={index}>
+ <div className='rounded-full border-2 border-grey_100 h-16 w-16 flex justify-center'>
+
+  
+
+{
+    
+
+    index+1 < 2 &&(<> 
+   <div className='h-16 rounded-full  p-4'>
+
+   <img src="/images/icons8-crown-48.png" className="h-full w-full " alt={"ZenithStake Top Affiliate Images Image"}/>
+  
+
+   </div>
+    
+</>)
+  }
+
+{
+   
+
+    index+1 > 1 &&(<> 
+    
+    <div className='h-16 rounded-full  p-4'>
+    <img src="/images/trophy-prize-medal-4-svgrepo-com.svg" className="h-full w-full rounded-full " alt={"ZenithStake Top Affiliate Images Image"}/>
+   
+
+       
+</div>
+    
+</>)
+  }
+
+ </div> 
+
+
+
+ 
+
+<div>
+
+<p className='font-semibold text-green-500 text-sm mt-4 ml-4'>{`${item.firstName }  ${item.lastName} `}</p>
+
+<p className='font-regular text-green text-sm mt-2 ml-4 '>{`Ranked:  ${index+1} `}</p>
+</div>
+
+         </div>
+  
+
+</>
+
+
+
+                         ))}
+
+
+
+    
+    </div>
+  
+
+
+</div>
 
 
        

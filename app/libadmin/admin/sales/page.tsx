@@ -265,9 +265,7 @@ export default function AdminSales() {
   return (
     <div >
 
-{
-//<LoginDialog />
-   } 
+
        <Toaster />
       <React.Fragment>
 

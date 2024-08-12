@@ -12,6 +12,7 @@ import { useTheme,useMediaQuery } from '@mui/material';
 import AffiliateDashboardHeader from './header/page';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { format, parseISO } from 'date-fns';
 
 
 
@@ -38,6 +39,7 @@ export default function AffiliateDashboard() {
   const [todaySales, setTodaySales] = useState("0");
   const [todayEarnings, setTodayEarnings] = useState("0.00"); 
   const [topAffiliatesData, setTopAffiliatesData] = useState([]); 
+  const [notifications, setNotificationsData] = useState([]); 
   
 
    
@@ -132,46 +134,7 @@ export default function AffiliateDashboard() {
 
 
 
-   const convertTodayEarningCurrency =()=>{
-
-    if(selected_currency ){
-
-      if(selected_currency = "USD"){
-
-          var total_today_sales_usd = parseInt(todayEarnings) / parseInt(naira_exchange_rate);
-
-
-          return "$ "+ (total_today_sales_usd).toString();
-
-
-        
-      }
-
-      else if(selected_currency = "NGN"){
-
-       // var ngn_bal = (parseInt(convert_balance_usd) * parseInt(naira_exchange_rate));
-
-        return "₦ "+todayEarnings.toString();
-
-
-      }
-
-
-    }
-
-    else{
-
-      var total_today_sales_usd = parseInt(todayEarnings) / parseInt(naira_exchange_rate);
-
-
-      return "$ "+ (total_today_sales_usd).toString();
-
-    }
-
   
-   }
-
-
 
 
 
@@ -273,32 +236,15 @@ return monthName;
     return 365-daysDifference;
   }
  
-
-   useEffect(() => {
-       
-    // Make an HTTP GET request to the API endpoint using axios
-    axios.get('https://back.learniix.com/api/top_affiliate/product/view/1',
-   )
-      .then((response: any) => {
-          
-           
-
-          
-           setTopAffiliatesData(response.data);
-          
-           setIsLoading(false)
-           console.log(response.data);
-
-           
-      })
-      .catch((error: any) => {
-        // Handle errors if any
-        console.error(error);
-        setIsLoading(false)
-      });
-    }, []);
+  const formatDate = (dateString:any) =>{
+    const date = new Date(dateString)
+    const formattedDate = format(date, 'EEEE, MMMM d, yyyy, h:mm a');
 
 
+    return formattedDate;
+  }
+
+ 
 
   
    useEffect(() => {
@@ -324,6 +270,30 @@ return monthName;
         setIsLoading(false)
       });
     }, []);
+
+      //get notifications
+        
+      useEffect(() => {
+       
+        // Make an HTTP GET request to the API endpoint using axios
+        axios.get('https://back.learniix.com/api/notifications/user/852')
+          .then((response: any) => {
+              
+               
+
+              
+               setNotificationsData(response.data);
+             
+               console.log(response.data);
+
+               
+          })
+          .catch((error: any) => {
+            // Handle errors if any
+            console.error(error);
+            setIsLoading(false)
+          });
+        }, [id]);
 
   
 
@@ -596,8 +566,19 @@ return monthName;
 <div className='grid md:grid-cols-2 w-full md:px-10 px-4 mt-6 gap-4 '>
   <div className='md:h-96 border border-zinc-300 rounded-md md:overflow-y-scroll grid place-content-center'>
 
-    <p className='text-center'>No recent activity yet <br></br> Your sales, withdrawals and other activity will show here</p>
+  {notifications.length > 0 ? (
+        notifications.map((item, index) => (
+          <div className="w-full bg-white mt-4 shadow-md py-2 px-2 rounded-md" key={index}>
+            <p className="font-semibold text-md text-yellow-500">{item.header}</p>
+            <p className="font-light text-md text-black">{item.body}</p>
+            <p className="font-medium text-sm text-green-500 mt-4">{formatDate(item.created_at)}</p>
+          </div>
+        ))
+      ) : (
+        <p className='text-center'>No recent activity yet <br></br> Your sales, withdrawals and other activity will show here</p>
 
+      )}
+  
     
     
   </div>
@@ -612,7 +593,7 @@ return monthName;
                                 
 <>
  
-     <div className="w-full bg-white mt-4 shadow-lg py-2 px-2 flex rounded-md " key={index}>
+     <div className="w-full bg-white mt-4 shadow-lg py-2 px-2 flex rounded-md  " key={index}>
  <div className='rounded-full border-2 border-grey_100 h-16 w-16 flex justify-center'>
 
   
@@ -656,7 +637,10 @@ return monthName;
 
 <p className='font-semibold text-green-500 text-sm mt-4 ml-4'>{`${item.firstName }  ${item.lastName} `}</p>
 
-<p className='font-regular text-green text-sm mt-2 ml-4 '>{`Ranked:  ${index+1} `}</p>
+<div className="w-96  flex justify-between">
+  <p className="font-regular text-green text-sm mt-2  ml-4">{`Ranked:  ${index + 1}`}</p>
+  <p className="font-regular text-green text-sm mt-2 ml-auto">{`Sales:  ${item.count}`}</p>
+</div>
 </div>
 
          </div>

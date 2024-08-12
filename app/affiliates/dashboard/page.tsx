@@ -1,6 +1,6 @@
 "use client"
 // Import necessary React and Material-UI components
-import React, { useState,useRef, useEffect } from 'react';
+import React, { useState,useRef, useEffect, CSSProperties } from 'react';
 
 import Link from 'next/link';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText, Menu, MenuItem } from '@mui/material';
@@ -13,6 +13,7 @@ import AffiliateDashboardHeader from './header/page';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { format, parseISO } from 'date-fns';
+import { PropagateLoader } from 'react-spinners';
 
 
 
@@ -39,11 +40,22 @@ export default function AffiliateDashboard() {
   const [todaySales, setTodaySales] = useState("0");
   const [todayEarnings, setTodayEarnings] = useState("0.00"); 
   const [topAffiliatesData, setTopAffiliatesData] = useState([]); 
-  const [notifications, setNotificationsData] = useState([]); 
+  const [notifications, setNotificationsData] = useState([]);
+  const [loadingNotif, setLoadingNotif] = useState(true); 
+  const [loadingTopAffiliates, setLoadingTopAff] = useState(true); 
+
+  
   
 
    
+  const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
 
+
+  let [color, setColor] = useState("#90EE90");
   
   const router = useRouter(); 
   var  loggedIn = " ";
@@ -262,6 +274,8 @@ return monthName;
            setIsLoading(false)
            console.log(response.data);
 
+           setLoadingTopAff(false)
+
            
       })
       .catch((error: any) => {
@@ -285,6 +299,8 @@ return monthName;
                setNotificationsData(response.data);
              
                console.log(response.data);
+               setLoadingNotif(false)
+
 
                
           })
@@ -566,7 +582,10 @@ return monthName;
 <div className='grid md:grid-cols-2 w-full md:px-10 px-4 mt-6 gap-4 '>
   <div className='md:h-96 border border-zinc-300 rounded-md md:overflow-y-scroll grid place-content-center'>
 
-  {notifications.length > 0 ? (
+  {
+
+       loadingNotif == false?(<>
+       {notifications.length > 0 ? (
         notifications.map((item, index) => (
           <div className="w-full bg-white mt-4 shadow-md py-2 px-2 rounded-md" key={index}>
             <p className="font-semibold text-md text-yellow-500">{item.header}</p>
@@ -579,6 +598,22 @@ return monthName;
 
       )}
   
+       </>):(<>
+
+          <div className='w-full h-full grid place-content-center'>
+          <PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
+
+          </div>
+       
+       </>)
+  }
     
     
   </div>
@@ -588,69 +623,94 @@ return monthName;
   <div className='text-grey_600 text-md font-semibold  p-2 rounded-xl mt-3'>Top Selling Affiliates in : <span className='text-green-500'>{getCurrentMonth()}</span></div> 
                            
 
-  { topAffiliatesData.map((item: any, index) => (
+
+  {
+
+    loadingTopAffiliates == false?(<>
+
+    {
+      topAffiliatesData.map((item: any, index) => (
 
                                 
-<>
- 
-     <div className="w-full bg-white mt-4 shadow-lg py-2 px-2 flex rounded-md  " key={index}>
- <div className='rounded-full border-2 border-grey_100 h-16 w-16 flex justify-center'>
-
-  
-
-{
+        <>
+         
+             <div className="w-full bg-white mt-4 shadow-lg py-2 px-2 flex rounded-md  " key={index}>
+         <div className='rounded-full border-2 border-grey_100 h-16 w-16 flex justify-center'>
+        
+          
+        
+        {
+            
+        
+            index+1 < 2 &&(<> 
+           <div className='h-16 rounded-full  p-4'>
+        
+           <img src="/images/icons8-crown-48.png" className="h-full w-full " alt={"ZenithStake Top Affiliate Images Image"}/>
+          
+        
+           </div>
+            
+        </>)
+          }
+        
+        {
+           
+        
+            index+1 > 1 &&(<> 
+            
+            <div className='h-16 rounded-full  p-4'>
+            <img src="/images/trophy-prize-medal-4-svgrepo-com.svg" className="h-full w-full rounded-full " alt={"ZenithStake Top Affiliate Images Image"}/>
+           
+        
+               
+        </div>
+            
+        </>)
+          }
+        
+         </div> 
+        
+        
+        
+         
+        
+        <div>
+        
+        <p className='font-semibold text-green-500 text-sm mt-4 ml-4'>{`${item.firstName }  ${item.lastName} `}</p>
+        
+        <div className="w-96  flex justify-between">
+          <p className="font-regular text-green text-sm mt-2  ml-4">{`Ranked:  ${index + 1}`}</p>
+          <p className="font-regular text-green text-sm mt-2 ml-auto">{`Sales:  ${item.count}`}</p>
+        </div>
+        </div>
+        
+                 </div>
+          
+        
+        </>
+        
+        
+        
+                                 ))
+    }
     
+    </>):(<>
 
-    index+1 < 2 &&(<> 
-   <div className='h-16 rounded-full  p-4'>
+      <div className='w-full h-full grid place-content-center'>
+          <PropagateLoader
+   color={color}
+   //loading={isLoading}
+   cssOverride={override}
+   size={15}
+   aria-label="Loading Spinner"
+   data-testid="loader"
+ />
 
-   <img src="/images/icons8-crown-48.png" className="h-full w-full " alt={"ZenithStake Top Affiliate Images Image"}/>
-  
+          </div>
+    </>)
 
-   </div>
-    
-</>)
   }
-
-{
-   
-
-    index+1 > 1 &&(<> 
-    
-    <div className='h-16 rounded-full  p-4'>
-    <img src="/images/trophy-prize-medal-4-svgrepo-com.svg" className="h-full w-full rounded-full " alt={"ZenithStake Top Affiliate Images Image"}/>
-   
-
-       
-</div>
-    
-</>)
-  }
-
- </div> 
-
-
-
  
-
-<div>
-
-<p className='font-semibold text-green-500 text-sm mt-4 ml-4'>{`${item.firstName }  ${item.lastName} `}</p>
-
-<div className="w-96  flex justify-between">
-  <p className="font-regular text-green text-sm mt-2  ml-4">{`Ranked:  ${index + 1}`}</p>
-  <p className="font-regular text-green text-sm mt-2 ml-auto">{`Sales:  ${item.count}`}</p>
-</div>
-</div>
-
-         </div>
-  
-
-</>
-
-
-
-                         ))}
 
 
 

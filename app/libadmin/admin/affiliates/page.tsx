@@ -927,6 +927,10 @@ item.next_withdrawal_amount
                        item.unpaid_balance
                     }</span></p>
 
+<p className='mt-2'><span className='text-green mt-2'>Next withdraw:</span> <span className='text-grey_600'>     ₦{
+                       item.next_withdrawal_amount
+                    }</span></p>
+
 <p className='mt-2'><span className='text-green mt-2'>Last Sale At:</span> <span className='text-grey_600'>     {
                        item.last_sale_time
                     }</span></p>

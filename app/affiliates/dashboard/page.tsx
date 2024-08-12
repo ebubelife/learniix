@@ -276,7 +276,7 @@ return monthName;
       useEffect(() => {
        
         // Make an HTTP GET request to the API endpoint using axios
-        axios.get('https://back.learniix.com/api/notifications/user/852')
+        axios.get('https://back.learniix.com/api/notifications/user/'+id)
           .then((response: any) => {
               
                

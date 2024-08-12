@@ -24,7 +24,7 @@ const AffiliateDashboard = () => {
   var user_data = Cookies.get('user_details');
 
     
-  var isVendor =false;var user_id =""; var affiliate_id = "";
+  var isVendor =false;var user_id =""; var affiliate_id = ""; var unpaid_balance ="";
   
   const [text, setText] = useState('');
   const [copied, setCopied] = useState(false);
@@ -44,6 +44,9 @@ const AffiliateDashboard = () => {
   const [userDataAccNum, setUserDataAccNum] = useState(null); 
   const [userDataBank, setUserDataBank] = useState(null); 
   const [userDataCurrency, setUserDataCurrency] = useState(null); 
+  const [userDataWithdrawAmount, setUserDataWithdrawAmount] = useState("0"); 
+
+  
   
   
   const [accountValidText, setAccountValidText] = useState("Your account has been successfully validated"); 
@@ -143,6 +146,8 @@ const countries = [
 
     payment_reference_paystack = (user as any).payment_reference_paystack;
 
+    unpaid_balance = (user as any).unpaid_balance;
+
    
 
    
@@ -154,6 +159,8 @@ const countries = [
  
   const submitPfofileDetails = async(event: any) => {
 
+
+
     setIsLoading(true)
    
   
@@ -161,11 +168,33 @@ const countries = [
     event.preventDefault();
 
 
+    if(parseInt(userDataWithdrawAmount) > parseInt(unpaid_balance)){
+
+      toast.error("Please enter an amount that is less than or equal to your total wallet balance ")
+      setIsLoading(false)
+      return;
+      
+    }
+
+    
+
+
     var formData = new FormData();
 
     formData.append('id',user_id)
     if(userDataFirstName!=null)
       formData.append('firstName',userDataFirstName)
+
+    if(userDataWithdrawAmount!=null){
+
+    
+      formData.append('next_withdrawal_amount',userDataWithdrawAmount)
+
+    }else{
+      formData.append('next_withdrawal_amount',"0")
+    }
+
+
     if(userDataLastName!=null)
       formData.append('lastName',userDataLastName)
     if(userDataPhone!=null)
@@ -527,6 +556,41 @@ color: 'slategray', // Use the slate color for text
 </div>
 
 
+<p className='mt-4 text-sm'> You can set a specific amount of cash you would want to withdraw from your total balance on the next payment date. Enter A specific amount below. </p>
+
+<p className='mt-4 text-green-500'>Your current wallet balance is {unpaid_balance}</p>
+<div className="block mt-6">
+
+<TextField
+ fullWidth
+ label="Amount"
+ variant="outlined"
+ margin="normal"
+ onChange={(e:any) => setUserDataWithdrawAmount(e.target.value)}
+//  {...register('email', { required: true })}
+ InputProps={{
+   startAdornment: (
+     <InputAdornment position="start">
+       {/* Icon for email (replace with your icon) */}
+       💰
+     </InputAdornment>
+   ),
+ }}
+
+ style={{
+   borderRadius: '12px', // Adjust the border-radius to make it curvier
+   marginTop: '10px', // Optional: Adjust the top margin
+ }}
+ inputProps={{
+   style: {
+     fontSize: '12px', // Adjust the font size
+     color: 'slategray', // Use the slate color for text
+   },
+ }}
+
+ value ={userDataWithdrawAmount}
+/>
+</div>
 
 
       {
@@ -536,7 +600,7 @@ color: 'slategray', // Use the slate color for text
         
         className="bg-green-500 hover:bg-white hover:text-green-500  text-white font-bold py-2 px-4 rounded-xl w-full shadow-xl mt-6 "
       >
-        Submit Bank Details
+        Update Withdrawal Details
       </button>
 
         

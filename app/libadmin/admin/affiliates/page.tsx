@@ -720,12 +720,18 @@ color: 'black',
                    Account Name
                 </th>
 
+               
+
+                <th scope="col" className="px-6 py-3">
+                   Account Number
+                </th>
+
                 <th scope="col" className="px-6 py-3">
                    Bank
                 </th>
 
                 <th scope="col" className="px-6 py-3">
-                   Account Number
+                   Next Withdraw
                 </th>
 
                 <th scope="col" className="px-6 py-3">
@@ -801,6 +807,16 @@ color: 'black',
 
 {
 getBankName(item.bank)
+}
+
+                      
+                
+                </td> 
+
+                <td className="px-6 py-4 dark:text-grey_600">
+
+{
+item.next_withdrawal_amount
 }
 
                       

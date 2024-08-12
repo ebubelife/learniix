@@ -579,8 +579,8 @@ return monthName;
 
 </div>
 
-<div className='grid md:grid-cols-2 w-full md:px-10 px-4 mt-6 gap-4 '>
-  <div className='md:h-96 border border-zinc-300 rounded-md md:overflow-y-scroll grid place-content-center'>
+<div className='grid md:grid-cols-2 grid-cols-1 w-full md:px-10 px-4 mt-6 gap-4 '>
+  <div className='md:h-96 border border-zinc-300 rounded-md md:overflow-y-scroll '>
 
   {
 
@@ -678,9 +678,10 @@ return monthName;
         
         <p className='font-semibold text-green-500 text-sm mt-4 ml-4'>{`${item.firstName }  ${item.lastName} `}</p>
         
-        <div className="w-96  flex justify-between">
+        <div className="  flex justify-between">
           <p className="font-regular text-green text-sm mt-2  ml-4">{`Ranked:  ${index + 1}`}</p>
-          <p className="font-regular text-green text-sm mt-2 ml-auto">{`Sales:  ${item.count}`}</p>
+          <p className="font-regular text-green text-sm mt-2 ml-10">{`Sales:  ${item.count}`}</p>
+         
         </div>
         </div>
         

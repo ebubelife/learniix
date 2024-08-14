@@ -127,7 +127,7 @@ export default function Signin() {
       console.log(res.data.user_details.firstName)
       var user = {"user_id":res.data.user_details.id,"firstName":res.data.user_details.firstName, "total_sales_vendor_cash":res.data.user_details.total_vendor_sales_cash,"total_sales_vendor":res.data.user_details.total_vendor_sales, "bank":res.data.user_details.bank, "bank_account":res.data.user_details.bank_account_name, "bank_account_number":res.data.user_details.bank_account_number,
       "unpaid_earnings_vendor":res.data.user_details.unpaid_balance_vendor, "total_aff_sales_cash":res.data.user_details.total_aff_sales_cash,"total_aff_sales": res.data.user_details.total_aff_sales ,"unpaid_balance":res.data.user_details.unpaid_balance,
-       "lastName":res.data.user_details.lastName, "isVendor":res.data.user_details.is_vendor, "id":res.data.user_details.id, "affiliate_id":res.data.user_details.affiliate_id, "logged_in":true,"auto_withdraw":res.data.user_details.withdrawal_settings,"naira_exchange_rate":res.data.naira_exchange_rate.value, "ghs_exchange_rate":res.data.ghs_exchange_rate.value, "convert_total_aff_sales_usd":res.data.convert_total_aff_sales_usd,
+       "lastName":res.data.user_details.lastName, "isVendor":res.data.user_details.is_vendor, "id":res.data.user_details.id, "affiliate_id":res.data.user_details.affiliate_id, "logged_in":true,"auto_withdraw":res.data.user_details.weekly_withdrawal,"naira_exchange_rate":res.data.naira_exchange_rate.value, "ghs_exchange_rate":res.data.ghs_exchange_rate.value, "convert_total_aff_sales_usd":res.data.convert_total_aff_sales_usd,
        "convert_balance_usd":res.data.convert_balance_usd,  "renewed_at":res.data.user_details.renewed_at,  "created_at":res.data.user_details.created_at,
       };
 

@@ -172,7 +172,7 @@ const AffiliateWithdrawals = () => {
       <div className="mt-6">
 
 <p className="text-grey_600 text-center mt-6">Our affiliates and vendors are paid weekly but you can decide if you want to 😇</p>
-                 <p className="text-grey_600 text-center mt-2">Use the switch below to activate or deactive automatic withdrawals every week</p>
+                 <p className="text-grey_600 text-center mt-2">{auto_withdraw.toString()} Use the switch below to activate or deactive automatic withdrawals every week</p>
 
                 <div className='flex justify-center '>
 

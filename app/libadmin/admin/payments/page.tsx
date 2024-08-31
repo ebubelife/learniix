@@ -53,6 +53,8 @@ export default function AdminPayments(){
 
     const [ unpaidAffiliatesData,  setUnpaidAffiliatesData] = useState(""); 
     const [ transfersData,  setTransfersData] = useState(""); 
+    const [ payableAffData,  setPayableAffData] = useState([]); 
+    
 
   
 
@@ -207,7 +209,7 @@ export default function AdminPayments(){
       };
   
    
-
+      
             //pull sales
         useEffect(() => {
    
@@ -233,6 +235,32 @@ export default function AdminPayments(){
                 setIsLoading(false)
               });
             }, [ ]);
+
+            //get payable affiliates
+            useEffect(() => {
+   
+              // Make an HTTP GET request to the API endpoint using axios
+              axios.get('https://back.learniix.com/api/view/payable_affiliates' )
+                .then((response: any) => {
+                    
+                     
+      
+                    
+                    setPayableAffData(response.data.unpaid_affiliates);
+  
+                   
+                  
+                     setIsLoading(false)
+                     console.log(response.data.unpaid_affiliates);
+      
+                     
+                })
+                .catch((error: any) => {
+                  // Handle errors if any
+                  console.error(error);
+                  setIsLoading(false)
+                });
+              }, [ ]);
 
             useEffect(() => {
    
@@ -494,17 +522,17 @@ Transfers have been successfully sent!
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
                 <th scope="col" className="px-2 py-3 text-green">
-                    Receiver
+                    Full Name
                 </th>
              
                  <th scope="col" className="px-6 py-3">
-                   Amount
+                   Acc Num
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Status
+                    Bank
                 </th>
                 <th scope="col" className="px-6 py-3">
-                    Date
+                    Balance
                 </th>
               
 
@@ -514,8 +542,8 @@ Transfers have been successfully sent!
         <tbody>
                
 
-{paymentsData.length > 0  ? (
-                          paymentsData.map((item: any, index: any) => (
+{payableAffData.length > 0  ? (
+                          payableAffData.map((item: any, index: any) => (
 
                             
 
@@ -527,19 +555,17 @@ Transfers have been successfully sent!
            
 
 <th scope="row" className="px-2 py-4 font-medium text-purple2 whitespace-wrap  ">
-                    {item.product_name}
+                    {item.firstName} {item.lastName}
                 </th>
                 <td className="px-6 py-4 dark:text-grey_600">
-                ₦{
-                 item.productPrice
-                }
+                {item.bank_account_number}
                 </td>
                 <td className="px-6 py-4 dark:text-green cursor-pointer hover:font-bold">
-                {item.affiliate_first_name} {item.affiliate_last_name}
+                {item.bank_name} 
                 </td>
                 <td className="px-6 py-4 dark:text-grey_600">
                   
-                    {convertDate(item.created_at)}
+                    {item.unpaid_balance}
                 </td>
               
 
@@ -557,7 +583,7 @@ Transfers have been successfully sent!
 <> 
 
 <div className="grid place-content-center">
-     <p className="text-gold">You have not made any payments yet</p>
+     <p className="text-gold">Payable Affiliates</p>
  </div>
 
 

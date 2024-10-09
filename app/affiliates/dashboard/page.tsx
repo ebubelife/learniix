@@ -44,7 +44,14 @@ export default function AffiliateDashboard() {
   const [loadingNotif, setLoadingNotif] = useState(true); 
   const [loadingTopAffiliates, setLoadingTopAff] = useState(true); 
 
-  
+   // State to handle the modal visibility
+   const [isOpen, setIsOpen] = useState(false);
+
+   // Function to toggle modal visibility
+   const toggleModal = () => {
+     setIsOpen(!isOpen);
+   };
+ 
   
 
    
@@ -439,6 +446,25 @@ return monthName;
     <div >
       <AffiliateDashboardHeader title="Affiliate Dashboard" />
 
+       {/* Modal */}
+       {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+          onClick={toggleModal} // Close modal when background is clicked
+        >
+          <div
+            className="bg-white rounded-md p-4 w-full max-w-lg flex justify-center items-center"
+            onClick={(e) => e.stopPropagation()} // Prevent modal close when clicking inside
+          >
+            <img
+              src="/images/1000215117.png"
+              className="rounded-md h-full w-full"
+              alt="learniix promo banner"
+            />
+          </div>
+        </div>
+      )}
+
       <div className="w-screen h-screen py-4">
 
 
@@ -564,18 +590,14 @@ return monthName;
 
 
 
-       <div className='w-screen  flex justify-center'>
+       <div className='w-screen  '>
 
-{
-  
- <div className=' md:w-1/3 mt-2 h-96 rounded-md mt-4 flex justify-center'>
+<p className='text-center'> Are you an Elite coach and a super affiliate? Join our challenge for coaches and super affiliate and win up to N10 million</p>
 
-   <img src="/images/1000215117.png" className='h-full w-full' alt="learniix promo banner" />
+<div className='grid place-content-center'>
 
+  <button  onClick={toggleModal} className=' text-white bg-green-500 mt-2 shadow-md p-2 rounded-md hover:bg-white hover:text-green-500 '>View Details</button>
 </div>
-
-}
-
 
 </div>
 

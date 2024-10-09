@@ -411,6 +411,41 @@ Do you really want to delete this sale? Please ensure to update the balances for
 
 
 
+<div className='h-28 shadow-md rounded-md border border-1 border-zinc-300 p-2'>
+
+<p className='font-medim text-md ml-auto  mt-2'>This Month&apos;s Sales</p>
+<div className='flex mt-2'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+
+</div>
+
+
+
+<p className='text-xl font-medium ml-4 mt-2'>{adminSalesData?.sales_this_month}</p>
+
+
+</div>
+</div>
+
+
+<div className='h-28 shadow-md rounded-md border border-1 border-zinc-300 p-2'>
+
+<p className='font-medim text-md ml-auto  mt-2'>This Month&apos;s Earnings</p>
+<div className='flex mt-2'>
+<div className='h-[50px] w-[50px] bg-green-500 rounded-md shadow-xl'>
+
+</div>
+
+
+
+<p className='text-xl font-medium ml-4 mt-2'>₦{adminSalesData?.earnings_this_month}</p>
+
+
+</div>
+</div>
+
+
+
 
 </div>
 

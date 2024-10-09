@@ -568,11 +568,11 @@ return monthName;
 
 {
   
-/* <div className=' md:w-1/3 mt-2 h-96 rounded-md mt-4 flex justify-center'>
+ <div className=' md:w-1/3 mt-2 h-96 rounded-md mt-4 flex justify-center'>
 
-   <img src="/images/home/WhatsApp Image 2024-01-13 at 12.56.32 PM.jpeg" className='h-full w-full' alt="learniix promo banner" />
+   <img src="/images/1000215117.png" className='h-full w-full' alt="learniix promo banner" />
 
-</div>*/
+</div>
 
 }
 

@@ -534,6 +534,10 @@ Transfers have been successfully sent!
                 <th scope="col" className="px-6 py-3">
                     Balance
                 </th>
+
+                <th scope="col" className="px-6 py-3">
+                    Email
+                </th>
               
 
                
@@ -567,6 +571,11 @@ Transfers have been successfully sent!
                   
                     {item.unpaid_balance}
                 </td>
+
+                <td className="px-6 py-4 dark:text-grey_600">
+                  
+                  {item.email}
+              </td>
               
 
                 </tr>           

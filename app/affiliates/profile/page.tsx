@@ -330,7 +330,7 @@ const countries = [
   return (
     <div >
        <Toaster/>
-      <AffiliateDashboardHeader title="Affiliate Profile" />
+      <AffiliateDashboardHeader title="Vendors Profile" />
 
       <div className="w-screen h-screen px-4 py-4 overflow-y">
 
